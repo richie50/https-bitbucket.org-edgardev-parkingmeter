@@ -10,4 +10,6 @@ Please Use Commit so we can know what changes are made when. This is great for d
 
 **git pull origin** ->  If you are behind use git pull origin (this just gets the changes) Whenever there are changes pushed to master you have to fetch the latest or else you're going to end up reverting w.e changes a person has done. So any time someone does a change, do this.  
 
-These are simple commands. If you need more contact *Edgar* for further help.
+These are simple commands. If you need more contact *Edgar* for further hellp.
+
+YO EDAGR IF YOU READ THIS LOOK AT YOUR ACTION LISTENER CODE this a a bug. FIX YOURS
