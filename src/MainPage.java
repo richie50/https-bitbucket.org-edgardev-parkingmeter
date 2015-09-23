@@ -220,7 +220,8 @@ public class MainPage implements ActionListener, MouseListener {
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
 			// check to see if input is valid
-			this.mainFrame = new JFrame("EDGAR IS A FAGGOT");
+			this.mainPanel.removeAll();
+			
 			mainFrame.setSize(700, 600);
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mainFrame.setVisible(true);
