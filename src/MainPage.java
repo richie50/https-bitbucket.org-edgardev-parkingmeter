@@ -50,7 +50,6 @@ public class MainPage implements ActionListener, MouseListener {
 	public void displayMainPage() throws IOException {
 		this.mainFrame = new JFrame(this.main_page_name);
 		this.mainPanel = new JPanel();
-		//this.mainPanel.setLayout(new GridLayout(5,1));
 		this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		this.mainPanel.setMaximumSize(this.mainPanel.getMinimumSize());
 		this.panel = new JPanel();
@@ -101,7 +100,7 @@ public class MainPage implements ActionListener, MouseListener {
 		this.mainFrame.setVisible(true);
 	}
 
-	public void addPanel() {
+	public void addInputPanel() {
 		// add the labels to the panel
 		this.panel.setLayout(null);
 		this.StudentNumber.setBounds(250 ,100, 200, 20);
@@ -227,13 +226,9 @@ public class MainPage implements ActionListener, MouseListener {
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
 			// check to see if input is valid
-			this.mainPanel.removeAll();
-			
-			mainFrame.setSize(700, 600);
-			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			mainFrame.setVisible(true);
+			this.mainPanel.setVisible(false);
 		}
-		if (e.getActionCommand().equals("1")) {
+		else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
 			sn_field.setText(sn_field.getText() + value);
