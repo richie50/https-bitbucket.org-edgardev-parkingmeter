@@ -1,3 +1,10 @@
+/*
+ * @author Richmond F, Edgar Z, Daniyal J
+ * @cse : cse23004, cse23106, cse31034
+ * YorkU Parking Meter GUI
+ * EECS3461 - Scott McKenzie
+ */
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
