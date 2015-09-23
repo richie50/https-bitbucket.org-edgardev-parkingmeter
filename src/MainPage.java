@@ -218,8 +218,17 @@ public class MainPage implements ActionListener, MouseListener {
 		System.out.println(e.getActionCommand());
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
-			// check to see if input is valid
+			/*check to see if input is valid
+			 * DANI FAGGOT YOUR STRING PARSING METHOD GOES HERE
+			 * VERIFY INPUT DATA WITH THE DATABASE ETC ETC BIATCH
+			 */
 			this.mainPanel.setVisible(false);
+			this.mainFrame.setVisible(false);
+			EmailPage email = new EmailPage(this.mainFrame, "Email");
+			email.diplayEmailPage();
+			email.middlePostion();
+			email.addEmailLabelAndTextFeild();
+			email.displayKeyboard();
 		}
 		else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
@@ -258,7 +267,11 @@ public class MainPage implements ActionListener, MouseListener {
 			System.out.println(value);
 			sn_field.setText(sn_field.getText() + value);
 		}
-
+		else if (e.getActionCommand().equals("0")) {
+			value = ((JButton) e.getSource()).getText();
+			System.out.println(value);
+			sn_field.setText(sn_field.getText() + value);
+		}
 	}
 
 	class StudentNumberListerner implements ActionListener {
