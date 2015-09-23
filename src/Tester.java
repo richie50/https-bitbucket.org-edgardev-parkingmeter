@@ -11,9 +11,11 @@ public class Tester {
 		display.displayMainPage();
 		display.middlePostion();
 		//display.addIcon();
+		
 		display.addTextFields();
-		display.addPanel();
+		display.addInputPanel();
 		display.addNumberButtons();
+		
 		display.addSubmitButtons("NEXT");
 		display.exitButton();
 		display.addClearButton();
