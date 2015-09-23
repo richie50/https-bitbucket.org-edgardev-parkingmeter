@@ -45,8 +45,11 @@ public class MainPage implements ActionListener, MouseListener {
 		this.mainPanel = new JPanel();
 		//this.mainPanel.setLayout(new GridLayout(5,1));
 		this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		this.mainPanel.setMaximumSize(this.mainPanel.getMinimumSize());
 		this.panel = new JPanel();
-		//this.numberPanel = new JPanel();
+		this.numberPanel = new JPanel();
+		this.numberPanel.setLayout(null);
+		this.numberPanel.setLayout(null);
 		this.buttonPanel = new JPanel();
 		this.mainFrame.setSize(700, 600);
 		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,12 +68,14 @@ public class MainPage implements ActionListener, MouseListener {
 		this.StudentNumber = new JLabel("Student Number:");
 		this.sn_field = new JTextField(30);
 		this.sn_field.setHorizontalAlignment(JTextField.LEFT);
+		this.sn_field.setEditable(false);
 		this.sn_field.setBounds(250, 125, 250, 30);
 		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.sn_field.addMouseListener(this);
 		this.PIN = new JLabel("PIN:");
 		this.pin_field = new JTextField(30);
 		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
+		this.pin_field.setEditable(false);
 		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.pin_field.setBounds(250, 190, 250, 30);
 		this.pin_field.addMouseListener(this);
@@ -90,9 +95,9 @@ public class MainPage implements ActionListener, MouseListener {
 
 	public void addPanel() {
 		// add the labels to the panel
-		this.StudentNumber.setBounds(290, 100, 200, 20);
-		this.PIN.setBounds(340, 160, 200, 20);
 		this.panel.setLayout(null);
+		this.StudentNumber.setBounds(250 ,100, 200, 20);
+		this.PIN.setBounds(250, 170, 200, 20);
 		this.panel.add(StudentNumber);
 		this.panel.add(PIN);
 		// add the textfields
@@ -111,37 +116,46 @@ public class MainPage implements ActionListener, MouseListener {
 	}
 
 	public void addNumberButtons() {
+		int x , y;
 		this.one = new JButton[firstRow.length];
-		this.numberPanel = new JPanel(new GridLayout(1, firstRow.length));
+		x = 280;
+		y = 50;
 		for(int i = 0 ; i < firstRow.length ; i++){
 			JButton temp = new JButton(firstRow[i]);
-			//temp.setPreferredSize(new Dimension(5,1));
+			temp.setBounds(x, y, 50 , 40);
+			x+= 60;
 			temp.addActionListener(this);
 			this.one[i] = temp;
 			this.numberPanel.add(one[i]);
 		}
-		this.mainPanel.add(numberPanel);
-		
 		this.two = new JButton[secondRow.length];
-		this.numberPanel = new JPanel(new GridLayout(1, secondRow.length));
+		x = 280;
+		y = 100;
 		for(int i = 0 ; i < secondRow.length ; i++){
 			JButton temp = new JButton(secondRow[i]);
-			//temp.setPreferredSize(new Dimension(10,5));
+			temp.setBounds(x, y, 50 , 40);
+			x+= 60;
 			temp.addActionListener(this);
 			this.two[i] = temp;
 			this.numberPanel.add(two[i]);
 		}
-		this.mainPanel.add(numberPanel);
-		
+		x = 280;
+		y = 150;
 		this.three = new JButton[thirdRow.length];
-		this.numberPanel = new JPanel(new GridLayout(1, thirdRow.length));
 		for(int i = 0 ; i < thirdRow.length ; i++){
 			JButton temp = new JButton(thirdRow[i]);
-			//temp.setPreferredSize(new Dimension(10,5));
+			temp.setBounds(x, y, 50 , 40);
+			x+= 60;
 			temp.addActionListener(this);
 			this.three[i] = temp;
 			this.numberPanel.add(three[i]);
 		}
+		// make the zero button
+		JButton zero = new JButton("0");
+		zero.setBounds(340, 200 , 50,  40);
+		zero.addActionListener(this);
+		this.numberPanel.add(zero);
+		
 		this.mainPanel.add(numberPanel);
 		this.mainFrame.add(mainPanel);
 	}
@@ -153,7 +167,7 @@ public class MainPage implements ActionListener, MouseListener {
 				java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
-		clear.setSize(10, 5);
+		clear.setSize(20, 10);
 		buttonPanel.add(clear);
 		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
 		this.mainFrame.setVisible(true);
