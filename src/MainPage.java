@@ -65,6 +65,7 @@ public class MainPage implements ActionListener, MouseListener {
 	}
 
 	public void addTextFields() {
+		// needs fix to determine if Student or PIN
 		this.StudentNumber = new JLabel("Student Number:");
 		this.sn_field = new JTextField(30);
 		this.sn_field.setHorizontalAlignment(JTextField.LEFT);
