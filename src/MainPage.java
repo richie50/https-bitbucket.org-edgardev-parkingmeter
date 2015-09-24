@@ -1,4 +1,3 @@
-
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -20,9 +19,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
-import sun.swing.SwingAccessor.JTextComponentAccessor;
+//import sun.swing.SwingAccessor.JTextComponentAccessor;
 
-public class MainPage implements ActionListener, MouseListener {
+public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JFrame mainFrame;
 	private JPanel mainPanel;
 	private String main_page_name;
@@ -71,8 +70,9 @@ public class MainPage implements ActionListener, MouseListener {
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.mainFrame.setLocation(dim.width / 2 - this.mainFrame.getSize().width / 2,
-				dim.height / 2 - this.mainFrame.getSize().height / 2);
+		this.mainFrame.setLocation(dim.width / 2
+				- this.mainFrame.getSize().width / 2, dim.height / 2
+				- this.mainFrame.getSize().height / 2);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -81,39 +81,38 @@ public class MainPage implements ActionListener, MouseListener {
 		this.StudentNumber = new JLabel("Student Number:");
 		this.sn_field = new JTextField(30);
 		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
-		this.sn_field.setEditable(false);
+		this.sn_field.setEditable(true);
 		this.sn_field.setBounds(250, 125, 250, 30);
 		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
-	    this.sn_field.addFocusListener(new FocusListener() {
+		this.sn_field.addFocusListener(new FocusListener() {
 
-	        @Override
-	        public void focusGained(FocusEvent e) {
-	    		currField = sn_field;
-	        }
+			@Override
+			public void focusGained(FocusEvent e) {
+				currField = sn_field;
+			}
 
-	        @Override
-	        public void focusLost(FocusEvent e) {
-	        }
-	    });
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+		});
 		this.PIN = new JLabel("PIN:");
 		this.pin_field = new JTextField(30);
 		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
-		this.pin_field.setEditable(false);
+		this.pin_field.setEditable(true);
 		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.pin_field.setBounds(250, 190, 250, 30);
 		this.pin_field.addMouseListener(this);
-	    this.pin_field.addFocusListener(new FocusListener() {
+		this.pin_field.addFocusListener(new FocusListener() {
 
-	        @Override
-	        public void focusGained(FocusEvent e) {
-	    		currField = pin_field;
-	        }
+			@Override
+			public void focusGained(FocusEvent e) {
+				currField = pin_field;
+			}
 
-	        @Override
-	        public void focusLost(FocusEvent e) {
-	        }
-	    });
-		// this.mainFrame.setVisible(true);
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+		});
 	}
 
 	public void addIcon() {
@@ -197,10 +196,11 @@ public class MainPage implements ActionListener, MouseListener {
 	public void addClearButton() {
 		ImageIcon backSpace = new ImageIcon("backspace.png");
 		Image image = backSpace.getImage();
-		Image temp = image.getScaledInstance(30, 20, java.awt.Image.SCALE_SMOOTH);
+		Image temp = image.getScaledInstance(20, 20,
+				java.awt.Image.SCALE_AREA_AVERAGING);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
-		clear.setSize(20, 10);
+		clear.setSize(15, 5);
 		buttonPanel.add(clear);
 		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
 		this.mainFrame.setVisible(true);
@@ -209,11 +209,13 @@ public class MainPage implements ActionListener, MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
+				System.out.println(e.getActionCommand() + " ---- "
+						+ e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("")) {
-					currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+					currField.setText(currField.getText().substring(0,
+							currField.getText().length() - 1));
 
 				}
 			}
@@ -230,7 +232,8 @@ public class MainPage implements ActionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
+				System.out.println(e.getActionCommand() + " ---- "
+						+ e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("EXIT")) {
@@ -250,9 +253,10 @@ public class MainPage implements ActionListener, MouseListener {
 		System.out.println(e.getActionCommand());
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
-			/*check to see if input is valid
-			 * DANI FAGGOT YOUR STRING PARSING METHOD GOES HERE
-			 * VERIFY INPUT DATA WITH THE DATABASE ETC ETC BIATCH
+			/*
+			 * check to see if input is valid DANI FAGGOT YOUR STRING PARSING
+			 * METHOD GOES HERE VERIFY INPUT DATA WITH THE DATABASE ETC ETC
+			 * BIATCH
 			 */
 			this.mainPanel.setVisible(false);
 			this.mainFrame.setVisible(false);
@@ -261,8 +265,6 @@ public class MainPage implements ActionListener, MouseListener {
 			email.middlePostion();
 			email.addEmailLabelAndTextFeild();
 			email.displayKeyboard();
-		}
-		else if (e.getActionCommand().equals("1")) {
 		} else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
@@ -300,11 +302,10 @@ public class MainPage implements ActionListener, MouseListener {
 			System.out.println(value);
 			currField.setText(currField.getText() + value);
 
-		}
-		else if (e.getActionCommand().equals("0")) {
+		} else if (e.getActionCommand().equals("0")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
-			sn_field.setText(sn_field.getText() + value);
+			currField.setText(currField.getText() + value);
 		}
 	}
 

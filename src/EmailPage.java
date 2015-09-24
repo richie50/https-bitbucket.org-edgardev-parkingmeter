@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
 public class EmailPage implements ActionListener {
 	private JFrame emailFrame;
 	private String name;
