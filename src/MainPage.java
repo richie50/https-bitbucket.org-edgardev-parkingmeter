@@ -1,3 +1,4 @@
+
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -21,7 +22,7 @@ import javax.swing.text.JTextComponent;
 
 //import sun.swing.SwingAccessor.JTextComponentAccessor;
 
-public class MainPage extends JFrame implements ActionListener, MouseListener {
+public class MainPage implements ActionListener, MouseListener {
 	private JFrame mainFrame;
 	private JPanel mainPanel;
 	private String main_page_name;
@@ -70,9 +71,8 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.mainFrame.setLocation(dim.width / 2
-				- this.mainFrame.getSize().width / 2, dim.height / 2
-				- this.mainFrame.getSize().height / 2);
+		this.mainFrame.setLocation(dim.width / 2 - this.mainFrame.getSize().width / 2,
+				dim.height / 2 - this.mainFrame.getSize().height / 2);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -81,7 +81,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.StudentNumber = new JLabel("Student Number:");
 		this.sn_field = new JTextField(30);
 		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
-		this.sn_field.setEditable(true);
+		this.sn_field.setEditable(false);
 		this.sn_field.setBounds(250, 125, 250, 30);
 		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.sn_field.addFocusListener(new FocusListener() {
@@ -98,7 +98,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.PIN = new JLabel("PIN:");
 		this.pin_field = new JTextField(30);
 		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
-		this.pin_field.setEditable(true);
+		this.pin_field.setEditable(false);
 		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.pin_field.setBounds(250, 190, 250, 30);
 		this.pin_field.addMouseListener(this);
@@ -113,6 +113,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			public void focusLost(FocusEvent e) {
 			}
 		});
+		// this.mainFrame.setVisible(true);
 	}
 
 	public void addIcon() {
@@ -196,11 +197,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	public void addClearButton() {
 		ImageIcon backSpace = new ImageIcon("backspace.png");
 		Image image = backSpace.getImage();
-		Image temp = image.getScaledInstance(20, 20,
-				java.awt.Image.SCALE_AREA_AVERAGING);
+		Image temp = image.getScaledInstance(30, 20, java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
-		clear.setSize(15, 5);
+		clear.setSize(20, 10);
 		buttonPanel.add(clear);
 		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
 		this.mainFrame.setVisible(true);
@@ -209,14 +209,15 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("")) {
-					currField.setText(currField.getText().substring(0,
-							currField.getText().length() - 1));
-
+					if (currField.getText().length() >= 1) {
+						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+					} else {
+						System.out.println("NOTHING TO DELETE");
+					}
 				}
 			}
 		});
@@ -232,8 +233,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("EXIT")) {
@@ -248,6 +248,15 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if (currField == null) {
+			currField = sn_field;
+		}
+		if (this.sn_field.getText().toString().length() >= 9) {
+			currField = pin_field;
+		}
+		if (this.pin_field.getText().toString().length() >= 4) {
+			return;
+		}
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
 		System.out.println(e.getActionCommand());
@@ -259,12 +268,20 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			 * BIATCH
 			 */
 			this.mainPanel.setVisible(false);
+			// save main frame for back buttons
+			JFrame backFrame = new JFrame();
+			backFrame = this.mainFrame;
 			this.mainFrame.setVisible(false);
 			EmailPage email = new EmailPage(this.mainFrame, "Email");
 			email.diplayEmailPage();
 			email.middlePostion();
 			email.addEmailLabelAndTextFeild();
 			email.displayKeyboard();
+			int backIdentifier = email.backButton();
+			email.exitButton();
+			if (backIdentifier == 0) {
+				System.out.println(this.mainFrame.getClass().getDeclaringClass());
+			}
 		} else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
@@ -301,7 +318,6 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
 			currField.setText(currField.getText() + value);
-
 		} else if (e.getActionCommand().equals("0")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
