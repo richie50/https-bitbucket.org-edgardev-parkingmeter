@@ -255,18 +255,13 @@ public class MainPage implements ActionListener, MouseListener {
 			currField = pin_field;
 		}
 		if (this.pin_field.getText().toString().length() >= 4) {
-			return;
+			this.pin_field.setText(this.pin_field.getText().substring(0, 3));
 		}
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
 		System.out.println(e.getActionCommand());
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
-			/*
-			 * check to see if input is valid DANI FAGGOT YOUR STRING PARSING
-			 * METHOD GOES HERE VERIFY INPUT DATA WITH THE DATABASE ETC ETC
-			 * BIATCH
-			 */
 			this.mainPanel.setVisible(false);
 			// save main frame for back buttons
 			JFrame backFrame = new JFrame();
