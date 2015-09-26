@@ -10,9 +10,9 @@ Please Use Commit so we can know what changes are made when. This is great for d
 
 **git pull origin** ->  If you are behind use git pull origin (this just gets the changes) Whenever there are changes pushed to master you have to fetch the latest or else you're going to end up reverting w.e changes a person has done. So any time someone does a change, do this.  
 
-**git stash MainPage.java** 
-**git stash pull origin**
-**git stash pop** 
+|| --> **git stash MainPage.java** \n
+|| --> **git stash pull origin** \n
+|| --> **git stash pop** \n
 |--------------------------> if you need to merge your changes with the code from bitbucket, you need to stash your main changes.
 
 These are simple commands. If you need more contact *Edgar* for further hellp.
