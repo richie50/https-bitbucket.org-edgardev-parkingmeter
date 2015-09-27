@@ -55,8 +55,14 @@ public class MainPage implements ActionListener, MouseListener {
 	public void setText(String txt) {
 		this.main_page_name = txt;
 	}
-
+	
 	public void displayMainPage() throws IOException {
+		WelcomePage wp = new WelcomePage(this.mainFrame, "Welcome");
+		wp.displayWelcomePanel();
+		wp.middlePostion();
+		wp.welcomeButton();
+		wp.exitButton();
+		//this.mainFrame.setVisible(false);
 		this.mainFrame = new JFrame(this.main_page_name);
 		this.mainPanel = new JPanel();
 		this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -254,7 +260,6 @@ public class MainPage implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (currField == null) {
 			currField = sn_field;
 		}
@@ -273,7 +278,7 @@ public class MainPage implements ActionListener, MouseListener {
 			String pindb = pin_field.getText();
 			/** CHANGE THE FILE PATH **/
 			final Path FILE_PATH = Paths
-					.get("C:\\Users\\RichMond\\workspace\\UI\\student.txt");
+					.get("student.txt");
 			// String studentdb = "457642455";
 			// String pindb = "2164";
 			Optional<Person> matchingStudent = null;
