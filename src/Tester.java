@@ -1,3 +1,4 @@
+import java.awt.EventQueue;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -7,18 +8,19 @@ public class Tester {
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
 		JFrame frame = null;
-		MainPage display = new MainPage("PARKING KIOSK DEV ENV" , frame); 
-		display.displayMainPage();
-		display.middlePostion();
-		//display.addIcon();
-		
-		display.addTextFields();
-		display.addInputPanel();
-		display.addNumberButtons();
-		
-		display.addSubmitButtons("NEXT");
-		display.exitButton();
-		display.addClearButton();
+		WelcomePage welcome = new WelcomePage(frame, "WELCOME");
+		Runnable runner = new Runnable() {		
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//welcome = new WelcomePage(frame, "WELCOME");
+				welcome.displayWelcomePanel();
+				welcome.run();
+				welcome.middlePostion();
+			}
+		};
+		EventQueue.invokeLater(runner);
+		welcome.setVisible(false);
 	}
 
 }
