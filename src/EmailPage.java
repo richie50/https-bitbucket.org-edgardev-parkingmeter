@@ -167,7 +167,7 @@ public class EmailPage implements ActionListener {
     }
 
     public int backButton() {
-        JButton backButton = new JButton("NEXT");
+        JButton backButton = new JButton("BACK");
         buttonPanel.add(backButton);
         this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
         this.emailFrame.setVisible(true);
@@ -179,7 +179,7 @@ public class EmailPage implements ActionListener {
                 System.out.println(e.getActionCommand() + " ---- " + e.getSource());
                 System.out.println(e.paramString());
                 // DEBUG
-                if (e.getActionCommand().equals("NEXT")) {
+                if (e.getActionCommand().equals("BACK")) {
                     // System.exit(0);
                     System.out.println("****************");
                 } else {
@@ -190,6 +190,31 @@ public class EmailPage implements ActionListener {
 
         });
         return 0;
+    }
+    public int nextButton() {
+        JButton backButton = new JButton("NEXT");
+        buttonPanel.add(backButton);
+        this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
+        this.emailFrame.setVisible(true);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                // DEBUG
+                System.out.println(e.getActionCommand() + "\n >>" + e.getSource());
+                System.out.println(e.paramString());
+                // DEBUG
+                if (e.getActionCommand().equals("NEXT")) {
+                    // System.exit(0);
+                    System.out.println("&&&&&&&&&&NEXT&&&&&&");
+                } else {
+                    System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
+                }
+
+            }
+
+        });
+		return 0;
     }
 
     public void exitButton() {
@@ -222,7 +247,6 @@ public class EmailPage implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             // TODO Auto-generated method stub
             value = ((JButton) event.getSource()).getText().toLowerCase();
-
             System.out.print("KEY => ");
             System.out.println(value + " WAS PRESSED IN EMAILPAGE");
             email_field.setText(email_field.getText().toLowerCase() + value);

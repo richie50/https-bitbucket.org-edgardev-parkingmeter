@@ -1,4 +1,3 @@
-
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -15,6 +14,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,7 +45,6 @@ public class MainPage implements ActionListener, MouseListener {
 	private JButton two[];
 	private JButton three[];
 	private JButton submitButton;
-	private int checker;
 	private static final long serialVersionUID = 1L;
 
 	public MainPage(String text, JFrame frame) {
@@ -71,8 +73,9 @@ public class MainPage implements ActionListener, MouseListener {
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.mainFrame.setLocation(dim.width / 2 - this.mainFrame.getSize().width / 2,
-				dim.height / 2 - this.mainFrame.getSize().height / 2);
+		this.mainFrame.setLocation(dim.width / 2
+				- this.mainFrame.getSize().width / 2, dim.height / 2
+				- this.mainFrame.getSize().height / 2);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -197,7 +200,8 @@ public class MainPage implements ActionListener, MouseListener {
 	public void addClearButton() {
 		ImageIcon backSpace = new ImageIcon("backspace.png");
 		Image image = backSpace.getImage();
-		Image temp = image.getScaledInstance(30, 20, java.awt.Image.SCALE_SMOOTH);
+		Image temp = image.getScaledInstance(30, 20,
+				java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
 		clear.setSize(20, 10);
@@ -209,12 +213,14 @@ public class MainPage implements ActionListener, MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
+				System.out.println(e.getActionCommand() + " ---- "
+						+ e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("")) {
 					if (currField.getText().length() >= 1) {
-						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+						currField.setText(currField.getText().substring(0,
+								currField.getText().length() - 1));
 					} else {
 						System.out.println("NOTHING TO DELETE");
 					}
@@ -233,7 +239,8 @@ public class MainPage implements ActionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
+				System.out.println(e.getActionCommand() + " ---- "
+						+ e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("EXIT")) {
@@ -255,28 +262,54 @@ public class MainPage implements ActionListener, MouseListener {
 			currField = pin_field;
 		}
 		if (this.pin_field.getText().toString().length() >= 4) {
-			this.pin_field.setText(this.pin_field.getText().substring(0, 3));
+			this.pin_field.setText(this.pin_field.getText().substring(0, 4));
 		}
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
 		System.out.println(e.getActionCommand());
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
-			this.mainPanel.setVisible(false);
-			// save main frame for back buttons
-			JFrame backFrame = new JFrame();
-			backFrame = this.mainFrame;
-			this.mainFrame.setVisible(false);
-			EmailPage email = new EmailPage(this.mainFrame, "Email");
-			email.diplayEmailPage();
-			email.middlePostion();
-			email.addEmailLabelAndTextFeild();
-			email.displayKeyboard();
-			int backIdentifier = email.backButton();
-			email.exitButton();
-			if (backIdentifier == 0) {
-				System.out.println(this.mainFrame.getClass().getDeclaringClass());
+			String studentdb = sn_field.getText();
+			String pindb = pin_field.getText();
+			/** CHANGE THE FILE PATH **/
+			final Path FILE_PATH = Paths
+					.get("C:\\Users\\RichMond\\workspace\\UI\\student.txt");
+			// String studentdb = "457642455";
+			// String pindb = "2164";
+			Optional<Person> matchingStudent = null;
+			try {
+				matchingStudent = Files
+						.lines(FILE_PATH)
+						.map(line -> line.split(","))
+						.map(commaVal -> new Person(commaVal))
+						.filter(person -> person.getStudentNumber().equals(
+								studentdb)
+								&& person.getPin().equals(pindb)).findFirst();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+
+			if (matchingStudent.isPresent()) {
+				Person matchingPerson = matchingStudent.get();
+				System.out.println("Hello "
+						+ matchingPerson.getFirstName().toUpperCase() + " "
+						+ matchingPerson.getLastName().toUpperCase());
+				// we display the email page
+				this.mainPanel.setVisible(true);
+				this.mainFrame.setVisible(false);
+				EmailPage email = new EmailPage(this.mainFrame, "Email");
+				email.diplayEmailPage();
+				email.middlePostion();
+				email.addEmailLabelAndTextFeild();
+				email.displayKeyboard();
+				email.nextButton();
+				email.backButton();
+				email.exitButton();
+			} else {
+				System.out.println("No matching record found".toUpperCase());
+			}
+			
 		} else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
