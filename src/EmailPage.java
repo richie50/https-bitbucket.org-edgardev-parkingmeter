@@ -4,7 +4,6 @@
  * YorkU Parking Meter GUI
  * EECS3461 - Scott McKenzie
  */
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -77,12 +76,12 @@ public class EmailPage implements ActionListener {
 		// Needs action preformed to be able to output common preset emails
 		// TODO implement action preformed for EMAIL row.
 		this.emailButtons = new JButton[emailRow.length];
-		x = 120;
+		x = 60;
 		y = 180;
 		for (int i = 0; i < emailRow.length; i++) {
 			JButton temp = new JButton(emailRow[i]);
 			temp.setBounds(x, y, 100, 40);
-			x += 100;
+			x += 120;
 			temp.addActionListener(this);
 			this.emailButtons[i] = temp;
 			this.keyboardPanel.add(emailButtons[i]);
@@ -198,12 +197,13 @@ public class EmailPage implements ActionListener {
 		return 0;
 	}
 
-	public int nextButton() {
+	public void nextButton() {
 		JButton backButton = new JButton("NEXT");
 		buttonPanel.add(backButton);
 		this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
 		this.emailFrame.setVisible(true);
 		backButton.addActionListener(new ActionListener() {
+			JFrame emailFrame = originalFrame();
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -218,9 +218,16 @@ public class EmailPage implements ActionListener {
 					String emaildb = new String();
 					emaildb = email_field.getText();
 					if (isValidEmailAddress(emaildb)) {
-						System.out
-								.println("SUCCESS , VALID EMAIL");
-						// move onto the next frame HERE , so implement a new class
+						System.out.println("SUCCESS , VALID EMAIL");
+						/*
+						 * ADDED INSURANCE PAGE
+						 */
+						emailFrame.setVisible(false);
+						InsurancePage insurance = new InsurancePage(this.emailFrame  , "Insurance Dev");
+						insurance.diplayInsurancePage();
+						insurance.addLabelAndText();
+						insurance.displayInput();
+						insurance.exitButton();
 					} else {
 						/* UI ERROR MESSAGE FOR EMAIL VALIDATION GOES HERE */
 						EmailPage.emailErrorWindow();
@@ -234,7 +241,6 @@ public class EmailPage implements ActionListener {
 			}
 
 		});
-		return 0;
 	}
 
 	public void exitButton() {
@@ -259,6 +265,7 @@ public class EmailPage implements ActionListener {
 					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
 				}
 			}
+
 		});
 	}
 
@@ -277,8 +284,12 @@ public class EmailPage implements ActionListener {
 		java.util.regex.Matcher m = p.matcher(email);
 		return m.matches();
 	}
-	public static void emailErrorWindow() {
-		JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
-	}
 
+	public static void emailErrorWindow() {
+		JOptionPane.showMessageDialog(null, "Please enter a valid email.",
+				"Error", JOptionPane.ERROR_MESSAGE);
+	}
+	public JFrame originalFrame(){
+		return this.emailFrame;
+	}
 }

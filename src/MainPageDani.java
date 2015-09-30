@@ -1,3 +1,4 @@
+
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -13,19 +14,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+
+
 //import sun.swing.SwingAccessor.JTextComponentAccessor;
 
-public class MainPage implements ActionListener, MouseListener {
+import sun.swing.*;
+
+public class MainPageDani implements ActionListener, MouseListener {
 	private JFrame mainFrame;
 	private JPanel mainPanel;
 	private String main_page_name;
@@ -45,9 +53,13 @@ public class MainPage implements ActionListener, MouseListener {
 	private JButton two[];
 	private JButton three[];
 	private JButton submitButton;
-	private static final long serialVersionUID = 1L;
+	private int checker;
 
-	public MainPage(String text, JFrame frame) {
+	private static final long serialVersionUID = 1L;
+	private static final Path FILE_PATH = Paths.get("student.txt");
+
+
+	public MainPageDani(String text, JFrame frame) {
 		this.mainFrame = frame;
 		this.main_page_name = text;
 	}
@@ -55,9 +67,8 @@ public class MainPage implements ActionListener, MouseListener {
 	public void setText(String txt) {
 		this.main_page_name = txt;
 	}
-	
+
 	public void displayMainPage() throws IOException {
-		//this.mainFrame.setVisible(false);
 		this.mainFrame = new JFrame(this.main_page_name);
 		this.mainPanel = new JPanel();
 		this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -74,9 +85,8 @@ public class MainPage implements ActionListener, MouseListener {
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.mainFrame.setLocation(dim.width / 2
-				- this.mainFrame.getSize().width / 2, dim.height / 2
-				- this.mainFrame.getSize().height / 2);
+		this.mainFrame.setLocation(dim.width / 2 - this.mainFrame.getSize().width / 2,
+				dim.height / 2 - this.mainFrame.getSize().height / 2);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -84,46 +94,47 @@ public class MainPage implements ActionListener, MouseListener {
 		// needs fix to determine if Student or PIN
 		this.StudentNumber = new JLabel("Student Number:");
 		this.sn_field = new JTextField(30);
+		
 		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
-		this.sn_field.setEditable(true);
+		this.sn_field.setEditable(false);
 		this.sn_field.setBounds(250, 125, 250, 30);
 		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
-		this.sn_field.addFocusListener(new FocusListener() {
+	    this.sn_field.addFocusListener(new FocusListener() {
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				currField = sn_field;
-			}
+	        @Override
+	        public void focusGained(FocusEvent e) {
+	    		currField = sn_field;
+	        }
 
-			@Override
-			public void focusLost(FocusEvent e) {
-			}
-		});
+	        @Override
+	        public void focusLost(FocusEvent e) {
+	        }
+	    });
 		this.PIN = new JLabel("PIN:");
 		this.pin_field = new JTextField(30);
 		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
-		this.pin_field.setEditable(true);
+		this.pin_field.setEditable(false);
 		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.pin_field.setBounds(250, 190, 250, 30);
 		this.pin_field.addMouseListener(this);
-		this.pin_field.addFocusListener(new FocusListener() {
+	    this.pin_field.addFocusListener(new FocusListener() {
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				currField = pin_field;
-			}
+	        @Override
+	        public void focusGained(FocusEvent e) {
+	    		currField = pin_field;
+	        }
 
-			@Override
-			public void focusLost(FocusEvent e) {
-			}
-		});
+	        @Override
+	        public void focusLost(FocusEvent e) {
+	        }
+	    });
 		// this.mainFrame.setVisible(true);
 	}
 
 	public void addIcon() {
 		this.iconPanel = new JPanel();
 		// adds a logo to the frame
-		ImageIcon image = new ImageIcon("yorku.gif");
+		ImageIcon image = new ImageIcon("background.gif");
 		JLabel backgroundImage = new JLabel(image);
 		backgroundImage.setBounds(5, 5, 10, 10);
 		this.iconPanel.add(backgroundImage);
@@ -201,8 +212,7 @@ public class MainPage implements ActionListener, MouseListener {
 	public void addClearButton() {
 		ImageIcon backSpace = new ImageIcon("backspace.png");
 		Image image = backSpace.getImage();
-		Image temp = image.getScaledInstance(30, 20,
-				java.awt.Image.SCALE_SMOOTH);
+		Image temp = image.getScaledInstance(30, 20, java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
 		clear.setSize(20, 10);
@@ -214,17 +224,12 @@ public class MainPage implements ActionListener, MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("")) {
-					if (currField.getText().length() >= 1) {
-						currField.setText(currField.getText().substring(0,
-								currField.getText().length() - 1));
-					} else {
-						System.out.println("NOTHING TO DELETE");
-					}
+					currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+
 				}
 			}
 		});
@@ -240,8 +245,7 @@ public class MainPage implements ActionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("EXIT")) {
@@ -255,63 +259,29 @@ public class MainPage implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (currField == null) {
-			currField = sn_field;
-		}
-		if (this.sn_field.getText().toString().length() >= 9) {
-			currField = pin_field;
-		}
-		if (this.pin_field.getText().toString().length() >= 4) {
-			this.pin_field.setText(this.pin_field.getText().substring(0, 4));
-		}
+		// TODO Auto-generated method stub
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
 		System.out.println(e.getActionCommand());
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
+			System.out.println("DAANIS PROGRAM");
+			/* Get input from JTextField and convert it to string*/
 			String studentdb = sn_field.getText();
 			String pindb = pin_field.getText();
-			/** CHANGE THE FILE PATH **/
-			final Path FILE_PATH = Paths
-					.get("student.txt");
-			// String studentdb = "457642455";
-			// String pindb = "2164";
-			Optional<Person> matchingStudent = null;
-			try {
-				matchingStudent = Files
-						.lines(FILE_PATH)
-						.map(line -> line.split(","))
-						.map(commaVal -> new Person(commaVal))
-						.filter(person -> person.getStudentNumber().equals(
-								studentdb)
-								&& person.getPin().equals(pindb)).findFirst();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			if (matchingStudent.isPresent()) {
-				Person matchingPerson = matchingStudent.get();
-				System.out.println("Hello "
-						+ matchingPerson.getFirstName().toUpperCase() + " "
-						+ matchingPerson.getLastName().toUpperCase());
-				// we display the email page
-				this.mainPanel.setVisible(true);
-				this.mainFrame.setVisible(false);
-				EmailPage email = new EmailPage(this.mainFrame, "Email");
-				email.diplayEmailPage();
-				email.middlePostion();
-				email.addEmailLabelAndTextFeild();
-				email.displayKeyboard();
-				email.nextButton();
-				email.backButton();
-				email.exitButton();
-			} else {
-				studentErrorWindow();
-				System.out.println("No matching record found".toUpperCase());
-			}
+		
+			/*A container object which may or may not contain a non-null value. 
+			If a value is present, isPresent() will return true and get() will return the value. */
 			
-		} else if (e.getActionCommand().equals("1")) {
+			this.mainPanel.setVisible(false);
+			this.mainFrame.setVisible(false);
+			//EmailPage email = new EmailPage(this.mainFrame, "Email");
+			//email.diplayEmailPage();
+			//email.middlePostion();
+			//email.addEmailLabelAndTextFeild();
+			//email.displayKeyboard();
+		}
+		else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
 			currField.setText(currField.getText() + value);
@@ -347,13 +317,16 @@ public class MainPage implements ActionListener, MouseListener {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
 			currField.setText(currField.getText() + value);
-		} else if (e.getActionCommand().equals("0")) {
+
+		}
+		else if (e.getActionCommand().equals("0")) {
 			value = ((JButton) e.getSource()).getText();
 			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		}
-	}
+	
 
+	}
 	class StudentNumberListerner implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -390,7 +363,6 @@ public class MainPage implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-	public static void studentErrorWindow() {
-		JOptionPane.showMessageDialog(null, "No matching record found.", "Error", JOptionPane.ERROR_MESSAGE);
-	}
+
+
 }
