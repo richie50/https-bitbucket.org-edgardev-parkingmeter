@@ -1,210 +1,131 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.*;
 
-public class InsurancePage implements ActionListener {
+public class InsurancePage extends JFrame implements ActionListener{
 
-	private JFrame insuranceFrame;
-	private JLabel insuranceLabel;
-	private JPanel insurancePanel;
-	private JPanel mainInsurancePanel;
-	private String insuranceName;
-	private JPanel inputPanel;
-	private JTextField insuranceField;
-	private JButton rowOne[];
-	private JButton rowTwo[];
-	private JButton rowThree[];
-	private JButton rowFour[];
-	private String firstRow[] = { "Co-operators Insurance Company of Canada", "State Farm Underwriters Incorporated" };
-	private String secondRow[] = { "Allstate International Insurance Company Ltd",
-			"Metropolitan Life Insurance Company" };
-	private String thirdRow[] = { "Bang Em Up Insurance Company of Vaughan", "Tightwads Incorporated" };
-	private String fourthRow[] = { "Gottcha Insurance Company, Inc", "OTHER" };
-	private String value;
-	private JPanel buttonPanel;
-
-	public InsurancePage(JFrame frame, String name) {
-		this.insuranceFrame = frame;
-		this.insuranceName = name;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JFrame mainFrame;
+	private JLabel headerLabel;
+	private JLabel statusLabel;
+	private String name;
+	private JLabel expLabel;
+	private JButton nextButton;
+	public InsurancePage(JFrame frame, String text) {
+		this.mainFrame = frame;
+		this.name = text;
 	}
 
-	public void diplayInsurancePage() {
-		this.insuranceFrame = new JFrame(this.insuranceName);
-		this.mainInsurancePanel = new JPanel();
-		this.insurancePanel = new JPanel();
-		this.inputPanel = new JPanel();
-		this.buttonPanel = new JPanel();
-		this.inputPanel.setLayout(null);
-		this.insurancePanel.setLayout(null);
-		this.mainInsurancePanel.setLayout(new BoxLayout(mainInsurancePanel, BoxLayout.Y_AXIS));
-		this.insuranceFrame.setSize(750, 500);
-		this.insuranceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.insuranceFrame.setVisible(true);
-
+	public void prepareGUI() {
+		mainFrame = new JFrame("Insurance");
+		mainFrame.setSize(700, 600);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.getContentPane().setLayout(null);
+		mainFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent) {
+				System.exit(0);
+			}
+		});
+		headerLabel = new JLabel("");
+		headerLabel
+		.setText("Please select your insurance company \n and your permit expiry from the list:");
+		int styleHeader  = Font.BOLD | Font.ITALIC;
+		headerLabel.setFont(new Font("Garamond" , styleHeader , 20));
+		headerLabel.setBounds( 80, 30, 600 , 60);
+		mainFrame.getContentPane().add(headerLabel);
+		statusLabel = new JLabel("");
+		expLabel = new JLabel("");
+		nextButton = new JButton("NEXT");
+		nextButton.setBounds( 350, 300 , 100 , 35);
+		nextButton.addActionListener(this);
+		mainFrame.getContentPane().add(nextButton);
+		mainFrame.setVisible(true);
 	}
-
-	public void addLabelAndText() {
-		this.insuranceLabel = new JLabel("Insurance Company");
-		this.insuranceLabel.setBounds(250, 20, 200, 50);
-		this.insuranceField = new JTextField(30);
-		this.insuranceField.setHorizontalAlignment(JTextField.LEFT);
-		this.insuranceField.setBounds(250, 60, 300, 30);
-		this.insurancePanel.add(insuranceLabel);
-		this.insurancePanel.add(insuranceField);
-		this.mainInsurancePanel.add(insurancePanel);
-		this.insuranceFrame.add(mainInsurancePanel);
-	}
-
-	public void displayInput() {
-		int x, y;
-		// Needs action preformed to be able to output common preset emails
-		// TODO implement action preformed for EMAIL row.
-		this.rowOne = new JButton[firstRow.length];
-		x = 200;
-		y = 200;
-		for (int i = 0; i < firstRow.length; i++) {
-			JButton temp = new JButton(firstRow[i]);
-			temp.setBounds(x, y, 150, 40);
-			x += 100;
-			temp.addActionListener(this);
-			this.rowOne[i] = temp;
-			this.inputPanel.add(rowOne[i]);
-		}
-		this.rowTwo = new JButton[secondRow.length];
-		x = 80;
-		y = 0;
-		for (int i = 0; i < secondRow.length; i++) {
-			JButton temp = new JButton(secondRow[i]);
-			temp.setBounds(x, y, 50, 40);
-			x += 60;
-			temp.addActionListener(this);
-			this.rowTwo[i] = temp;
-			this.inputPanel.add(rowTwo[i]);
-		}
-		this.rowThree = new JButton[thirdRow.length];
-		x = 80;
-		y = 45;
-		for (int i = 0; i < thirdRow.length; i++) {
-			JButton temp = new JButton(thirdRow[i]);
-			temp.setBounds(x, y, 50, 40);
-			x += 60;
-			temp.addActionListener(this);
-			this.rowThree[i] = temp;
-			this.inputPanel.add(rowThree[i]);
-		}
-		this.rowFour = new JButton[fourthRow.length];
-		x = 80;
-		y = 90;
-		for (int i = 0; i < fourthRow.length; i++) {
-			JButton temp = new JButton(fourthRow[i]);
-			temp.setBounds(x, y, 50, 40);
-			x += 60;
-			temp.addActionListener(this);
-			this.rowFour[i] = temp;
-			this.inputPanel.add(rowFour[i]);
-		}
-		this.mainInsurancePanel.add(inputPanel);
-	}
-
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.insuranceFrame.setLocation(dim.width / 2 - this.insuranceFrame.getSize().width / 2,
-				dim.height / 2 - this.insuranceFrame.getSize().height / 2);
-		this.insuranceFrame.setVisible(true);
+		mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width
+				/ 2, dim.height / 2 - mainFrame.getSize().height / 2);
+		mainFrame.setVisible(true);
 	}
+	public void showComboboxDemo() throws IOException {
+		expLabel.setText("Please enter the expiry (mm/yyyy):");
+		final DefaultComboBoxModel<String> insName = new DefaultComboBoxModel<String>();
+		File file = new File("companies.txt");
+		FileReader fileReader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			insName.addElement(line);
+		}
+		fileReader.close();
+		JComboBox<String> inSelect = new JComboBox<String>(insName);
+		inSelect.setSelectedIndex(0);
+		inSelect.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+		inSelect.setBounds(170, 100 , 350 , 30);
+		JScrollPane inList = new JScrollPane(inSelect);
+		mainFrame.getContentPane().add(inSelect);
+		// adding expiry month
+		final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
 
-	public int backButton() {
-		JButton backButton = new JButton("BACK");
-		buttonPanel.add(backButton);
-		this.insuranceFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.insuranceFrame.setVisible(true);
-		backButton.addActionListener(new ActionListener() {
-			@Override
+		for (int i = 1; i < 13; i++) {
+			insExpM.addElement(i);
+		}
+		JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
+		inSelect.setSelectedIndex(0);
+		inEx.setBounds(250 , 150 , 60 , 30);
+		JScrollPane inExx = new JScrollPane(inEx);
+		mainFrame.getContentPane().add(inEx);
+		// add expiry year
+		final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
+		for (int i = 2015; i < 2021; i++) {
+			insExpY.addElement(i);
+		}
+		JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
+		inSelect.setSelectedIndex(0);
+		inY.setBounds(350, 150 , 60 , 30);
+		JScrollPane inExxY = new JScrollPane(inY);
+		mainFrame.getContentPane().add(inY);
+		JButton showButton = new JButton("SELECT");
+		showButton.setBounds(250 , 300 , 100 , 35);
+		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
-				if (e.getActionCommand().equals("BACK")) {
-					// System.exit(0);
-					System.out.println("****************");
-				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
+				String data = "";
+				if (inSelect.getSelectedIndex() != -1) {
+					data = "Insurance company selected: \n"
+							+ inSelect.getItemAt(inSelect.getSelectedIndex())
+							+ " (" + inEx.getItemAt(inEx.getSelectedIndex())
+							+ "/" + inY.getItemAt(inY.getSelectedIndex()) + ")";
 				}
-
+				statusLabel.setBounds(100 , 180 , 500 , 70);
+				statusLabel.setText(data);
+				int style  = Font.BOLD | Font.ITALIC;
+				statusLabel.setFont(new Font("Jokerman" , style , 15));
+				statusLabel.setBackground(Color.GREEN);
 			}
-
 		});
-		return 0;
-	}
-
-	public int nextButton() {
-		JButton backButton = new JButton("NEXT");
-		buttonPanel.add(backButton);
-		this.insuranceFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.insuranceFrame.setVisible(true);
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + "\n >>" + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
-				if (e.getActionCommand().equals("NEXT")) {
-					// System.exit(0);
-					System.out.println("&&&&&&&&&&NEXT&&&&&&");
-				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
-				}
-
-			}
-
-		});
-		return 0;
-	}
-
-	public void exitButton() {
-		JButton exitButton = new JButton("EXIT");
-		buttonPanel.add(exitButton);
-		this.insuranceFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.insuranceFrame.setVisible(true);
-		exitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
-				if (e.getActionCommand().equals("EXIT")) {
-					System.out.println("****************");
-					System.exit(0);
-					System.out.println("****************");
-				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
-				}
-
-			}
-
-		});
+		mainFrame.getContentPane().add(showButton);
+		mainFrame.getContentPane().add(statusLabel);
+		mainFrame.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		// TODO Auto-generated method stub
-		value = ((JButton) event.getSource()).getText().toLowerCase();
-		if (value.toString().equals("OTHER")) {
-			insuranceField.setText("");
-		} else {
-			insuranceField.setText(insuranceField.getText().toLowerCase() + value);
-		}
-		System.out.print("KEY => ");
-		System.out.println(value + " WAS PRESSED IN INSURANCEPAGE");
+		String val = ((JButton)event.getSource()).getActionCommand();
+		System.out.println("INSURANCE PAGE . . . . . . " + val);
+		this.mainFrame.setVisible(false);
+		this.mainFrame = new JFrame("ALSMOST");
+		this.mainFrame.setSize(700, 600);
+		this.mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.mainFrame.setVisible(true);
 	}
 }
