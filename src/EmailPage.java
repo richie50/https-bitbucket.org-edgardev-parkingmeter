@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -224,10 +225,14 @@ public class EmailPage implements ActionListener {
 						 */
 						emailFrame.setVisible(false);
 						InsurancePage insurance = new InsurancePage(this.emailFrame  , "Insurance Dev");
-						insurance.diplayInsurancePage();
-						insurance.addLabelAndText();
-						insurance.displayInput();
-						insurance.exitButton();
+						insurance.prepareGUI();
+						insurance.middlePostion();
+						try {
+							insurance.showComboboxDemo();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					} else {
 						/* UI ERROR MESSAGE FOR EMAIL VALIDATION GOES HERE */
 						EmailPage.emailErrorWindow();
@@ -262,7 +267,7 @@ public class EmailPage implements ActionListener {
 					System.exit(0);
 					System.out.println("****************");
 				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
+					System.out.println("CRITICAL ERROR!!!!!!!!!!!!");
 				}
 			}
 
