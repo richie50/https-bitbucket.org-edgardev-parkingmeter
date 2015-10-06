@@ -113,7 +113,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void welcomePageRunner() {
+	public void welcomePageRunner() throws IOException {
 		this.bar = new JProgressBar(0, 50);
 		this.bar.setStringPainted(false);
 		Random rnd = new Random();
@@ -127,12 +127,18 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.add(welcomeButton, BorderLayout.SOUTH);
 		this.welcomeLabel = new JLabel("Welcome To York University's Automated Parking System");
 		welcomeLabel.setFont(new Font("SANS_SERIF",Font.BOLD, 18));
+        String image_path = "yorku.gif";
+        File path = new File(image_path);
+        BufferedImage image = ImageIO.read(path);
+        JLabel label = new JLabel(new ImageIcon(image));
 		welcomeLabel.setBounds(100, 180, 600, 200);
+		label.setBounds(100, -150, 500, 500);
 		JLabel time = new JLabel("Current Date/Time: " + DateFormat.getDateTimeInstance().format(new Date()));
 		time.setVerticalAlignment(JLabel.BOTTOM);
 		time.setFont(new Font("MONOSPACED",Font.ITALIC, 16));
 		time.setHorizontalAlignment(JLabel.RIGHT);
 		welcomeFrame.add(welcomeLabel);
+		welcomeFrame.add(label);
 		welcomeFrame.add(time);
 		//welcomeFrame.add(new welcomeClockPanel());
 		// this.welcomeFrame.add(welcomePanel);
