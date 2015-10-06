@@ -13,7 +13,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -247,7 +251,6 @@ public class MainPage implements ActionListener, MouseListener {
 				if (e.getActionCommand().equals("EXIT")) {
 					System.exit(0);
 				}
-
 			}
 
 		});
@@ -274,8 +277,6 @@ public class MainPage implements ActionListener, MouseListener {
 			/** CHANGE THE FILE PATH **/
 			final Path FILE_PATH = Paths
 					.get("student.txt");
-			// String studentdb = "457642455";
-			// String pindb = "2164";
 			Optional<Person> matchingStudent = null;
 			try {
 				matchingStudent = Files
@@ -284,17 +285,39 @@ public class MainPage implements ActionListener, MouseListener {
 						.map(commaVal -> new Person(commaVal))
 						.filter(person -> person.getStudentNumber().equals(
 								studentdb)
-								&& person.getPin().equals(pindb)).findFirst();
+								&& person.getPin().equals(pindb) && (person.getStatus().equals("ok") 
+								|| person.getStatus().equals("arrears"))).findFirst();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
 			if (matchingStudent.isPresent()) {
 				Person matchingPerson = matchingStudent.get();
 				System.out.println("Hello "
 						+ matchingPerson.getFirstName().toUpperCase() + " "
 						+ matchingPerson.getLastName().toUpperCase());
+				System.out.println("\tSTUDENT STATUS > > > > >" + matchingPerson.getStatus());
+				//add valid info to the file
+				final String newLine = System.getProperty("line.separator");
+				File file = new File("Ticket_database.txt");
+				PrintWriter writer = null;
+				try {
+					if(!file.exists()){
+						file.createNewFile();
+					}
+					writer = new PrintWriter(new FileOutputStream(file));//overwrites the file each time
+					writer.write(matchingPerson.getStudentNumber() + newLine 
+							+ matchingPerson.getFirstName() + " " + matchingPerson.getLastName() + " " +
+							matchingPerson.getStatus());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}finally{
+					if(writer != null){
+						writer.flush();
+						writer.close();
+					}
+				}
 				// we display the email page
 				this.mainPanel.setVisible(true);
 				this.mainFrame.setVisible(false);
@@ -307,7 +330,7 @@ public class MainPage implements ActionListener, MouseListener {
 				email.backButton();
 				email.exitButton();
 			} else {
-				studentErrorWindow();
+				MainPage.studentErrorWindow();
 				System.out.println("No matching record found".toUpperCase());
 			}
 			
@@ -353,15 +376,6 @@ public class MainPage implements ActionListener, MouseListener {
 			currField.setText(currField.getText() + value);
 		}
 	}
-
-	class StudentNumberListerner implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
