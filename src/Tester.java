@@ -19,7 +19,12 @@ public class Tester {
 					e.printStackTrace();
 					System.out.println("IMAGE DOESNT EXIST!!!!");
 				}
-				welcome.welcomePageRunner();
+				try {
+					welcome.welcomePageRunner();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				welcome.middlePostion();
 			}
 		};
