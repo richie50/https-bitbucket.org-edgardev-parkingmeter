@@ -1,36 +1,35 @@
-public class Person
-   {
-      private final String studentNumber;
-      private final String pin;
-      private final String lastName;
-      private final String firstName;
+import java.awt.EventQueue;
+import java.io.IOException;
 
-      Person(String[] commaVal)
-      {
-    	  /*trim to remove any white spaces before the commas*/
-          this.studentNumber = commaVal[0].trim();
-          this.pin           = commaVal[1].trim();
-          this.lastName      = commaVal[2].trim();
-          this.firstName     = commaVal[3].trim();
-      }
+import javax.swing.*;
 
-      String getStudentNumber()
-      {
-         return studentNumber;
-      }
+public class Tester {
 
-      String getPin()
-      {
-         return pin;
-      }
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		JFrame frame = null;
+		WelcomePage welcome = new WelcomePage("WELCOME", frame);
+		Runnable runner = new Runnable() {		
+			@Override
+			public void run() {
+				try {
+					welcome.displayWelcomePanel();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("IMAGE DOESNT EXIST!!!!");
+				}
+				try {
+					welcome.welcomePageRunner();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				welcome.middlePostion();
+			}
+		};
+		EventQueue.invokeLater(runner);
+		welcome.setVisible(false);
+	}
 
-      String getLastName()
-      {
-         return lastName;
-      }
-
-      String getFirstName()
-      {
-         return firstName;
-      }
-   }
+}
