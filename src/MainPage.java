@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -29,17 +30,12 @@ import javax.swing.text.JTextComponent;
 
 //import sun.swing.SwingAccessor.JTextComponentAccessor;
 
-public class MainPage implements ActionListener, MouseListener {
+public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JFrame mainFrame;
-	private JPanel mainPanel;
 	private String main_page_name;
 	private JLabel StudentNumber;
 	private JLabel PIN;
 	private JTextField currField;
-	private JPanel panel;
-	private JPanel numberPanel;
-	private JPanel buttonPanel;
-	private JPanel iconPanel;
 	private JTextField sn_field;
 	private JTextField pin_field;
 	private String firstRow[] = { "1", "2", "3" };
@@ -61,18 +57,14 @@ public class MainPage implements ActionListener, MouseListener {
 	}
 	
 	public void displayMainPage() throws IOException {
-		//this.mainFrame.setVisible(false);
 		this.mainFrame = new JFrame(this.main_page_name);
-		this.mainPanel = new JPanel();
-		this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		this.mainPanel.setMaximumSize(this.mainPanel.getMinimumSize());
-		this.panel = new JPanel();
-		this.numberPanel = new JPanel();
-		this.numberPanel.setLayout(null);
-		this.numberPanel.setLayout(null);
-		this.buttonPanel = new JPanel();
+		this.mainFrame.getContentPane().setLayout(null);
 		this.mainFrame.setSize(700, 600);
+		this.mainFrame.getContentPane().setBackground(Color.BLUE);
 		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.mainFrame.pack();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2, dim.height / 2 - mainFrame.getSize().height / 2);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -87,11 +79,12 @@ public class MainPage implements ActionListener, MouseListener {
 	public void addTextFields() {
 		// needs fix to determine if Student or PIN
 		this.StudentNumber = new JLabel("Student Number:");
+		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.sn_field = new JTextField(30);
 		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
 		this.sn_field.setEditable(true);
-		this.sn_field.setBounds(250, 125, 250, 30);
-		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
+		this.sn_field.setBounds(230, 50 , 250, 30);
+		this.mainFrame.getContentPane().add(sn_field);
 		this.sn_field.addFocusListener(new FocusListener() {
 
 			@Override
@@ -104,12 +97,17 @@ public class MainPage implements ActionListener, MouseListener {
 			}
 		});
 		this.PIN = new JLabel("PIN:");
+		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
 		this.pin_field = new JTextField(30);
 		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
 		this.pin_field.setEditable(true);
-		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
-		this.pin_field.setBounds(250, 190, 250, 30);
+		this.pin_field.setBounds(230, 150 , 250 , 30);
+		this.mainFrame.getContentPane().add(pin_field);
 		this.pin_field.addMouseListener(this);
+		this.StudentNumber.setBounds(250, 25, 200, 20);
+		this.PIN.setBounds(250, 60 , 200, 20);
+		this.mainFrame.getContentPane().add(StudentNumber);
+		this.mainFrame.getContentPane().add(PIN);
 		this.pin_field.addFocusListener(new FocusListener() {
 
 			@Override
@@ -124,65 +122,39 @@ public class MainPage implements ActionListener, MouseListener {
 		// this.mainFrame.setVisible(true);
 	}
 
-	public void addIcon() {
-		this.iconPanel = new JPanel();
-		// adds a logo to the frame
-		ImageIcon image = new ImageIcon("yorku.gif");
-		JLabel backgroundImage = new JLabel(image);
-		backgroundImage.setBounds(5, 5, 10, 10);
-		this.iconPanel.add(backgroundImage);
-		this.mainFrame.add(iconPanel, BorderLayout.SOUTH);
-		this.mainFrame.setVisible(true);
-	}
-
-	public void addInputPanel() {
-		// add the labels to the panel
-		this.panel.setLayout(null);
-		this.StudentNumber.setBounds(250, 100, 200, 20);
-		this.PIN.setBounds(250, 170, 200, 20);
-		this.panel.add(StudentNumber);
-		this.panel.add(PIN);
-		// add the textfields
-		this.panel.add(sn_field);
-		this.panel.add(pin_field);
-		this.mainPanel.add(panel);
-		this.mainFrame.add(mainPanel);
-	}
-
 	public void addSubmitButtons(String text) {
 		submitButton = new JButton(text);
-		this.buttonPanel.add(submitButton);
+		submitButton.setBounds(450 , 450 , 50 , 30 );
 		submitButton.addActionListener(this);
-		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.mainFrame.setVisible(true);
+		this.mainFrame.getContentPane().add(submitButton);
 	}
 
 	public void addNumberButtons() {
 		int x, y;
 		this.one = new JButton[firstRow.length];
-		x = 280;
-		y = 50;
+		x = 250;
+		y = 250;
 		for (int i = 0; i < firstRow.length; i++) {
 			JButton temp = new JButton(firstRow[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.one[i] = temp;
-			this.numberPanel.add(one[i]);
+			this.mainFrame.getContentPane().add(one[i]);
 		}
 		this.two = new JButton[secondRow.length];
-		x = 280;
-		y = 100;
+		x = 250;
+		y = 300;
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.two[i] = temp;
-			this.numberPanel.add(two[i]);
+			this.mainFrame.getContentPane().add(two[i]);
 		}
-		x = 280;
-		y = 150;
+		x = 250;
+		y = 350;
 		this.three = new JButton[thirdRow.length];
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
@@ -190,16 +162,13 @@ public class MainPage implements ActionListener, MouseListener {
 			x += 60;
 			temp.addActionListener(this);
 			this.three[i] = temp;
-			this.numberPanel.add(three[i]);
+			this.mainFrame.getContentPane().add(three[i]);
 		}
 		// make the zero button
 		JButton zero = new JButton("0");
-		zero.setBounds(340, 200, 50, 40);
+		zero.setBounds(300 , 400 , 50, 40);
 		zero.addActionListener(this);
-		this.numberPanel.add(zero);
-
-		this.mainPanel.add(numberPanel);
-		this.mainFrame.add(mainPanel);
+		this.mainFrame.getContentPane().add(zero);
 	}
 
 	public void addClearButton() {
@@ -209,10 +178,8 @@ public class MainPage implements ActionListener, MouseListener {
 				java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
-		clear.setSize(20, 10);
-		buttonPanel.add(clear);
-		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.mainFrame.setVisible(true);
+		clear.setBounds(550, 450, 50 , 30);
+		this.mainFrame.getContentPane().add(clear);
 		// init to student Number Field by default;
 		clear.addActionListener(new ActionListener() {
 			@Override
@@ -236,9 +203,8 @@ public class MainPage implements ActionListener, MouseListener {
 
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
-		buttonPanel.add(exitButton);
-		this.mainFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.mainFrame.setVisible(true);
+		exitButton.setBounds(200, 450, 50, 30);
+		this.mainFrame.getContentPane().add(exitButton);
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -307,7 +273,7 @@ public class MainPage implements ActionListener, MouseListener {
 					}
 					writer = new PrintWriter(new FileOutputStream(file));//overwrites the file each time
 					writer.write(matchingPerson.getStudentNumber() + newLine 
-							+ matchingPerson.getFirstName() + " " + matchingPerson.getLastName() + " " +
+							+ matchingPerson.getFirstName() + " " + matchingPerson.getLastName() + " \n" +
 							matchingPerson.getStatus());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -319,7 +285,6 @@ public class MainPage implements ActionListener, MouseListener {
 					}
 				}
 				// we display the email page
-				this.mainPanel.setVisible(true);
 				this.mainFrame.setVisible(false);
 				EmailPage email = new EmailPage(this.mainFrame, "Email");
 				email.diplayEmailPage();
@@ -327,10 +292,9 @@ public class MainPage implements ActionListener, MouseListener {
 				email.addEmailLabelAndTextFeild();
 				email.displayKeyboard();
 				email.nextButton();
-				email.backButton();
 				email.exitButton();
 			} else {
-				MainPage.studentErrorWindow();
+				studentErrorWindow();
 				System.out.println("No matching record found".toUpperCase());
 			}
 			
@@ -404,7 +368,12 @@ public class MainPage implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-	public static void studentErrorWindow() {
+	public JTextField getCurrentField(){
+		return this.currField;
+	}
+	public void studentErrorWindow() {
 		JOptionPane.showMessageDialog(null, "No matching record found.", "Error", JOptionPane.ERROR_MESSAGE);
+		JTextField reset = getCurrentField();
+		reset.setText("");
 	}
 }
