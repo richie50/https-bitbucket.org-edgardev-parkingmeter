@@ -30,6 +30,7 @@ import javax.swing.*;
 
 public class WelcomePage extends JFrame implements ActionListener {
 	/**
+	 * Init default values, frame, the name of the page, and the panel.
 	 * 
 	 */
 	private static JFrame welcomeFrame;
@@ -70,14 +71,12 @@ public class WelcomePage extends JFrame implements ActionListener {
 						welcomeFrame.setVisible(false);
 						System.out.println("RENDERING MAINPAGE . . . . . . . ");
 						MainPage display = new MainPage(
-								"PARKING KIOSK DEV ENV", welcomeFrame);
+								"York University Parking Kiosk", welcomeFrame);
 						display.displayMainPage();
 						display.middlePostion();
-
 						display.addTextFields();
 						display.addInputPanel();
 						display.addNumberButtons();
-
 						display.addSubmitButtons("NEXT");
 						display.exitButton();
 						display.addClearButton();
@@ -98,10 +97,6 @@ public class WelcomePage extends JFrame implements ActionListener {
 	public WelcomePage(String title, JFrame frame) {
 		welcomeName = title;
 		welcomeFrame = frame;
-	}
-
-	public void displayWelcomeMessage() {
-
 	}
 
 	public void displayWelcomePanel() throws IOException{
@@ -127,7 +122,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.add(welcomeButton, BorderLayout.SOUTH);
 		this.welcomeLabel = new JLabel("Welcome To York University's Automated Parking System");
 		welcomeLabel.setFont(new Font("SANS_SERIF",Font.BOLD, 18));
-        String image_path = "yorku.gif";
+        String image_path = "YorkLogo.gif";
         File path = new File(image_path);
         BufferedImage image = ImageIO.read(path);
         JLabel label = new JLabel(new ImageIcon(image));
@@ -140,6 +135,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.add(welcomeLabel);
 		welcomeFrame.add(label);
 		welcomeFrame.add(time);
+		welcomeFrame.getContentPane().setBackground(new Color(153, 190, 255));
 		//welcomeFrame.add(new welcomeClockPanel());
 		// this.welcomeFrame.add(welcomePanel);
 		welcomeFrame.setVisible(true);

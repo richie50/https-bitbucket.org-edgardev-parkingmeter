@@ -5,6 +5,7 @@
  * EECS3461 - Scott McKenzie
  */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class EmailPage implements ActionListener {
+public class EmailPage extends JFrame implements ActionListener {
 	private JFrame emailFrame;
 	private String name;
 	private JLabel email;
@@ -34,8 +35,8 @@ public class EmailPage implements ActionListener {
 	private String digit[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 	private String firstRow[] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O",
 			"P" };
-	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L" };
-	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M", "_", "@" };
+	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L" , "@"};
+	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M", "_", "." };
 	private String value;
 	private JPanel buttonPanel;
 
@@ -46,14 +47,9 @@ public class EmailPage implements ActionListener {
 
 	public void diplayEmailPage() {
 		this.emailFrame = new JFrame(this.name);
-		this.mainEmailPanel = new JPanel();
-		this.emailPanel = new JPanel();
-		this.keyboardPanel = new JPanel();
 		this.buttonPanel = new JPanel();
-		this.keyboardPanel.setLayout(null);
-		this.emailPanel.setLayout(null);
-		this.mainEmailPanel.setLayout(new BoxLayout(mainEmailPanel,
-				BoxLayout.Y_AXIS));
+		this.emailFrame.getContentPane().setLayout(null);
+		this.emailFrame.getContentPane().setBackground(new Color(153, 190, 255));
 		this.emailFrame.setSize(700, 600);
 		this.emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.emailFrame.setVisible(true);
@@ -62,14 +58,15 @@ public class EmailPage implements ActionListener {
 
 	public void addEmailLabelAndTextFeild() {
 		this.email = new JLabel("EMAIL:");
-		this.email.setBounds(250, 20, 200, 50);
+		this.email.setBounds(350, 50, 200, 50);
 		this.email_field = new JTextField(30);
-		this.email_field.setHorizontalAlignment(JTextField.LEFT);
-		this.email_field.setBounds(150, 60, 300, 30);
-		this.emailPanel.add(email);
-		this.emailPanel.add(email_field);
-		this.mainEmailPanel.add(emailPanel);
-		this.emailFrame.add(mainEmailPanel);
+		//this.email_field.setHorizontalAlignment(SwingConstants.CENTER);
+		//this.email_field.setAlignment(SwingConstants.CENTER);
+		this.email_field.setBounds(250, 100 , 300, 30);
+		
+		this.emailFrame.getContentPane().add(email);
+		this.emailFrame.getContentPane().add(email_field);
+		this.emailFrame.setVisible(true);
 	}
 
 	public void displayKeyboard() {
@@ -78,47 +75,47 @@ public class EmailPage implements ActionListener {
 		// TODO implement action preformed for EMAIL row.
 		this.emailButtons = new JButton[emailRow.length];
 		x = 60;
-		y = 180;
+		y = 390;
 		for (int i = 0; i < emailRow.length; i++) {
 			JButton temp = new JButton(emailRow[i]);
-			temp.setBounds(x, y, 100, 40);
+			temp.setBounds(x, y, 120, 40);
 			x += 120;
 			temp.addActionListener(this);
 			this.emailButtons[i] = temp;
-			this.keyboardPanel.add(emailButtons[i]);
+			this.emailFrame.getContentPane().add(emailButtons[i]);
 		}
 		this.numberRow = new JButton[digit.length];
 		x = 60;
-		y = 0;
+		y = 200;
 		for (int i = 0; i < digit.length; i++) {
 			JButton temp = new JButton(digit[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.numberRow[i] = temp;
-			this.keyboardPanel.add(numberRow[i]);
+			this.emailFrame.getContentPane().add(numberRow[i]);
 		}
 		this.rowOne = new JButton[firstRow.length];
 		x = 60;
-		y = 45;
+		y = 245;
 		for (int i = 0; i < firstRow.length; i++) {
 			JButton temp = new JButton(firstRow[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowOne[i] = temp;
-			this.keyboardPanel.add(rowOne[i]);
+			this.emailFrame.getContentPane().add(rowOne[i]);
 		}
 		this.rowTwo = new JButton[secondRow.length];
 		x = 60;
-		y = 90;
+		y = 290;
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowTwo[i] = temp;
-			this.keyboardPanel.add(rowTwo[i]);
+			this.emailFrame.getContentPane().add(rowTwo[i]);
 		}
 		// create the clear button
 		ImageIcon backSPace = new ImageIcon("backspace.png");
@@ -127,8 +124,8 @@ public class EmailPage implements ActionListener {
 				Image.SCALE_AREA_AVERAGING);
 		backSPace = new ImageIcon(temporary);
 		this.clearButton = new JButton(backSPace);
-		this.clearButton.setBounds(x, y, 50, 85);
-		this.keyboardPanel.add(clearButton);
+		this.clearButton.setBounds(600 , 340 , 50, 40);
+		this.emailFrame.getContentPane().add(clearButton);
 		clearButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -149,18 +146,15 @@ public class EmailPage implements ActionListener {
 
 		this.rowThree = new JButton[thirdRow.length];
 		x = 60;
-		y = 135;
+		y = 340;
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
 			temp.setBounds(x, y, 50, 40);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowThree[i] = temp;
-			this.keyboardPanel.add(rowThree[i]);
+			this.emailFrame.getContentPane().add(rowThree[i]);
 		}
-
-		this.mainEmailPanel.add(keyboardPanel);
-		this.emailFrame.add(mainEmailPanel);
 	}
 
 	public void middlePostion() {
@@ -171,37 +165,12 @@ public class EmailPage implements ActionListener {
 		this.emailFrame.setVisible(true);
 	}
 
-	public int backButton() {
-		JButton backButton = new JButton("BACK");
-		buttonPanel.add(backButton);
-		this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
-		this.emailFrame.setVisible(true);
-		backButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
-				if (e.getActionCommand().equals("BACK")) {
-					// System.exit(0);
-					System.out.println("****************");
-				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
-				}
-
-			}
-
-		});
-		return 0;
-	}
+	
 
 	public void nextButton() {
 		JButton backButton = new JButton("NEXT");
-		buttonPanel.add(backButton);
-		this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
+		backButton.setBounds( 450 , 450 , 80 , 50);
+		this.emailFrame.getContentPane().add(backButton);
 		this.emailFrame.setVisible(true);
 		backButton.addActionListener(new ActionListener() {
 			JFrame emailFrame = originalFrame();
@@ -218,14 +187,15 @@ public class EmailPage implements ActionListener {
 							.println("VAALIDATING EMAIL . . . . . . . . . . . . . . . . ");
 					String emaildb = new String();
 					emaildb = email_field.getText();
-					if (isValidEmailAddress(emaildb)) {
+					if (isValidEmailAddress(emaildb) || emaildb.isEmpty()) {
 						System.out.println("SUCCESS , VALID EMAIL");
 						/*
 						 * ADDED INSURANCE PAGE
 						 */
 						emailFrame.setVisible(false);
 						InsurancePage insurance = new InsurancePage(this.emailFrame  , "Insurance Dev");
-						insurance.prepareGUI();
+						insurance.initialize();
+						insurance.initializeKeyboard();
 						insurance.middlePostion();
 						try {
 							insurance.showComboboxDemo();
@@ -250,8 +220,8 @@ public class EmailPage implements ActionListener {
 
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
-		buttonPanel.add(exitButton);
-		this.emailFrame.add(buttonPanel, BorderLayout.SOUTH);
+		exitButton.setBounds( 250 ,450 , 80 , 50);
+		this.emailFrame.getContentPane().add(exitButton);
 		this.emailFrame.setVisible(true);
 		exitButton.addActionListener(new ActionListener() {
 			@Override
