@@ -1,3 +1,4 @@
+
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -76,17 +77,16 @@ public class WelcomePage extends JFrame implements ActionListener {
 						welcomeFrame.setVisible(false);
 						welcomeFrame.dispose();
 						System.out.println("RENDERING MAINPAGE . . . . . . . ");
-						MainPage display = new MainPage(
-								"PARKING KIOSK DEV ENV", welcomeFrame);
+						MainPage display = new MainPage("PARKING KIOSK DEV ENV", welcomeFrame);
 						display.displayMainPage();
-						display.addTextFields();					
+						display.addTextFields();
 						display.addNumberButtons();
 						display.addClearButton();
 						display.addSubmitButtons("NEXT");
 						display.exitButton();
-						//display.middlePostion();
-						//display.setVisible(true);
-						
+						// display.middlePostion();
+						// display.setVisible(true);
+
 					}
 				} catch (InterruptedException ex1) {
 
@@ -104,50 +104,55 @@ public class WelcomePage extends JFrame implements ActionListener {
 	public WelcomePage(String title, JFrame frame) {
 		welcomeName = title;
 		welcomeFrame = frame;
-		
+
 	}
 
-	public class displayWelcomeMessage extends JLabel{
+	public class displayWelcomeMessage extends JLabel {
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		final String text[] = {"Welcome" , "To" , "York" , "Univeristy" , "Automated" ,"Parking" ,"System" };
+		final String text[] = { "Welcome To", "York Univeristy's", "Automated Parking System" };
 		int index = 0;
 		int startingPoint = 10;
-		final int delay = 2000;
-		displayWelcomeMessage(){
-		System.out.println("********ANIMATION STRINGS*******");
-		ActionListener counter = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				repaint();
-				startingPoint+= 10;
-				index++;
-			}
-		};
-			new Timer(delay , counter).start(); // runs animation
-		}
-		@Override
-		public void paintComponent(Graphics graphics){
-			if(index < text.length){
-				graphics.drawString(text[index], startingPoint, 20);
-			}
-		}
-	} //end of animation class
+		final int delay = 1500;
 
-	public void displayWelcomePanel() throws IOException{
+		displayWelcomeMessage() {
+			System.out.println("********ANIMATION STRINGS*******");
+			ActionListener counter = new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					repaint();
+					// startingPoint+= 10;
+					index++;
+				}
+			};
+			new Timer(delay, counter).start(); // runs animation
+		}
+
+		@Override
+		public void paintComponent(Graphics graphics) {
+
+			if (index < text.length) {
+				graphics.drawString(text[index], startingPoint, 20);
+
+			}
+		}
+	} // end of animation class
+
+	public void displayWelcomePanel() throws IOException {
 		welcomeFrame = new JFrame(welcomeName);
 		welcomePanel = new JPanel();
-		//System.out.println("DEV NAME: " + container.getTitle());
+		// System.out.println("DEV NAME: " + container.getTitle());
 		displayWelcomeMessage welcome = new displayWelcomeMessage();
 		welcome.setBounds(280, 450, 400, 200);
-		welcome.setFont(new Font("SANS_SERIF",Font.BOLD | Font.ITALIC, 40));
+		welcome.setFont(new Font("SANS_SERIF", Font.BOLD | Font.ITALIC, 20));
 		welcomeFrame.getContentPane().add(welcome);
 		welcome.setVisible(true);
 		System.out.println(welcomeFrame.getTitle());
 		welcomeFrame.setSize(700, 600);
+		welcomeFrame.getContentPane().setBackground(new Color(153, 190, 255));
 		welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -158,7 +163,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		float red = rnd.nextFloat();
 		float blue = rnd.nextFloat();
 		float green = rnd.nextFloat();
-		this.bar.setForeground(new Color(red , blue , green));
+		this.bar.setForeground(new Color(red, blue, green));
 		Border border = new EtchedBorder(EtchedBorder.LOWERED);
 		this.welcomeButton = new JButton("PRESS HERE TO CONITNUE");
 		this.welcomeButton.setSize(50, 40);
@@ -166,28 +171,30 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.welcomeButton.addActionListener(this);
 		welcomeFrame.add(bar, BorderLayout.NORTH);
 		welcomeFrame.add(welcomeButton, BorderLayout.SOUTH);
-		//this.welcomeLabel = new JLabel("Welcome To York University's Automated Parking System");
-		//welcomeLabel.setFont(new Font("SANS_SERIF",Font.BOLD | Font.ITALIC, 20));
-        String image_path = "yorku.gif";
-        File path = new File(image_path);
-        BufferedImage image = ImageIO.read(path);
-        JLabel label = new JLabel(new ImageIcon(image));
-		//welcomeLabel.setBounds(100, 180, 600, 200);
+		// this.welcomeLabel = new JLabel("Welcome To York University's
+		// Automated Parking System");
+		// welcomeLabel.setFont(new Font("SANS_SERIF",Font.BOLD | Font.ITALIC,
+		// 20));
+		String image_path = "YorkLogo.gif";
+		File path = new File(image_path);
+		BufferedImage image = ImageIO.read(path);
+		JLabel label = new JLabel(new ImageIcon(image));
+		// welcomeLabel.setBounds(100, 180, 600, 200);
 		label.setBounds(100, -150, 500, 500);
 		JLabel time = new JLabel("Current Date/Time: " + DateFormat.getDateTimeInstance().format(new Date()));
 		time.setVerticalAlignment(JLabel.BOTTOM);
-		time.setFont(new Font("MONOSPACED",Font.BOLD|Font.ITALIC, 17));
+		time.setFont(new Font("MONOSPACED", Font.BOLD | Font.ITALIC, 17));
 		time.setHorizontalAlignment(JLabel.RIGHT);
-		//welcomeFrame.add(welcomeLabel);
+		// welcomeFrame.add(welcomeLabel);
 		welcomeFrame.add(label);
 		welcomeFrame.add(time);
 		welcomeFrame.setVisible(true);
 	}
-	
+
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		welcomeFrame.setLocation(dim.width / 2 - welcomeFrame.getSize().width
-				/ 2, dim.height / 2 - welcomeFrame.getSize().height / 2);
+		welcomeFrame.setLocation(dim.width / 2 - welcomeFrame.getSize().width / 2,
+				dim.height / 2 - welcomeFrame.getSize().height / 2);
 		welcomeFrame.setVisible(true);
 	}
 

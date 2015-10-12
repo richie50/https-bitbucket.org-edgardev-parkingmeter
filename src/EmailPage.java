@@ -12,8 +12,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -46,24 +49,33 @@ public class EmailPage extends JFrame implements ActionListener {
 		this.name = text;
 	}
 
-	public void diplayEmailPage() {
+	public void diplayEmailPage() throws IOException {
 		this.emailFrame = new JFrame(this.name);
 		this.emailFrame.getContentPane().setLayout(null);
 		this.emailFrame.getContentPane().setBackground(Color.WHITE);
 		this.emailFrame.setSize(700, 600);
+		String image_path = "YorkLogo.gif";
+		File path = new File(image_path);
+		BufferedImage image = ImageIO.read(path);
+		JLabel label = new JLabel(new ImageIcon(image));
+		label.setBounds(330, 285, 500, 500);
+		emailFrame.getContentPane().add(label);
 		this.emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.emailFrame.setVisible(true);
 
 	}
 
 	public void addEmailLabelAndTextFeild() {
-		this.email = new JLabel("EMAIL:");
-		this.email.setBounds(350, 50, 200, 50);
+		JLabel prompt = new JLabel("Subscribe for our news letters and offers below.");
+		prompt.setBounds(200, 0, 400, 100);
+		this.email = new JLabel("EMAIL (OPTIONAL) :");
+		this.email.setBounds(120, 100, 300, 30);
 		this.email_field = new JTextField(30);
 		//this.email_field.setHorizontalAlignment(SwingConstants.CENTER);
 		//this.email_field.setAlignment(SwingConstants.CENTER);
 		this.email_field.setBounds(250, 100 , 300, 30);
 		
+		this.emailFrame.getContentPane().add(prompt);
 		this.emailFrame.getContentPane().add(email);
 		this.emailFrame.getContentPane().add(email_field);
 		this.emailFrame.setVisible(true);
@@ -175,7 +187,7 @@ public class EmailPage extends JFrame implements ActionListener {
 	public void nextButton() {
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		JButton backButton = new JButton("NEXT");
-		backButton.setBounds( 450 , 450 , 80 , 50);
+		backButton.setBounds(350 , 450 , 80 , 30);
 		backButton.setBorder(border);
 		this.emailFrame.getContentPane().add(backButton);
 		this.emailFrame.setVisible(true);
@@ -228,7 +240,7 @@ public class EmailPage extends JFrame implements ActionListener {
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
 		Border border = new BevelBorder(BevelBorder.RAISED);
-		exitButton.setBounds( 250 ,450 , 80 , 50);
+		exitButton.setBounds(270 ,450 , 80 , 30);
 		exitButton.setBorder(border);
 		this.emailFrame.getContentPane().add(exitButton);
 		this.emailFrame.setVisible(true);
