@@ -1,3 +1,4 @@
+
 /*
  * @author Richmond F, Edgar Z, Daniyal J
  * @cse : cse23004, cse23106, cse31034
@@ -35,12 +36,10 @@ public class EmailPage extends JFrame implements ActionListener {
 	private JButton numberRow[];
 	private JButton clearButton;
 	private JButton emailButtons[];
-	private String emailRow[] = { "@my.yorku.ca", "@gmail.com", "@hotmail.com",
-			"@yahoo.ca", "@live.com" };
+	private String emailRow[] = { "@my.yorku.ca", "@gmail.com", "@hotmail.com", "@yahoo.ca", "@live.com" };
 	private String digit[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
-	private String firstRow[] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O",
-			"P" };
-	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L" , "@"};
+	private String firstRow[] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" };
+	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L", "@" };
 	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M", "_", "." };
 	private String value;
 
@@ -71,10 +70,10 @@ public class EmailPage extends JFrame implements ActionListener {
 		this.email = new JLabel("EMAIL (OPTIONAL) :");
 		this.email.setBounds(120, 100, 300, 30);
 		this.email_field = new JTextField(30);
-		//this.email_field.setHorizontalAlignment(SwingConstants.CENTER);
-		//this.email_field.setAlignment(SwingConstants.CENTER);
-		this.email_field.setBounds(250, 100 , 300, 30);
-		
+		// this.email_field.setHorizontalAlignment(SwingConstants.CENTER);
+		// this.email_field.setAlignment(SwingConstants.CENTER);
+		this.email_field.setBounds(250, 100, 300, 30);
+
 		this.emailFrame.getContentPane().add(prompt);
 		this.emailFrame.getContentPane().add(email);
 		this.emailFrame.getContentPane().add(email_field);
@@ -135,11 +134,10 @@ public class EmailPage extends JFrame implements ActionListener {
 		// create the clear button
 		ImageIcon backSPace = new ImageIcon("backspace.png");
 		Image image = backSPace.getImage();
-		Image temporary = image.getScaledInstance(20, 20,
-				Image.SCALE_AREA_AVERAGING);
+		Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
 		backSPace = new ImageIcon(temporary);
 		this.clearButton = new JButton(backSPace);
-		this.clearButton.setBounds(600 , 340 , 50, 40);
+		this.clearButton.setBounds(600, 340, 50, 40);
 		this.clearButton.setBorder(border);
 		this.emailFrame.getContentPane().add(clearButton);
 		clearButton.addActionListener(new ActionListener() {
@@ -151,8 +149,7 @@ public class EmailPage extends JFrame implements ActionListener {
 				//
 				if (e.getActionCommand().equals("")) {
 					if (email_field.getText().length() >= 1) {
-						email_field.setText(email_field.getText().substring(0,
-								email_field.getText().length() - 1));
+						email_field.setText(email_field.getText().substring(0, email_field.getText().length() - 1));
 					} else {
 						System.out.println("NOTHING TO DELETE");
 					}
@@ -176,34 +173,30 @@ public class EmailPage extends JFrame implements ActionListener {
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.emailFrame.setLocation(dim.width / 2
-				- this.emailFrame.getSize().width / 2, dim.height / 2
-				- this.emailFrame.getSize().height / 2);
+		this.emailFrame.setLocation(dim.width / 2 - this.emailFrame.getSize().width / 2,
+				dim.height / 2 - this.emailFrame.getSize().height / 2);
 		this.emailFrame.setVisible(true);
 	}
-
-	
 
 	public void nextButton() {
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		JButton backButton = new JButton("NEXT");
-		backButton.setBounds(350 , 450 , 80 , 30);
+		backButton.setBounds(350, 450, 80, 30);
 		backButton.setBorder(border);
 		this.emailFrame.getContentPane().add(backButton);
 		this.emailFrame.setVisible(true);
 		backButton.addActionListener(new ActionListener() {
 			JFrame emailFrame = originalFrame();
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + "\n >>"
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + "\n >>" + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("NEXT")) {
-					System.out
-							.println("VAALIDATING EMAIL . . . . . . . . . . . . . . . . ");
+					System.out.println("VAALIDATING EMAIL . . . . . . . . . . . . . . . . ");
 					String emaildb = new String();
 					emaildb = email_field.getText();
 					if (isValidEmailAddress(emaildb) || emaildb.isEmpty()) {
@@ -212,7 +205,7 @@ public class EmailPage extends JFrame implements ActionListener {
 						 * ADDED INSURANCE PAGE
 						 */
 						emailFrame.setVisible(false);
-						InsurancePage insurance = new InsurancePage(this.emailFrame  , "Insurance Dev");
+						InsurancePage insurance = new InsurancePage(this.emailFrame, "Insurance Dev");
 						insurance.initialize();
 						insurance.initializeKeyboard();
 						insurance.middlePostion();
@@ -225,8 +218,7 @@ public class EmailPage extends JFrame implements ActionListener {
 					} else {
 						/* UI ERROR MESSAGE FOR EMAIL VALIDATION GOES HERE */
 						EmailPage.emailErrorWindow();
-						System.out
-								.println("The email you have entered is not valid. Please try again");
+						System.out.println("The email you have entered is not valid. Please try again");
 					}
 
 				} else {
@@ -240,7 +232,7 @@ public class EmailPage extends JFrame implements ActionListener {
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
 		Border border = new BevelBorder(BevelBorder.RAISED);
-		exitButton.setBounds(270 ,450 , 80 , 30);
+		exitButton.setBounds(270, 450, 80, 30);
 		exitButton.setBorder(border);
 		this.emailFrame.getContentPane().add(exitButton);
 		this.emailFrame.setVisible(true);
@@ -249,8 +241,7 @@ public class EmailPage extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- "
-						+ e.getSource());
+				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
 				System.out.println(e.paramString());
 				// DEBUG
 				if (e.getActionCommand().equals("EXIT")) {
@@ -282,10 +273,10 @@ public class EmailPage extends JFrame implements ActionListener {
 	}
 
 	public static void emailErrorWindow() {
-		JOptionPane.showMessageDialog(null, "Please enter a valid email.",
-				"Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
-	public JFrame originalFrame(){
+
+	public JFrame originalFrame() {
 		return this.emailFrame;
 	}
 }

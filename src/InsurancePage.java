@@ -60,25 +60,25 @@ public class InsurancePage extends JFrame implements ActionListener {
 		});
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		headerLabel = new JLabel("");
-		headerLabel.setText("Please select your insurance company \n and your permit expiry from the list:");
-		int styleHeader = Font.BOLD | Font.ITALIC;
-		headerLabel.setFont(new Font("Garamond", styleHeader, 20));
+		headerLabel.setText("Please select your insurance company and your permit expiry from the list:");
+		// int styleHeader = Font.BOLD | Font.ITALIC;
+		headerLabel.setFont(new Font("Garamond", Font.CENTER_BASELINE, 14));
 		headerLabel.setBounds(80, 30, 600, 60);
 		mainFrame.getContentPane().add(headerLabel);
 		statusLabel = new JLabel("");
 		expLabel = new JLabel("");
 		monthLabel = new JLabel("Month:");
-		monthLabel.setBounds(200, 160, 50, 20);
+		monthLabel.setBounds(200, 155, 50, 20);
 		yearLabel = new JLabel("Year:");
-		yearLabel.setBounds(315, 160, 50, 20);
+		yearLabel.setBounds(315, 155, 50, 20);
 		nextButton = new JButton("Print Ticket");
 		nextButton.setBounds(380, 500, 100, 35);
 		nextButton.setBorder(border);
 		nextButton.addActionListener(this);
 		make = new JTextField(); // FIELD EDGAR
 		JLabel makeLabel = new JLabel("Make :");
-		make.setBounds(200, 200, 80, 30);
-		makeLabel.setBounds(155, 200, 50, 30);
+		make.setBounds(190, 200, 80, 30);
+		makeLabel.setBounds(145, 200, 50, 30);
 		this.make.addFocusListener(new FocusListener() {
 
 			@Override
@@ -93,7 +93,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 		model = new JTextField(); // FIELD EDGAR
 		model.setBounds(320, 200, 80, 30);
 		JLabel modelLabel = new JLabel("Model :");
-		modelLabel.setBounds(280, 200, 50, 30);
+		modelLabel.setBounds(270, 200, 50, 30);
 		this.model.addFocusListener(new FocusListener() {
 
 			@Override
@@ -238,12 +238,12 @@ public class InsurancePage extends JFrame implements ActionListener {
 		showButton.setBorder(border);
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(currField == make) {
+				if (currField == make) {
 					currField = model;
-				} else if(currField == model) {
+				} else if (currField == model) {
 					currField = plateNumber;
 				} else if (currField == plateNumber) {
-					//display Popup next Field is empty or set back to make
+					// display Popup next Field is empty or set back to make
 				}
 			}
 		});
