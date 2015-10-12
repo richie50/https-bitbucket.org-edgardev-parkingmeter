@@ -101,6 +101,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 
 			@Override
 			public void focusLost(FocusEvent e) {
+				//ADDED TOOLTIP
+				JTextField field = (JTextField)e.getSource();
+				String number = field.getText();
+				if(number.isEmpty()||number.length() < 9 || number.length() > 9){
+					sn_field.setToolTipText("Your Student Number should be nine digits");
+					System.out.println(sn_field.getToolTipText());
+				}
 			}
 		});
 		PIN = new JLabel("PIN:");
@@ -124,6 +131,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 
 			@Override
 			public void focusLost(FocusEvent e) {
+				//ADDED TOOLTIP
+				JPasswordField field = (JPasswordField)e.getSource();
+				char password[] = field.getPassword();
+				if(password.length == 0 ||password.length < 4 || password.length > 4){
+					pin_password_field.setToolTipText("Pin should be four digits");
+					System.out.println(pin_password_field.getToolTipText());
+				}
 			}
 		});
 	}
