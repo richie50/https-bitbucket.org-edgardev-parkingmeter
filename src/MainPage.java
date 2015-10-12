@@ -265,15 +265,15 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (currField == null) {
-			currField = sn_field;
-		}
-		if (this.sn_field.getText().toString().length() >= 9) {
-			currField = pin_password_field;
-		}
-		if (this.pin_password_field.getText().toString().length() >= 4) {
-			this.pin_password_field.setText(this.pin_password_field.getText().substring(0, 4));
-		}
+//		if (currField == null) {
+//			currField = sn_field;
+//		}
+//		if (this.sn_field.getText().toString().length() >= 9) {
+//			currField = pin_password_field;
+//		}
+//		if (this.pin_password_field.getText().toString().length() >= 4) {
+//			this.pin_password_field.setText(this.pin_password_field.getText().substring(0, 4));
+//		}
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
 		System.out.println(e.getActionCommand());
@@ -282,7 +282,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			String studentdb = sn_field.getText();
 			String pindb = pin_password_field.getText();
 			/** CHANGE THE FILE PATH **/
-			final Path FILE_PATH = Paths.get("student.txt");
+			final Path FILE_PATH = Paths.get("students.txt");
 			Optional<Person> matchingStudent = null;
 			try {
 				matchingStudent = Files.lines(FILE_PATH).map(line -> line.split(","))
