@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 public class EmailPage extends JFrame implements ActionListener {
 	private JFrame emailFrame;
@@ -38,7 +40,6 @@ public class EmailPage extends JFrame implements ActionListener {
 	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L" , "@"};
 	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M", "_", "." };
 	private String value;
-	private JPanel buttonPanel;
 
 	public EmailPage(JFrame frame, String text) {
 		this.emailFrame = frame;
@@ -47,9 +48,8 @@ public class EmailPage extends JFrame implements ActionListener {
 
 	public void diplayEmailPage() {
 		this.emailFrame = new JFrame(this.name);
-		this.buttonPanel = new JPanel();
 		this.emailFrame.getContentPane().setLayout(null);
-		this.emailFrame.getContentPane().setBackground(new Color(153, 190, 255));
+		this.emailFrame.getContentPane().setBackground(Color.WHITE);
 		this.emailFrame.setSize(700, 600);
 		this.emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.emailFrame.setVisible(true);
@@ -71,14 +71,14 @@ public class EmailPage extends JFrame implements ActionListener {
 
 	public void displayKeyboard() {
 		int x, y;
-		// Needs action preformed to be able to output common preset emails
-		// TODO implement action preformed for EMAIL row.
+		Border border = new BevelBorder(BevelBorder.RAISED);
 		this.emailButtons = new JButton[emailRow.length];
 		x = 60;
 		y = 390;
 		for (int i = 0; i < emailRow.length; i++) {
 			JButton temp = new JButton(emailRow[i]);
 			temp.setBounds(x, y, 120, 40);
+			temp.setBorder(border);
 			x += 120;
 			temp.addActionListener(this);
 			this.emailButtons[i] = temp;
@@ -90,6 +90,7 @@ public class EmailPage extends JFrame implements ActionListener {
 		for (int i = 0; i < digit.length; i++) {
 			JButton temp = new JButton(digit[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.numberRow[i] = temp;
@@ -101,6 +102,7 @@ public class EmailPage extends JFrame implements ActionListener {
 		for (int i = 0; i < firstRow.length; i++) {
 			JButton temp = new JButton(firstRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowOne[i] = temp;
@@ -112,6 +114,7 @@ public class EmailPage extends JFrame implements ActionListener {
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowTwo[i] = temp;
@@ -125,6 +128,7 @@ public class EmailPage extends JFrame implements ActionListener {
 		backSPace = new ImageIcon(temporary);
 		this.clearButton = new JButton(backSPace);
 		this.clearButton.setBounds(600 , 340 , 50, 40);
+		this.clearButton.setBorder(border);
 		this.emailFrame.getContentPane().add(clearButton);
 		clearButton.addActionListener(new ActionListener() {
 
@@ -150,6 +154,7 @@ public class EmailPage extends JFrame implements ActionListener {
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowThree[i] = temp;
@@ -168,8 +173,10 @@ public class EmailPage extends JFrame implements ActionListener {
 	
 
 	public void nextButton() {
+		Border border = new BevelBorder(BevelBorder.RAISED);
 		JButton backButton = new JButton("NEXT");
 		backButton.setBounds( 450 , 450 , 80 , 50);
+		backButton.setBorder(border);
 		this.emailFrame.getContentPane().add(backButton);
 		this.emailFrame.setVisible(true);
 		backButton.addActionListener(new ActionListener() {
@@ -220,7 +227,9 @@ public class EmailPage extends JFrame implements ActionListener {
 
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
+		Border border = new BevelBorder(BevelBorder.RAISED);
 		exitButton.setBounds( 250 ,450 , 80 , 50);
+		exitButton.setBorder(border);
 		this.emailFrame.getContentPane().add(exitButton);
 		this.emailFrame.setVisible(true);
 		exitButton.addActionListener(new ActionListener() {
