@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -47,10 +49,16 @@ public class InsurancePage extends JFrame implements ActionListener {
 		this.name = text;
 	}
 
-	public void initialize() {
+	public void initialize() throws IOException {
 		mainFrame = new JFrame("Insurance");
 		mainFrame.setSize(700, 600);
-		mainFrame.getContentPane().setBackground(new Color(153, 190, 255));
+		mainFrame.getContentPane().setBackground(Color.WHITE);
+		String image_path = "YorkLogo.gif";
+		File path = new File(image_path);
+		BufferedImage image = ImageIO.read(path);
+		JLabel label = new JLabel(new ImageIcon(image));
+		label.setBounds(330, 285, 500, 500);
+		mainFrame.getContentPane().add(label);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.addWindowListener(new WindowAdapter() {
@@ -60,25 +68,27 @@ public class InsurancePage extends JFrame implements ActionListener {
 		});
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		headerLabel = new JLabel("");
-		headerLabel.setText("Please select your insurance company and your permit expiry from the list:");
+		headerLabel.setText("Select your insurance company from the drop down below");
 		// int styleHeader = Font.BOLD | Font.ITALIC;
 		headerLabel.setFont(new Font("Garamond", Font.CENTER_BASELINE, 14));
-		headerLabel.setBounds(80, 30, 600, 60);
+		headerLabel.setBounds(140, -10, 500, 60);
 		mainFrame.getContentPane().add(headerLabel);
 		statusLabel = new JLabel("");
-		expLabel = new JLabel("");
+		expLabel = new JLabel("Please enter expiry date(MM/YY) :");
+		expLabel.setBounds(220, 70, 300, 20);
 		monthLabel = new JLabel("Month:");
-		monthLabel.setBounds(200, 155, 50, 20);
+		monthLabel.setBounds(200, 100, 50, 20);
 		yearLabel = new JLabel("Year:");
-		yearLabel.setBounds(315, 155, 50, 20);
+		yearLabel.setBounds(315, 100, 50, 20);
 		nextButton = new JButton("Print Ticket");
-		nextButton.setBounds(380, 500, 100, 35);
+		// nextButton.setBounds(380, 500, 100, 35);
+		nextButton.setBounds(350, 425, 80, 30);
 		nextButton.setBorder(border);
 		nextButton.addActionListener(this);
 		make = new JTextField(); // FIELD EDGAR
 		JLabel makeLabel = new JLabel("Make :");
-		make.setBounds(190, 200, 80, 30);
-		makeLabel.setBounds(145, 200, 50, 30);
+		make.setBounds(190, 140, 80, 30);
+		makeLabel.setBounds(145, 140, 50, 30);
 		this.make.addFocusListener(new FocusListener() {
 
 			@Override
@@ -91,9 +101,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 			}
 		});
 		model = new JTextField(); // FIELD EDGAR
-		model.setBounds(320, 200, 80, 30);
+		model.setBounds(320, 140, 80, 30);
 		JLabel modelLabel = new JLabel("Model :");
-		modelLabel.setBounds(270, 200, 50, 30);
+		modelLabel.setBounds(270, 140, 50, 30);
 		this.model.addFocusListener(new FocusListener() {
 
 			@Override
@@ -106,9 +116,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 			}
 		});
 		plateNumber = new JTextField(); // FIELD EDGAR
-		plateNumber.setBounds(440, 200, 80, 30);
+		plateNumber.setBounds(440, 140, 80, 30);
 		JLabel plateLabel = new JLabel("Plate :");
-		plateLabel.setBounds(400, 200, 50, 30);
+		plateLabel.setBounds(400, 140, 50, 30);
 		this.plateNumber.addFocusListener(new FocusListener() {
 
 			@Override
@@ -120,7 +130,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 			public void focusLost(FocusEvent e) {
 			}
 		});
-
+		mainFrame.getContentPane().add(expLabel);
 		mainFrame.getContentPane().add(nextButton);
 		mainFrame.getContentPane().add(monthLabel);
 		mainFrame.getContentPane().add(yearLabel);
@@ -137,8 +147,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 		int x, y;
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		this.numberRow = new JButton[digit.length];
-		x = 45;
-		y = 265;
+		x = 55;
+		y = 200;
 		for (int i = 0; i < digit.length; i++) {
 			JButton temp = new JButton(digit[i]);
 			temp.setBounds(x, y, 50, 40);
@@ -149,8 +159,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(numberRow[i]);
 		}
 		this.rowOne = new JButton[firstRow.length];
-		x = 45;
-		y = 320;
+		x = 60;
+		y = 255;
 		for (int i = 0; i < firstRow.length; i++) {
 			JButton temp = new JButton(firstRow[i]);
 			temp.setBounds(x, y, 50, 40);
@@ -161,8 +171,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(rowOne[i]);
 		}
 		this.rowTwo = new JButton[secondRow.length];
-		x = 55;
-		y = 375;
+		x = 75;
+		y = 310;
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
 			temp.setBounds(x, y, 50, 40);
@@ -173,8 +183,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(rowTwo[i]);
 		}
 		this.rowThree = new JButton[thirdRow.length];
-		x = 130;
-		y = 430;
+		x = 150;
+		y = 365;
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
 			temp.setBounds(x, y, 50, 40);
@@ -195,7 +205,6 @@ public class InsurancePage extends JFrame implements ActionListener {
 	}
 
 	public void showComboboxDemo() throws IOException {
-		expLabel.setText("Please enter the expiry (mm/yyyy):");
 		final DefaultComboBoxModel<String> insName = new DefaultComboBoxModel<String>();
 		File file = new File("companies.txt");
 		FileReader fileReader = new FileReader(file);
@@ -208,7 +217,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 		final JComboBox<String> inSelect = new JComboBox<String>(insName);
 		inSelect.setSelectedIndex(0);
 		inSelect.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-		inSelect.setBounds(170, 100, 350, 30);
+		inSelect.setBounds(170, 35, 350, 30);
 		JScrollPane inList = new JScrollPane(inSelect);
 		mainFrame.getContentPane().add(inSelect);
 		// adding expiry month
@@ -219,7 +228,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 		}
 		final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
 		inSelect.setSelectedIndex(0);
-		inEx.setBounds(250, 150, 60, 30);
+		inEx.setBounds(250, 95, 60, 30);
 		JScrollPane inExx = new JScrollPane(inEx);
 		mainFrame.getContentPane().add(inEx);
 		// add expiry year
@@ -229,12 +238,12 @@ public class InsurancePage extends JFrame implements ActionListener {
 		}
 		final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 		inSelect.setSelectedIndex(0);
-		inY.setBounds(350, 150, 90, 30);
+		inY.setBounds(350, 95, 90, 30);
 		JScrollPane inExxY = new JScrollPane(inY);
 		mainFrame.getContentPane().add(inY);
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		JButton showButton = new JButton("Next Field");
-		showButton.setBounds(250, 500, 100, 35);
+		showButton.setBounds(260, 425, 80, 30);
 		showButton.setBorder(border);
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

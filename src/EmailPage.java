@@ -206,7 +206,12 @@ public class EmailPage extends JFrame implements ActionListener {
 						 */
 						emailFrame.setVisible(false);
 						InsurancePage insurance = new InsurancePage(this.emailFrame, "Insurance Dev");
-						insurance.initialize();
+						try {
+							insurance.initialize();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
 						insurance.initializeKeyboard();
 						insurance.middlePostion();
 						try {
