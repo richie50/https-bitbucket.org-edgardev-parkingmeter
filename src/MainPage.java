@@ -26,6 +26,10 @@ import java.util.Optional;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.text.JTextComponent;
 
 //import sun.swing.SwingAccessor.JTextComponentAccessor;
@@ -33,11 +37,9 @@ import javax.swing.text.JTextComponent;
 public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JFrame mainFrame;
 	private String main_page_name;
-	private JLabel StudentNumber;
-	private JLabel PIN;
 	private JTextField currField;
 	private JTextField sn_field;
-	private JTextField pin_field;
+	private JPasswordField pin_password_field;
 	private String firstRow[] = { "1", "2", "3" };
 	private String secondRow[] = { "4", "5", "6" };
 	private String thirdRow[] = { "7", "8", "9" };
@@ -58,31 +60,28 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	
 	public void displayMainPage() throws IOException {
 		this.mainFrame = new JFrame(this.main_page_name);
+		this.mainFrame.setSize(700 , 600);
+		this.mainFrame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		this.mainFrame.getContentPane().setLayout(null);
-		this.mainFrame.setSize(700, 600);
-		this.mainFrame.getContentPane().setBackground(Color.BLUE);
-		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.mainFrame.pack();
+		//this.mainFrame.setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2, dim.height / 2 - mainFrame.getSize().height / 2);
-		this.mainFrame.setVisible(true);
-	}
-
-	public void middlePostion() {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.mainFrame.setLocation(dim.width / 2
-				- this.mainFrame.getSize().width / 2, dim.height / 2
-				- this.mainFrame.getSize().height / 2);
+		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.mainFrame.setVisible(true);
 	}
 
 	public void addTextFields() {
 		// needs fix to determine if Student or PIN
-		this.StudentNumber = new JLabel("Student Number:");
-		this.StudentNumber.setFont(new Font("monospace", Font.PLAIN, 20));
+		JLabel StudentNumber , PIN;
+		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
+		StudentNumber = new JLabel("Student Number:");
+		StudentNumber.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 20));
+		StudentNumber.setBounds(250, 25, 200, 20);
+		this.mainFrame.getContentPane().add(StudentNumber);
 		this.sn_field = new JTextField(30);
 		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
 		this.sn_field.setEditable(true);
+		this.sn_field.setBorder(border);
 		this.sn_field.setBounds(230, 50 , 250, 30);
 		this.mainFrame.getContentPane().add(sn_field);
 		this.sn_field.addFocusListener(new FocusListener() {
@@ -96,91 +95,84 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			public void focusLost(FocusEvent e) {
 			}
 		});
-		this.PIN = new JLabel("PIN:");
-		this.PIN.setFont(new Font("monospace", Font.PLAIN, 20));
-		this.pin_field = new JTextField(30);
-		this.pin_field.setHorizontalAlignment(JTextField.LEFT);
-		this.pin_field.setEditable(true);
-		this.pin_field.setBounds(230, 150 , 250 , 30);
-		this.mainFrame.getContentPane().add(pin_field);
-		this.pin_field.addMouseListener(this);
-		this.StudentNumber.setBounds(250, 25, 200, 20);
-		this.PIN.setBounds(250, 60 , 200, 20);
-		this.mainFrame.getContentPane().add(StudentNumber);
+		PIN = new JLabel("PIN:");
+		PIN.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 20));
+		PIN.setBounds(350, 100 , 200, 20);
 		this.mainFrame.getContentPane().add(PIN);
-		this.pin_field.addFocusListener(new FocusListener() {
+		this.pin_password_field = new JPasswordField(30);
+		//this.pin_password_field.setHorizontalAlignment(JTextField.LEFT);
+		this.pin_password_field.setEditable(true);
+		this.pin_password_field.setBorder(border);
+		this.pin_password_field.setBounds(230, 150 , 250 , 30);
+		this.mainFrame.getContentPane().add(pin_password_field);
+		this.pin_password_field.addMouseListener(this);
+		this.pin_password_field.addFocusListener(new FocusListener() {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				currField = pin_field;
+				currField = pin_password_field;
 			}
-
 			@Override
 			public void focusLost(FocusEvent e) {
 			}
 		});
-		// this.mainFrame.setVisible(true);
-	}
-
-	public void addSubmitButtons(String text) {
-		submitButton = new JButton(text);
-		submitButton.setBounds(450 , 450 , 50 , 30 );
-		submitButton.addActionListener(this);
-		this.mainFrame.getContentPane().add(submitButton);
 	}
 
 	public void addNumberButtons() {
+		Border border = new BevelBorder(BevelBorder.RAISED);
 		int x, y;
 		this.one = new JButton[firstRow.length];
 		x = 250;
 		y = 250;
 		for (int i = 0; i < firstRow.length; i++) {
-			JButton temp = new JButton(firstRow[i]);
-			temp.setBounds(x, y, 50, 40);
+			one[i] = new JButton(firstRow[i]);
+			one[i].setBounds(x, y, 50, 40);
+			one[i].setBorder(border);
 			x += 60;
-			temp.addActionListener(this);
-			this.one[i] = temp;
+			one[i].addActionListener(this);
 			this.mainFrame.getContentPane().add(one[i]);
 		}
 		this.two = new JButton[secondRow.length];
 		x = 250;
 		y = 300;
 		for (int i = 0; i < secondRow.length; i++) {
-			JButton temp = new JButton(secondRow[i]);
-			temp.setBounds(x, y, 50, 40);
+			two[i] = new JButton(secondRow[i]);
+			two[i].setBounds(x, y, 50, 40);
+			two[i].setBorder(border);
 			x += 60;
-			temp.addActionListener(this);
-			this.two[i] = temp;
+			two[i].addActionListener(this);
 			this.mainFrame.getContentPane().add(two[i]);
 		}
 		x = 250;
 		y = 350;
 		this.three = new JButton[thirdRow.length];
 		for (int i = 0; i < thirdRow.length; i++) {
-			JButton temp = new JButton(thirdRow[i]);
-			temp.setBounds(x, y, 50, 40);
+			three[i] = new JButton(thirdRow[i]);
+			three[i].setBounds(x, y, 50, 40);
+			three[i].setBorder(border);
 			x += 60;
-			temp.addActionListener(this);
-			this.three[i] = temp;
+			three[i].addActionListener(this);
 			this.mainFrame.getContentPane().add(three[i]);
 		}
 		// make the zero button
 		JButton zero = new JButton("0");
-		zero.setBounds(300 , 400 , 50, 40);
+		zero.setBounds(310 , 400 , 50, 40);
+		zero.setBorder(border);
 		zero.addActionListener(this);
 		this.mainFrame.getContentPane().add(zero);
 	}
 
 	public void addClearButton() {
+		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		ImageIcon backSpace = new ImageIcon("backspace.png");
 		Image image = backSpace.getImage();
 		Image temp = image.getScaledInstance(30, 20,
 				java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
-		clear.setBounds(550, 450, 50 , 30);
+		clear.setBounds(370 , 400 , 50 , 40);
+		clear.setBorder(border);
 		this.mainFrame.getContentPane().add(clear);
-		// init to student Number Field by default;
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -201,9 +193,16 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		});
 	}
 
+	public void addSubmitButtons(String text) {
+		submitButton = new JButton(text);
+		submitButton.setBounds(150 , 450 , 80 , 30 );
+		submitButton.addActionListener(this);
+		this.mainFrame.getContentPane().add(submitButton);
+	}
+
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
-		exitButton.setBounds(200, 450, 50, 30);
+		exitButton.setBounds(400, 450, 80, 30);
 		this.mainFrame.getContentPane().add(exitButton);
 		exitButton.addActionListener(new ActionListener() {
 			@Override
@@ -220,18 +219,20 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			}
 
 		});
+		this.mainFrame.setResizable(false);;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (currField == null) {
 			currField = sn_field;
 		}
 		if (this.sn_field.getText().toString().length() >= 9) {
-			currField = pin_field;
+			currField = pin_password_field;
 		}
-		if (this.pin_field.getText().toString().length() >= 4) {
-			this.pin_field.setText(this.pin_field.getText().substring(0, 4));
+		if (this.pin_password_field.getText().toString().length() >= 4) {
+			this.pin_password_field.setText(this.pin_password_field.getText().substring(0, 4));
 		}
 		String value = new String();
 		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
@@ -239,7 +240,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
 			String studentdb = sn_field.getText();
-			String pindb = pin_field.getText();
+			String pindb = pin_password_field.getText();
 			/** CHANGE THE FILE PATH **/
 			final Path FILE_PATH = Paths
 					.get("student.txt");
