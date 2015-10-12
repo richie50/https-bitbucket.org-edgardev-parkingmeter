@@ -88,10 +88,15 @@ public class EmailPage extends JFrame implements ActionListener {
 		y = 390;
 		for (int i = 0; i < emailRow.length; i++) {
 			JButton temp = new JButton(emailRow[i]);
-			temp.setBounds(x, y, 120, 40);
+			temp.setBounds(x, y, 110, 40);
 			temp.setBorder(border);
 			x += 120;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.emailButtons[i] = temp;
 			this.emailFrame.getContentPane().add(emailButtons[i]);
 		}
@@ -104,6 +109,11 @@ public class EmailPage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.numberRow[i] = temp;
 			this.emailFrame.getContentPane().add(numberRow[i]);
 		}
@@ -116,6 +126,11 @@ public class EmailPage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowOne[i] = temp;
 			this.emailFrame.getContentPane().add(rowOne[i]);
 		}
@@ -128,6 +143,11 @@ public class EmailPage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowTwo[i] = temp;
 			this.emailFrame.getContentPane().add(rowTwo[i]);
 		}
@@ -137,6 +157,11 @@ public class EmailPage extends JFrame implements ActionListener {
 		Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
 		backSPace = new ImageIcon(temporary);
 		this.clearButton = new JButton(backSPace);
+		this.clearButton.setBackground(Color.BLACK);
+		this.clearButton.setForeground(new Color(153, 190, 255));
+		this.clearButton.setOpaque(true);
+		this.clearButton.setBorderPainted(false);
+		;
 		this.clearButton.setBounds(600, 340, 50, 40);
 		this.clearButton.setBorder(border);
 		this.emailFrame.getContentPane().add(clearButton);
@@ -166,6 +191,11 @@ public class EmailPage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowThree[i] = temp;
 			this.emailFrame.getContentPane().add(rowThree[i]);
 		}
@@ -181,8 +211,13 @@ public class EmailPage extends JFrame implements ActionListener {
 	public void nextButton() {
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		JButton backButton = new JButton("NEXT");
-		backButton.setBounds(350, 450, 80, 30);
 		backButton.setBorder(border);
+		backButton.setForeground(new Color(153, 190, 255));
+		backButton.setBackground(Color.BLACK);
+		backButton.setOpaque(true);
+		backButton.setBorderPainted(false);
+		;
+		backButton.setBounds(350, 450, 75, 30);
 		this.emailFrame.getContentPane().add(backButton);
 		this.emailFrame.setVisible(true);
 		backButton.addActionListener(new ActionListener() {
@@ -237,7 +272,12 @@ public class EmailPage extends JFrame implements ActionListener {
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
 		Border border = new BevelBorder(BevelBorder.RAISED);
-		exitButton.setBounds(270, 450, 80, 30);
+		exitButton.setForeground(new Color(153, 190, 255));
+		exitButton.setBackground(Color.BLACK);
+		exitButton.setOpaque(true);
+		exitButton.setBorderPainted(false);
+		;
+		exitButton.setBounds(270, 450, 75, 30);
 		exitButton.setBorder(border);
 		this.emailFrame.getContentPane().add(exitButton);
 		this.emailFrame.setVisible(true);
