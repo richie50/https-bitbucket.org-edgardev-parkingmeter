@@ -81,6 +81,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 		yearLabel = new JLabel("Year:");
 		yearLabel.setBounds(315, 100, 50, 20);
 		nextButton = new JButton("Print Ticket");
+		nextButton.setBackground(Color.BLACK);
+		nextButton.setForeground(new Color(153, 190, 255));
+		nextButton.setOpaque(true);
+		nextButton.setBorderPainted(false);
+		;
 		// nextButton.setBounds(380, 500, 100, 35);
 		nextButton.setBounds(350, 425, 80, 30);
 		nextButton.setBorder(border);
@@ -155,6 +160,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.numberRow[i] = temp;
 			mainFrame.getContentPane().add(numberRow[i]);
 		}
@@ -167,6 +177,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowOne[i] = temp;
 			mainFrame.getContentPane().add(rowOne[i]);
 		}
@@ -179,6 +194,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowTwo[i] = temp;
 			mainFrame.getContentPane().add(rowTwo[i]);
 		}
@@ -191,6 +211,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
+			temp.setBackground(Color.BLACK);
+			temp.setForeground(new Color(153, 190, 255));
+			temp.setOpaque(true);
+			temp.setBorderPainted(false);
+			;
 			this.rowThree[i] = temp;
 			mainFrame.getContentPane().add(rowThree[i]);
 		}
@@ -203,8 +228,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 				dim.height / 2 - mainFrame.getSize().height / 2);
 		mainFrame.setVisible(true);
 	}
-	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
 
+	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
 
 	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
 	final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
@@ -224,27 +249,35 @@ public class InsurancePage extends JFrame implements ActionListener {
 		final JComboBox<String> inSelect = new JComboBox<String>(insName);
 		inSelect.setSelectedIndex(0);
 		inSelect.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+		inSelect.setBackground(Color.BLACK);
+		inSelect.setForeground(new Color(153, 190, 255));
 		inSelect.setBounds(170, 35, 350, 30);
 		JScrollPane inList = new JScrollPane(inSelect);
 		mainFrame.getContentPane().add(inSelect);
 		// adding expiry month
-	//	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
+		// final DefaultComboBoxModel<Integer> insExpM = new
+		// DefaultComboBoxModel<Integer>();
 
 		for (int i = 1; i < 13; i++) {
 			insExpM.addElement(i);
 		}
-	//	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
+		// final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
 		inSelect.setSelectedIndex(0);
+		inEx.setBackground(Color.BLACK);
+		inEx.setForeground(new Color(153, 190, 255));
 		inEx.setBounds(250, 95, 60, 30);
 		JScrollPane inExx = new JScrollPane(inEx);
 		mainFrame.getContentPane().add(inEx);
 		// add expiry year
-		//final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
+		// final DefaultComboBoxModel<Integer> insExpY = new
+		// DefaultComboBoxModel<Integer>();
 		for (int i = 2015; i < 2021; i++) {
 			insExpY.addElement(i);
 		}
-	//	final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
+		// final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 		inSelect.setSelectedIndex(0);
+		inY.setBackground(Color.BLACK);
+		inY.setForeground(new Color(153, 190, 255));
 		inY.setBounds(350, 95, 90, 30);
 		JScrollPane inExxY = new JScrollPane(inY);
 		mainFrame.getContentPane().add(inY);
@@ -252,6 +285,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 		JButton showButton = new JButton("Next Field");
 		showButton.setBounds(260, 425, 80, 30);
 		showButton.setBorder(border);
+		showButton.setBackground(Color.BLACK);
+		showButton.setForeground(new Color(153, 190, 255));
+		showButton.setOpaque(true);
+		showButton.setBorderPainted(false);
+		;
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currField == make) {
@@ -305,82 +343,91 @@ public class InsurancePage extends JFrame implements ActionListener {
 		if (event.getActionCommand().equals("Print Ticket")) {
 			String carMake = make.getText();
 			String carPlate = plateNumber.getText();
-			
-			if(carMake.isEmpty()){
-				JOptionPane.showMessageDialog(null, "Please enter the make of your vehicle.",
-						"Error", JOptionPane.ERROR_MESSAGE);
-				
+
+			if (carMake.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please enter the make of your vehicle.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+
 			}
-			
-			else if(carPlate.isEmpty()){
-				JOptionPane.showMessageDialog(null, "Please enter the plate of your vehicle.",
-						"Error", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			else{
-			this.mainFrame.setVisible(true);
-			this.mainFrame = new JFrame("RECIEPT");
-			this.mainFrame.setLayout(new GridLayout());
 
-			this.mainFrame.setSize(500, 400);
-			this.mainFrame.getContentPane().setBackground(Color.WHITE);
-			this.mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.mainFrame.setVisible(true);
+			else if (carPlate.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please enter the plate of your vehicle.", "Error",
+						JOptionPane.ERROR_MESSAGE);
 
-			Calendar cal = GregorianCalendar.getInstance();
+			} else {
+				this.mainFrame.setVisible(true);
+				this.mainFrame = new JFrame("RECIEPT");
+				this.mainFrame.setLayout(new GridLayout());
 
-			ArrayList<String> lst = new ArrayList<String>();
+				this.mainFrame.setSize(500, 400);
+				this.mainFrame.getContentPane().setBackground(Color.WHITE);
+				this.mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				this.mainFrame.setVisible(true);
 
-			File file = new File("Ticket_database.txt");
-			FileReader fileReader = null;
-			try {
-				fileReader = new FileReader(file);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			@SuppressWarnings("resource")
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			String line;
-			try {
-				while ((line = bufferedReader.readLine()) != null) {
+				Calendar cal = GregorianCalendar.getInstance();
 
-					lst.add(line);
+				ArrayList<String> lst = new ArrayList<String>();
+
+				File file = new File("Ticket_database.txt");
+				FileReader fileReader = null;
+				try {
+					fileReader = new FileReader(file);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (IOException e) {
+				@SuppressWarnings("resource")
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+				String line;
+				try {
+					while ((line = bufferedReader.readLine()) != null) {
 
-				e.printStackTrace();
-			}
+						lst.add(line);
+					}
+				} catch (IOException e) {
 
-			String sn = (String) lst.get(0);
-			String name = (String) lst.get(1);
-			String status = (String) lst.get(2);
+					e.printStackTrace();
+				}
 
-			if (status.equals("ok")) {
+				String sn = (String) lst.get(0);
+				String name = (String) lst.get(1);
+				String status = (String) lst.get(2);
 
-				JLabel label = new JLabel();
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setVerticalAlignment(SwingConstants.CENTER);
-				label.setFont(new Font("Serif", Font.BOLD, 25));
-				label.setText("<html>Hello " + name + "<br>Account charged $3.50 per day<br> Student Number : " + sn + "<br>"
-						+ "Date issued : " + cal.getTime() + "<br>"
-						+ " Make:    " + carMake.toUpperCase() +"<br>" + "     Plates: " + carPlate.toUpperCase() + "<br>" +
-						"Permit valid till " + inEx.getItemAt(inEx.getSelectedIndex()) + "/" +
-						inY.getItemAt(inY.getSelectedIndex()) + "<br>"  + "</html>");
-				this.mainFrame.add(label);
+				if (status.equals("ok")) {
+					JLabel acc = new JLabel(new ImageIcon("accept.png"));
+					acc.setBounds(100, 50, 80, 80);
+					JLabel label = new JLabel();
+					label.setHorizontalAlignment(SwingConstants.CENTER);
+					label.setVerticalAlignment(SwingConstants.CENTER);
+					label.setFont(new Font("Serif", Font.BOLD, 25));
+					label.setText("<html> Hello " + name + "<br>Account charged $3.50 per day<br> Student Number : "
+							+ sn + "<br>" + "Date issued : " + cal.getTime() + "<br>" + " Make:    "
+							+ carMake.toUpperCase() + "<br>" + "     Plates: " + carPlate.toUpperCase() + "<br>"
+							+ "Permit valid till " + inEx.getItemAt(inEx.getSelectedIndex()) + "/"
+							+ inY.getItemAt(inY.getSelectedIndex()) + "<br>" + "</html>");
+					this.mainFrame.add(acc);
+					this.mainFrame.add(label);
 
-			}
+				}
 
-			else if (status.equals("arrears")) {
-				JLabel label = new JLabel();
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setVerticalAlignment(SwingConstants.CENTER);
-				label.setFont(new Font("Serif", Font.BOLD, 25));
-				label.setForeground(Color.red);
-				label.setText("<html>PERMISSION DENIED DUE TO:<br>" + "OUTSTANDING BALANCE</html>");
-				this.mainFrame.add(label);
-			}
+				else if (status.equals("arrears")) {
+					JLabel dec = new JLabel(new ImageIcon("declined.png"));
+					dec.setBounds(100, 50, 80, 80);
+					JLabel label = new JLabel();
+					label.setHorizontalAlignment(SwingConstants.CENTER);
+					label.setVerticalAlignment(SwingConstants.CENTER);
+					label.setFont(new Font("Serif", Font.BOLD, 25));
+					label.setForeground(Color.red);
+					label.setText("<html>PERMISSION DENIED DUE TO:<br>" + "OUTSTANDING BALANCE</html>");
+					this.mainFrame.add(dec);
+					this.mainFrame.add(label);
+				}
 			}
 		}
+	}
+
+	private ImageIcon createImage(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
