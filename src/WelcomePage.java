@@ -146,13 +146,13 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomePanel = new JPanel();
 		// System.out.println("DEV NAME: " + container.getTitle());
 		displayWelcomeMessage welcome = new displayWelcomeMessage();
-		welcome.setBounds(280, 450, 400, 200);
+		welcome.setBounds(260, 300, 400, 400);
 		welcome.setFont(new Font("SANS_SERIF", Font.BOLD | Font.ITALIC, 20));
 		welcomeFrame.getContentPane().add(welcome);
 		welcome.setVisible(true);
 		System.out.println(welcomeFrame.getTitle());
 		welcomeFrame.setSize(700, 600);
-		welcomeFrame.getContentPane().setBackground(new Color(153, 190, 255));
+		welcomeFrame.getContentPane().setBackground(Color.WHITE);
 		welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -166,6 +166,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.bar.setForeground(new Color(red, blue, green));
 		Border border = new EtchedBorder(EtchedBorder.LOWERED);
 		this.welcomeButton = new JButton("PRESS HERE TO CONITNUE");
+		this.welcomeButton.setForeground(new Color(153, 190, 255));
+		this.welcomeButton.setOpaque(true);
+		this.welcomeButton.setBorderPainted(false);
 		this.welcomeButton.setSize(50, 40);
 		this.welcomeButton.setBorder(border);
 		this.welcomeButton.addActionListener(this);
