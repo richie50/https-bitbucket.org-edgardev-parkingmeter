@@ -203,6 +203,13 @@ public class InsurancePage extends JFrame implements ActionListener {
 				dim.height / 2 - mainFrame.getSize().height / 2);
 		mainFrame.setVisible(true);
 	}
+	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
+
+
+	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
+	final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
+
+	final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 
 	public void showComboboxDemo() throws IOException {
 		final DefaultComboBoxModel<String> insName = new DefaultComboBoxModel<String>();
@@ -221,22 +228,22 @@ public class InsurancePage extends JFrame implements ActionListener {
 		JScrollPane inList = new JScrollPane(inSelect);
 		mainFrame.getContentPane().add(inSelect);
 		// adding expiry month
-		final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
+	//	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
 
 		for (int i = 1; i < 13; i++) {
 			insExpM.addElement(i);
 		}
-		final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
+	//	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
 		inSelect.setSelectedIndex(0);
 		inEx.setBounds(250, 95, 60, 30);
 		JScrollPane inExx = new JScrollPane(inEx);
 		mainFrame.getContentPane().add(inEx);
 		// add expiry year
-		final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
+		//final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
 		for (int i = 2015; i < 2021; i++) {
 			insExpY.addElement(i);
 		}
-		final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
+	//	final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 		inSelect.setSelectedIndex(0);
 		inY.setBounds(350, 95, 90, 30);
 		JScrollPane inExxY = new JScrollPane(inY);
@@ -298,6 +305,19 @@ public class InsurancePage extends JFrame implements ActionListener {
 		if (event.getActionCommand().equals("Print Ticket")) {
 			String carMake = make.getText();
 			String carPlate = plateNumber.getText();
+			
+			if(carMake.isEmpty()){
+				JOptionPane.showMessageDialog(null, "Please enter the make of your vehicle.",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			
+			else if(carPlate.isEmpty()){
+				JOptionPane.showMessageDialog(null, "Please enter the plate of your vehicle.",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			else{
 			this.mainFrame.setVisible(true);
 			this.mainFrame = new JFrame("RECIEPT");
 			this.mainFrame.setLayout(new GridLayout());
@@ -342,9 +362,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 				label.setHorizontalAlignment(SwingConstants.CENTER);
 				label.setVerticalAlignment(SwingConstants.CENTER);
 				label.setFont(new Font("Serif", Font.BOLD, 25));
-				label.setText("<html>Hello " + name + "<br>Account charged $3.50 <br> Student Number : " + sn + "<br>"
-						+ " Make:    " + carMake.toUpperCase() + "     Plates: " + carPlate.toUpperCase() + "<br>"
-						+ cal.getTime() + "</html>");
+				label.setText("<html>Hello " + name + "<br>Account charged $3.50 per day<br> Student Number : " + sn + "<br>"
+						+ "Date issued : " + cal.getTime() + "<br>"
+						+ " Make:    " + carMake.toUpperCase() +"<br>" + "     Plates: " + carPlate.toUpperCase() + "<br>" +
+						"Permit valid till " + inEx.getItemAt(inEx.getSelectedIndex()) + "/" +
+						inY.getItemAt(inY.getSelectedIndex()) + "<br>"  + "</html>");
 				this.mainFrame.add(label);
 
 			}
@@ -358,7 +380,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 				label.setText("<html>PERMISSION DENIED DUE TO:<br>" + "OUTSTANDING BALANCE</html>");
 				this.mainFrame.add(label);
 			}
-
+			}
 		}
 	}
 }
