@@ -10,6 +10,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.SoftBevelBorder;
 
 public class InsurancePage extends JFrame implements ActionListener {
 
@@ -55,6 +58,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 				System.exit(0);
 			}
 		});
+		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		headerLabel = new JLabel("");
 		headerLabel.setText("Please select your insurance company \n and your permit expiry from the list:");
 		int styleHeader = Font.BOLD | Font.ITALIC;
@@ -69,6 +73,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 		yearLabel.setBounds(315, 160, 50, 20);
 		nextButton = new JButton("Print Ticket");
 		nextButton.setBounds(380, 500, 100, 35);
+		nextButton.setBorder(border);
 		nextButton.addActionListener(this);
 		make = new JTextField(); // FIELD EDGAR
 		JLabel makeLabel = new JLabel("Make :");
@@ -130,20 +135,17 @@ public class InsurancePage extends JFrame implements ActionListener {
 
 	public void initializeKeyboard() {
 		int x, y;
-		keyboardPanel = new JPanel();
-		keyboardPanel.setLayout(null);
-		// FOR EDGAR THESE BUTTONS NEEDS FOCUS LISTENERS YOU CAN VALIDATE THEM
-		// TOO IF YOU WANT
+		Border border = new BevelBorder(BevelBorder.RAISED);
 		this.numberRow = new JButton[digit.length];
 		x = 45;
 		y = 265;
 		for (int i = 0; i < digit.length; i++) {
 			JButton temp = new JButton(digit[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.numberRow[i] = temp;
-			this.keyboardPanel.add(numberRow[i]);
 			mainFrame.getContentPane().add(numberRow[i]);
 		}
 		this.rowOne = new JButton[firstRow.length];
@@ -152,10 +154,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 		for (int i = 0; i < firstRow.length; i++) {
 			JButton temp = new JButton(firstRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowOne[i] = temp;
-			this.keyboardPanel.add(rowOne[i]);
 			mainFrame.getContentPane().add(rowOne[i]);
 		}
 		this.rowTwo = new JButton[secondRow.length];
@@ -164,10 +166,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowTwo[i] = temp;
-			this.keyboardPanel.add(rowTwo[i]);
 			mainFrame.getContentPane().add(rowTwo[i]);
 		}
 		this.rowThree = new JButton[thirdRow.length];
@@ -176,10 +178,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
 			temp.setBounds(x, y, 50, 40);
+			temp.setBorder(border);
 			x += 60;
 			temp.addActionListener(this);
 			this.rowThree[i] = temp;
-			this.keyboardPanel.add(rowThree[i]);
 			mainFrame.getContentPane().add(rowThree[i]);
 		}
 		mainFrame.setVisible(true);
@@ -230,8 +232,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 		inY.setBounds(350, 150, 90, 30);
 		JScrollPane inExxY = new JScrollPane(inY);
 		mainFrame.getContentPane().add(inY);
+		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		JButton showButton = new JButton("Next Field");
 		showButton.setBounds(250, 500, 100, 35);
+		showButton.setBorder(border);
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(currField == make) {
