@@ -63,7 +63,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	public void displayMainPage() throws IOException {
 		this.mainFrame = new JFrame(this.main_page_name);
 		this.mainFrame.setSize(700, 600);
-		this.mainFrame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		this.mainFrame.getContentPane().setBackground(Color.WHITE);
 		this.mainFrame.getContentPane().setLayout(null);
 		String image_path = "YorkLogo.gif";
 		File path = new File(image_path);
@@ -87,8 +87,8 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		StudentNumber.setBounds(250, 25, 200, 20);
 		this.mainFrame.getContentPane().add(StudentNumber);
 		this.sn_field = new JTextField(30);
-		// this.sn_field.setHorizontalAlignment(JTextField.LEFT);
 		this.sn_field.setEditable(true);
+		this.sn_field.setBackground(Color.LIGHT_GRAY);
 		this.sn_field.setBorder(border);
 		this.sn_field.setBounds(235, 50, 250, 30);
 		this.mainFrame.getContentPane().add(sn_field);
@@ -110,6 +110,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.pin_password_field = new JPasswordField(30);
 		// this.pin_password_field.setHorizontalAlignment(JTextField.LEFT);
 		this.pin_password_field.setEditable(true);
+		this.pin_password_field.setBackground(Color.LIGHT_GRAY);
 		this.pin_password_field.setBorder(border);
 		this.pin_password_field.setBounds(230, 150, 250, 30);
 		this.mainFrame.getContentPane().add(pin_password_field);
@@ -139,6 +140,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			one[i].setBorder(border);
 			x += 60;
 			one[i].addActionListener(this);
+			one[i].setBackground(Color.BLACK);
+			one[i].setForeground(new Color(153, 190, 255));
+			one[i].setOpaque(true);
+			one[i].setBorderPainted(false);
 			this.mainFrame.getContentPane().add(one[i]);
 		}
 		this.two = new JButton[secondRow.length];
@@ -150,6 +155,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			two[i].setBorder(border);
 			x += 60;
 			two[i].addActionListener(this);
+			two[i].setBackground(Color.BLACK);
+			two[i].setForeground(new Color(153, 190, 255));
+			two[i].setOpaque(true);
+			two[i].setBorderPainted(false);
 			this.mainFrame.getContentPane().add(two[i]);
 		}
 		x = 250;
@@ -161,6 +170,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			three[i].setBorder(border);
 			x += 60;
 			three[i].addActionListener(this);
+			three[i].setBackground(Color.BLACK);
+			three[i].setForeground(new Color(153, 190, 255));
+			three[i].setOpaque(true);
+			three[i].setBorderPainted(false);
 			this.mainFrame.getContentPane().add(three[i]);
 		}
 		// make the zero button
@@ -168,6 +181,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		zero.setBounds(310, 400, 50, 40);
 		zero.setBorder(border);
 		zero.addActionListener(this);
+		zero.setBackground(Color.BLACK);
+		zero.setForeground(new Color(153, 190, 255));
+		zero.setOpaque(true);
+		zero.setBorderPainted(false);
 		this.mainFrame.getContentPane().add(zero);
 	}
 
@@ -178,6 +195,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		Image temp = image.getScaledInstance(30, 20, java.awt.Image.SCALE_SMOOTH);
 		backSpace = new ImageIcon(temp);
 		JButton clear = new JButton(backSpace);
+		clear.setBackground(Color.BLACK);
+		clear.setForeground(new Color(153, 190, 255));
+		clear.setOpaque(true);
+		clear.setBorderPainted(false);
 		clear.setBounds(370, 400, 50, 40);
 		clear.setBorder(border);
 		this.mainFrame.getContentPane().add(clear);
@@ -202,6 +223,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	public void addSubmitButtons(String text) {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		submitButton = new JButton(text);
+		submitButton.setBackground(Color.BLACK);
+		submitButton.setForeground(new Color(153, 190, 255));
+		submitButton.setOpaque(true);
+		submitButton.setBorderPainted(false);
 		submitButton.setBounds(350, 450, 80, 30);
 		submitButton.setBorder(border);
 		submitButton.addActionListener(this);
@@ -211,6 +236,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	public void exitButton() {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		JButton exitButton = new JButton("EXIT");
+		exitButton.setBackground(Color.BLACK);
+		exitButton.setForeground(new Color(153, 190, 255));
+		exitButton.setOpaque(true);
+		exitButton.setBorderPainted(false);
 		exitButton.setBounds(250, 450, 80, 30);
 		exitButton.setBorder(border);
 		this.mainFrame.getContentPane().add(exitButton);
