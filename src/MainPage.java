@@ -1,6 +1,6 @@
 
 /*
- * @author Richmond F, Edgar Z, Daniyal J
+ * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
  * EECS3461 - Scott McKenzie
@@ -263,6 +263,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		if (currField == null) {
+			currField = sn_field;
+		}
+		if (this.sn_field.getText().toString().length() >= 9) {
+			currField = pin_password_field;
+		}
 
 		String value = new String();
 		if (e.getActionCommand().equals("NEXT")) {

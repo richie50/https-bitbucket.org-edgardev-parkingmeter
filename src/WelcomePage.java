@@ -1,6 +1,6 @@
 
 /*
- * @author Richmond F, Edgar Z, Daniyal J
+ * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
  * EECS3461 - Scott McKenzie
@@ -64,8 +64,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 					if (i == max - 1) {
 						welcomeFrame.setVisible(false);
 						welcomeFrame.dispose();
-						System.out.println("RENDERING MAINPAGE . . . . . . . ");
-						MainPage display = new MainPage("PARKING KIOSK DEV ENV", welcomeFrame);
+						MainPage display = new MainPage("York University Parking System", welcomeFrame);
 						display.displayMainPage();
 						display.addTextFields();
 						display.addNumberButtons();

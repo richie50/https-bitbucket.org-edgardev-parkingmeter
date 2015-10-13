@@ -1,3 +1,11 @@
+
+/*
+ * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
+ * @cse : cse23004, cse23106, cse31034
+ * YorkU Parking Meter GUI
+ * EECS3461 - Scott McKenzie
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -47,6 +55,13 @@ public class InsurancePage extends JFrame implements ActionListener {
 	public InsurancePage(JFrame frame, String text) {
 		this.mainFrame = frame;
 		this.name = text;
+	}
+
+	public void middlePostion() {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2,
+				dim.height / 2 - mainFrame.getSize().height / 2);
+		mainFrame.setVisible(true);
 	}
 
 	public void initialize() throws IOException {
@@ -222,13 +237,6 @@ public class InsurancePage extends JFrame implements ActionListener {
 		mainFrame.setVisible(true);
 	}
 
-	public void middlePostion() {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2,
-				dim.height / 2 - mainFrame.getSize().height / 2);
-		mainFrame.setVisible(true);
-	}
-
 	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
 
 	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
@@ -297,6 +305,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 				} else if (currField == model) {
 					currField = plateNumber;
 				} else if (currField == plateNumber) {
+					currField = plateNumber;
 					// display Popup next Field is empty or set back to make
 				}
 			}
@@ -316,9 +325,6 @@ public class InsurancePage extends JFrame implements ActionListener {
 	 * THE BUTTONS JUST DO UR MAGIC. BRUH LOL
 	 */
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
-		// String val = ((JButton)event.getSource()).getActionCommand();
-		// System.out.println("INSURANCE PAGE . . . . . . " + val);
 
 		if (currField == null) {
 			currField = make;
@@ -331,6 +337,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 		}
 		if (this.plateNumber.getText().toString().length() >= 8) {
 			this.plateNumber.setText(this.plateNumber.getText().substring(0, 9));
+			currField = plateNumber;
 		}
 
 		if (!event.getActionCommand().equals("Print Ticket")) {
@@ -360,6 +367,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 				this.mainFrame.setLayout(new GridLayout());
 
 				this.mainFrame.setSize(500, 400);
+				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+				mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2,
+						dim.height / 2 - mainFrame.getSize().height / 2);
 				this.mainFrame.getContentPane().setBackground(Color.WHITE);
 				this.mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				this.mainFrame.setVisible(true);
@@ -424,10 +434,5 @@ public class InsurancePage extends JFrame implements ActionListener {
 				}
 			}
 		}
-	}
-
-	private ImageIcon createImage(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
