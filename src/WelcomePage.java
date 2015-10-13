@@ -8,16 +8,10 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,21 +25,15 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 public class WelcomePage extends JFrame implements ActionListener {
-	/**
-	 * 
-	 */
+
 	private static JFrame welcomeFrame = null;
 	private static String welcomeName;
-	private static JPanel welcomePanel;
 	private JButton welcomeButton;
-	private String value;
 	private JProgressBar bar;
-	private JLabel welcomeLabel;
 	private static final long serialVersionUID = 1L;
 
 	static class welcomeThread extends Thread {
@@ -63,7 +51,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
+
 					int value = progressBar.getValue();
 					progressBar.setValue(value + 1);
 				}
@@ -84,16 +72,13 @@ public class WelcomePage extends JFrame implements ActionListener {
 						display.addClearButton();
 						display.addSubmitButtons("NEXT");
 						display.exitButton();
-						// display.middlePostion();
-						// display.setVisible(true);
-
 					}
 				} catch (InterruptedException ex1) {
 
 				} catch (InvocationTargetException ex2) {
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 
@@ -108,9 +93,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	}
 
 	public class displayWelcomeMessage extends JLabel {
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 1L;
 		final String text[] = { "Welcome To", "York Univeristy's", "Automated Parking System" };
 		int index = 0;
@@ -118,13 +101,12 @@ public class WelcomePage extends JFrame implements ActionListener {
 		final int delay = 1500;
 
 		displayWelcomeMessage() {
-			System.out.println("********ANIMATION STRINGS*******");
 			ActionListener counter = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+
 					repaint();
-					// startingPoint+= 10;
+
 					index++;
 				}
 			};
@@ -143,8 +125,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 	public void displayWelcomePanel() throws IOException {
 		welcomeFrame = new JFrame(welcomeName);
-		welcomePanel = new JPanel();
-		// System.out.println("DEV NAME: " + container.getTitle());
+		new JPanel();
+
 		displayWelcomeMessage welcome = new displayWelcomeMessage();
 		welcome.setBounds(260, 300, 400, 400);
 		welcome.setFont(new Font("SANS_SERIF", Font.BOLD | Font.ITALIC, 20));
@@ -174,21 +156,18 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.welcomeButton.addActionListener(this);
 		welcomeFrame.add(bar, BorderLayout.NORTH);
 		welcomeFrame.add(welcomeButton, BorderLayout.SOUTH);
-		// this.welcomeLabel = new JLabel("Welcome To York University's
-		// Automated Parking System");
-		// welcomeLabel.setFont(new Font("SANS_SERIF",Font.BOLD | Font.ITALIC,
-		// 20));
+
 		String image_path = "YorkLogo.gif";
 		File path = new File(image_path);
 		BufferedImage image = ImageIO.read(path);
 		JLabel label = new JLabel(new ImageIcon(image));
-		// welcomeLabel.setBounds(100, 180, 600, 200);
+
 		label.setBounds(100, -150, 500, 500);
 		JLabel time = new JLabel("Current Date/Time: " + DateFormat.getDateTimeInstance().format(new Date()));
 		time.setVerticalAlignment(JLabel.BOTTOM);
 		time.setFont(new Font("MONOSPACED", Font.BOLD | Font.ITALIC, 17));
 		time.setHorizontalAlignment(JLabel.RIGHT);
-		// welcomeFrame.add(welcomeLabel);
+
 		welcomeFrame.add(label);
 		welcomeFrame.add(time);
 		welcomeFrame.setVisible(true);
@@ -203,7 +182,6 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		this.welcomeButton.setEnabled(true);
 		Thread stepper = new welcomeThread(bar);
 		stepper.start();
