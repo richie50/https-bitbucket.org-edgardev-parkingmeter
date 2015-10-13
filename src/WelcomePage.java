@@ -103,9 +103,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			ActionListener counter = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
 					repaint();
-
 					index++;
 				}
 			};
@@ -117,7 +115,10 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 			if (index < text.length) {
 				graphics.drawString(text[index], startingPoint, 20);
-
+			}
+			if(index == text.length){
+				System.out.println("REPEATING ANIMINATION -------->>>>");
+				index = 0;
 			}
 		}
 	} // end of animation class
@@ -150,7 +151,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		this.welcomeButton.setForeground(new Color(153, 190, 255));
 		this.welcomeButton.setOpaque(true);
 		this.welcomeButton.setBorderPainted(false);
-		this.welcomeButton.setSize(50, 40);
+		this.welcomeButton.setPreferredSize(new Dimension(60, 50));
 		this.welcomeButton.setBorder(border);
 		this.welcomeButton.addActionListener(this);
 		welcomeFrame.add(bar, BorderLayout.NORTH);
