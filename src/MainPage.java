@@ -15,12 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,11 +27,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.text.JTextComponent;
-
-//import sun.swing.SwingAccessor.JTextComponentAccessor;
 
 public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JFrame mainFrame;
@@ -79,7 +72,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	}
 
 	public void addTextFields() {
-		// needs fix to determine if Student or PIN
+
 		JLabel StudentNumber, PIN;
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		StudentNumber = new JLabel("Student Number:");
@@ -101,12 +94,11 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ADDED TOOLTIP
-				JTextField field = (JTextField)e.getSource();
+				// ADDED TOOLTIP
+				JTextField field = (JTextField) e.getSource();
 				String number = field.getText();
-				if(number.isEmpty()||number.length() < 9 || number.length() > 9){
+				if (number.isEmpty() || number.length() < 9 || number.length() > 9) {
 					sn_field.setToolTipText("Your Student Number should be nine digits");
-					System.out.println(sn_field.getToolTipText());
 				}
 			}
 		});
@@ -115,7 +107,6 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		PIN.setBounds(320, 110, 200, 20);
 		this.mainFrame.getContentPane().add(PIN);
 		this.pin_password_field = new JPasswordField(30);
-		// this.pin_password_field.setHorizontalAlignment(JTextField.LEFT);
 		this.pin_password_field.setEditable(true);
 		this.pin_password_field.setBackground(Color.LIGHT_GRAY);
 		this.pin_password_field.setBorder(border);
@@ -131,12 +122,11 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ADDED TOOLTIP
-				JPasswordField field = (JPasswordField)e.getSource();
+				// ADDED TOOLTIP
+				JPasswordField field = (JPasswordField) e.getSource();
 				char password[] = field.getPassword();
-				if(password.length == 0 ||password.length < 4 || password.length > 4){
+				if (password.length == 0 || password.length < 4 || password.length > 4) {
 					pin_password_field.setToolTipText("Pin should be four digits");
-					System.out.println(pin_password_field.getToolTipText());
 				}
 			}
 		});
@@ -219,15 +209,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(e.getActionCommand() + " DEBUG " + e.getSource());
-				System.out.println(e.paramString());
+
 				// DEBUG
 				if (e.getActionCommand().equals("")) {
 					if (currField.getText().length() >= 1) {
 						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
 					} else {
-						System.out.println("NOTHING TO DELETE");
+						// System.out.println("NOTHING TO DELETE");
 					}
 				}
 			}
@@ -260,11 +248,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
+
 				if (e.getActionCommand().equals("EXIT")) {
 					System.exit(0);
 				}
@@ -279,19 +263,8 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if (currField == null) {
-//			currField = sn_field;
-//		}
-//		if (this.sn_field.getText().toString().length() >= 9) {
-//			currField = pin_password_field;
-//		}
-//		if (this.pin_password_field.getText().toString().length() >= 4) {
-//			this.pin_password_field.setText(this.pin_password_field.getText().substring(0, 4));
-//		}
+
 		String value = new String();
-		System.out.println("--------DEBUG FOR SUBMIT BUTTON-------------");
-		System.out.println(e.getActionCommand());
-		System.out.println(e.getID() + " and " + e.getSource());
 		if (e.getActionCommand().equals("NEXT")) {
 			String studentdb = sn_field.getText();
 			String pindb = pin_password_field.getText();
@@ -305,16 +278,21 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 								&& (person.getStatus().equals("ok") || person.getStatus().equals("arrears")))
 						.findFirst();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+
 				e1.printStackTrace();
 			}
 			if (matchingStudent.isPresent())
 				try {
 					{
 						Person matchingPerson = matchingStudent.get();
-						System.out.println("Hello " + matchingPerson.getFirstName().toUpperCase() + " "
-								+ matchingPerson.getLastName().toUpperCase());
-						System.out.println("\tSTUDENT STATUS > > > > >" + matchingPerson.getStatus());
+
+						/* Debug */
+
+						// System.out.println("Hello " +
+						// matchingPerson.getFirstName().toUpperCase() + " "
+						// + matchingPerson.getLastName().toUpperCase());
+						// System.out.println("\tSTUDENT STATUS > > > > >" +
+						// matchingPerson.getStatus());
 						// add valid info to the file
 						final String newLine = System.getProperty("line.separator");
 						File file = new File("Ticket_database.txt");
@@ -331,7 +309,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 							writer.write(matchingPerson.getStudentNumber() + newLine + matchingPerson.getFirstName()
 									+ " " + matchingPerson.getLastName() + " \n" + matchingPerson.getStatus());
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
+
 							e1.printStackTrace();
 						} finally {
 							if (writer != null) {
@@ -345,7 +323,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 						try {
 							email.diplayEmailPage();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
+
 							e1.printStackTrace();
 						}
 						email.middlePostion();
@@ -355,83 +333,66 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 						email.exitButton();
 					}
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 				}
 			else {
 				studentErrorWindow();
-				System.out.println("No matching record found".toUpperCase());
+				// System.out.println("No matching record found".toUpperCase());
 			}
 
 		} else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("2")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("3")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("4")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("5")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("6")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("7")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("8")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("9")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		} else if (e.getActionCommand().equals("0")) {
 			value = ((JButton) e.getSource()).getText();
-			System.out.println(value);
 			currField.setText(currField.getText() + value);
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println(e.getID());
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println(e.getID());
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
