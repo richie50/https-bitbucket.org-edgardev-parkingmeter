@@ -41,6 +41,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 	private JTextField make;
 	private JTextField plateNumber;
 	private JButton nextButton;
+	private JButton clearButton;
 	private JButton rowOne[];
 	private JButton rowTwo[];
 	private JButton rowThree[];
@@ -234,6 +235,35 @@ public class InsurancePage extends JFrame implements ActionListener {
 			this.rowThree[i] = temp;
 			mainFrame.getContentPane().add(rowThree[i]);
 		}
+		// create the clear button
+				ImageIcon backSPace = new ImageIcon("backspace.png");
+				Image image = backSPace.getImage();
+				Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
+				backSPace = new ImageIcon(temporary);
+				this.clearButton = new JButton(backSPace);
+				this.clearButton.setBackground(Color.BLACK);
+				this.clearButton.setForeground(new Color(153, 190, 255));
+				this.clearButton.setOpaque(true);
+				this.clearButton.setBorderPainted(false);
+				this.clearButton.setBounds(530, 365, 70 , 40);
+				this.clearButton.setBorder(border);
+				this.mainFrame.getContentPane().add(clearButton);
+				clearButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO DEBUG
+						System.out.println("WHEN CLEAR BUTTON IS PRESSED . . . . . ");
+						//
+						if (e.getActionCommand().equals("")) {
+							if (currField.getText().length() >= 1) {
+								currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+							} else {
+								System.out.println("NOTHING TO DELETE");
+							}
+						}
+					}
+				});
 		mainFrame.setVisible(true);
 	}
 
