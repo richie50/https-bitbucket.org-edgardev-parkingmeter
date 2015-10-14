@@ -1,5 +1,5 @@
 
-/*
+/**
  * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
@@ -18,12 +18,13 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 
 public class welcomeClockPanel extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JLabel timer;
 
+	/**
+	 * Creates the panel for the clock in the welcome page
+	 */
 	public welcomeClockPanel() {
 		setLayout(new BorderLayout());
 		timer = new JLabel();
@@ -44,6 +45,10 @@ public class welcomeClockPanel extends JPanel {
 		clock.start();
 	}
 
+	/**
+	 * Set the current date and time
+	 * 
+	 */
 	public void tickTock() {
 		timer.setText("Current Date/Time: " + DateFormat.getDateTimeInstance().format(new Date()));
 	}
