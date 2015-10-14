@@ -1,13 +1,11 @@
 
-/*
- * @author Richmond F, Edgar Z, Daniyal J
- * @cse : cse23004, cse23106, cse31034
+/**
+ * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
+ * cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
  * EECS3461 - Scott McKenzie
  */
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -23,12 +21,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 public class EmailPage extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
 	private JFrame emailFrame;
 	private String name;
 	private JLabel email;
-	private JPanel mainEmailPanel;
-	private JPanel emailPanel;
-	private JPanel keyboardPanel;
 	private JTextField email_field;
 	private JButton rowOne[];
 	private JButton rowTwo[];
@@ -43,10 +40,24 @@ public class EmailPage extends JFrame implements ActionListener {
 	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M", "_", "." };
 	private String value;
 
+	/**
+	 * Creates frame for the email page
+	 * 
+	 * @param frame
+	 * @param text
+	 */
+
 	public EmailPage(JFrame frame, String text) {
 		this.emailFrame = frame;
 		this.name = text;
 	}
+
+	/**
+	 * Displays the email page
+	 * 
+	 * @throws IOException
+	 *             Input Output exception
+	 */
 
 	public void diplayEmailPage() throws IOException {
 		this.emailFrame = new JFrame(this.name);
@@ -64,21 +75,26 @@ public class EmailPage extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Creates labels for input of email address
+	 */
+
 	public void addEmailLabelAndTextFeild() {
 		JLabel prompt = new JLabel("Subscribe for our news letters and offers below.");
 		prompt.setBounds(200, 0, 400, 100);
 		this.email = new JLabel("EMAIL (OPTIONAL) :");
 		this.email.setBounds(120, 100, 300, 30);
 		this.email_field = new JTextField(30);
-		// this.email_field.setHorizontalAlignment(SwingConstants.CENTER);
-		// this.email_field.setAlignment(SwingConstants.CENTER);
 		this.email_field.setBounds(250, 100, 300, 30);
-
 		this.emailFrame.getContentPane().add(prompt);
 		this.emailFrame.getContentPane().add(email);
 		this.emailFrame.getContentPane().add(email_field);
 		this.emailFrame.setVisible(true);
 	}
+
+	/**
+	 * Creates qwerty keyboard
+	 */
 
 	public void displayKeyboard() {
 		int x, y;
@@ -167,16 +183,16 @@ public class EmailPage extends JFrame implements ActionListener {
 		this.emailFrame.getContentPane().add(clearButton);
 		clearButton.addActionListener(new ActionListener() {
 
+			/**
+			 * See JAVA API
+			 */
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO DEBUG
-				System.out.println("WHEN CLEAR BUTTON IS PRESSED . . . . . ");
-				//
+
 				if (e.getActionCommand().equals("")) {
 					if (email_field.getText().length() >= 1) {
 						email_field.setText(email_field.getText().substring(0, email_field.getText().length() - 1));
-					} else {
-						System.out.println("NOTHING TO DELETE");
 					}
 				}
 			}
@@ -201,6 +217,10 @@ public class EmailPage extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Creates the window in the center
+	 */
+
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.emailFrame.setLocation(dim.width / 2 - this.emailFrame.getSize().width / 2,
@@ -208,6 +228,10 @@ public class EmailPage extends JFrame implements ActionListener {
 		this.emailFrame.setVisible(true);
 	}
 
+	/**
+	 * Creates the next button for going to the next page which is insurance
+	 * page
+	 */
 	public void nextButton() {
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		JButton backButton = new JButton("NEXT");
@@ -223,19 +247,16 @@ public class EmailPage extends JFrame implements ActionListener {
 		backButton.addActionListener(new ActionListener() {
 			JFrame emailFrame = originalFrame();
 
+			/**
+			 * See Java API
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + "\n >>" + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
+
 				if (e.getActionCommand().equals("NEXT")) {
-					System.out.println("VAALIDATING EMAIL . . . . . . . . . . . . . . . . ");
 					String emaildb = new String();
 					emaildb = email_field.getText();
 					if (isValidEmailAddress(emaildb) || emaildb.isEmpty()) {
-						System.out.println("SUCCESS , VALID EMAIL");
 						/*
 						 * ADDED INSURANCE PAGE
 						 */
@@ -244,30 +265,29 @@ public class EmailPage extends JFrame implements ActionListener {
 						try {
 							insurance.initialize();
 						} catch (IOException e2) {
-							// TODO Auto-generated catch block
 							e2.printStackTrace();
 						}
 						insurance.initializeKeyboard();
 						insurance.middlePostion();
 						try {
-							insurance.showComboboxDemo();
+							insurance.showCombobox();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					} else {
-						/* UI ERROR MESSAGE FOR EMAIL VALIDATION GOES HERE */
+						/* UI ERROR MESSAGE FOR EMAIL VALIDATION */
 						EmailPage.emailErrorWindow();
-						System.out.println("The email you have entered is not valid. Please try again");
 					}
 
-				} else {
-					System.out.println("SOMETHING WEIRD HAPPEN !!!!!!!!!!!!");
 				}
 			}
 
 		});
 	}
+
+	/**
+	 * Creates the exit button
+	 */
 
 	public void exitButton() {
 		JButton exitButton = new JButton("EXIT");
@@ -284,31 +304,32 @@ public class EmailPage extends JFrame implements ActionListener {
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// DEBUG
-				System.out.println(e.getActionCommand() + " ---- " + e.getSource());
-				System.out.println(e.paramString());
-				// DEBUG
+
 				if (e.getActionCommand().equals("EXIT")) {
-					System.out.println("****************");
 					System.exit(0);
-					System.out.println("****************");
-				} else {
-					System.out.println("CRITICAL ERROR!!!!!!!!!!!!");
 				}
 			}
 
 		});
 	}
 
+	/**
+	 * See Java API
+	 */
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
 		value = ((JButton) event.getSource()).getText().toLowerCase();
-		System.out.print("KEY => ");
-		System.out.println(value + " WAS PRESSED IN EMAILPAGE");
 		email_field.setText(email_field.getText().toLowerCase() + value);
 	}
+
+	/**
+	 * Method for verifying correct email input with regular expression
+	 * 
+	 * @param email
+	 *            Email address entered
+	 * @return Boolean for correct match
+	 */
 
 	public static boolean isValidEmailAddress(String email) {
 		String reg = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
@@ -317,9 +338,19 @@ public class EmailPage extends JFrame implements ActionListener {
 		return m.matches();
 	}
 
+	/**
+	 * Creates error window for incorrect email input
+	 */
+
 	public static void emailErrorWindow() {
 		JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
+	/**
+	 * Creates email frame
+	 * 
+	 * @return emailframe
+	 */
 
 	public JFrame originalFrame() {
 		return this.emailFrame;
