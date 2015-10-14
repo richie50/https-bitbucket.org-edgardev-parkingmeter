@@ -1,5 +1,5 @@
 
-/*
+/**
  * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
@@ -11,11 +11,11 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class Tester {
+public class a1 {
 
 	public static void main(String[] args) throws IOException {
 		JFrame frame = null;
-		WelcomePage welcome = new WelcomePage("WELCOME", frame);
+		WelcomePage welcome = new WelcomePage("Initiate the program", frame);
 		Runnable runner = new Runnable() {
 			@Override
 			public void run() {
