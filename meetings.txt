@@ -2,70 +2,87 @@ cse31034, 212654570, Javed, Daniyal
 cse23004, 212114641, Frimpong, Richmond
 cse23106, 211509551, Zaganjori, Edgar
 
----------------------
-Special Requirements: (optional)
----------------------
-To use the new syntax available in Java 8, I have to set the 
-compliance level of my code to 1.8.
+    ---------------------
+    Special Requirements: (optional)
+    ---------------------
+    To use the new syntax available in Java 8, I have to set the 
+    compliance level of my code to 1.8.
 
--------
-Design:
--------
+    -------
+    Design:
+    -------
 
-RICHMOND ADD STUFF
+    The motivation behind desigining this software came from a group
+    project assigned by Prof. Scot Mackenzie. After deciding on how 
+    we were going to tackle this project and started working on a 
+    base model, we looked at current parking systems and what we did 
+    not like about them, and incorperated it in our project as much as
+    we could. We went after a very simplistic design that is very easy
+    to use, color schemes that are very simplistic. We made our automated
+    parking system simulate York Universitys and used images that belong to
+    the university. Our color scheme was after york univeristies in the sense
+    red and white, but we added black and blue keyboard because it looks very
+    nice on the white background. 
 
-(Describe the motivation behind your software design. Why did you use
-the JFC/Swing components that you did, and why did you organise them
-that way? Briefly justify your design.)
+    RICHMOND ADD STUFF
+
+    (Describe the motivation behind your software design. Why did you use
+     the JFC/Swing components that you did, and why did you organise them
+     that way? Briefly justify your design.)
 
 
---------------------
-Additional Features: (optional)
---------------------
+    --------------------
+    Additional Features: (optional)
+    --------------------
 
-RICHMOND ADD STUFF
+    We provided an Email page that was not a requirement. This is to sign
+    a student up to news letters and offers provided by the university. 
+
+    RICHMOND ADD STUFF
 (Describe any additional features implemented.)
 
 
----------------
-Communications:
----------------
+    ---------------
+    Communications:
+    ---------------
 
-September 19, 2015; 8:30 pm;
-Daniyal, Richmond and Edgar set up whatsapp group.
-We brain-stormed ideas for the assignment and began to talk about
-setting up a repository for the project.
+    September 19, 2015; 8:30 pm;
+    Daniyal, Richmond and Edgar set up whatsapp group.
+    We brain-stormed ideas for the assignment and began to talk about
+    setting up a repository for the project.
 
-September 20, 2015; 7:00 pm - 10:00 pm;
-Richmond, Daniyal and Edgar met and setup repository:
-Edgar setup git for everyone.
-We drew skeleton of our project.
-Assigned duties and started to work.
+    September 20, 2015; 7:00 pm - 10:00 pm;
+    Richmond, Daniyal and Edgar met and setup repository:
+    Edgar setup git for everyone.
+    We drew skeleton of our project.
+    Assigned duties and started to work.
 
-September 25 2015; 1 pm to 8 pm;
+    September 25 2015; 1 pm to 8 pm;
 
-Richmond showed off the main page with a fully built keyboard.
-Edgar made the welcome page.
-Daniyal did the back end file parsing.
-Richmond incorporated all the code together
+    Richmond showed off the main page with a fully built keyboard.
+    Edgar made the welcome page.
+    Daniyal did the back end file parsing.
+    Richmond incorporated all the code together
 
-After this worked remotely via whatsapp and github and uploaded all our changes.
+    After this worked remotely via whatsapp and github and uploaded all our changes.
 
-October 11 2015; 1 pm to 8 pm;
+    October 11 2015; 1 pm to 8 pm;
 
-The entire project was now done. Started to work on testing, documentation and design.
-Edgar changed all the color schemes.
+    The entire project was now done. Started to work on testing, documentation and design.
+    Edgar debugged along with richmond, changed the layout from 
+    barebones to something that represents the final design decisions. 
 
+    -----------------
+    Responsibilities:
+    -----------------
 
------------------
-Responsibilities:
------------------
+    Richmond:
+    Set up the base code, setting up panels, frames, keyboards.
+    Linking pages together.
 
-Richmond:
-GUI layout, programming and over all structure.
+    Daniyal:
+    Testing, documentation and back end student and insurance validating.
 
-Daniyal:
-Testing, documentation and back end file programming.
-
-Edgar:
-Animation and overall design.
+    Edgar:
+    Animation and overall design and debugging, back end implementations
+    such as delete button and field focusing.
