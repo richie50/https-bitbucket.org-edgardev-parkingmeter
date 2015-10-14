@@ -1,9 +1,7 @@
 
-/*
- * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
- * @cse : cse23004, cse23106, cse31034
- * YorkU Parking Meter GUI
- * EECS3461 - Scott McKenzie
+/**
+ * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed cse : cse23004,
+ *         cse23106, cse31034 YorkU Parking Meter GUI EECS3461 - Scott McKenzie
  */
 
 public class Person {
@@ -22,21 +20,45 @@ public class Person {
 		this.status = commaVal[4].trim();
 	}
 
+	/**
+	 * 
+	 * @return studentNumber Student number entered
+	 */
 	String getStudentNumber() {
 		return studentNumber;
 	}
+
+	/**
+	 * 
+	 * @return pin Pin number entered
+	 */
 
 	String getPin() {
 		return pin;
 	}
 
+	/**
+	 * 
+	 * @return lastName Student's last number entered
+	 */
+
 	String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * 
+	 * @return firstName Student's first name entered
+	 */
+
 	String getFirstName() {
 		return firstName;
 	}
+
+	/**
+	 * 
+	 * @return status Student's stats of 'ok' or 'arrears'
+	 */
 
 	String getStatus() {
 		return status;
