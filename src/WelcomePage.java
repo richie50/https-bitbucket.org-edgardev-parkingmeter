@@ -1,5 +1,5 @@
 
-/*
+/**
  * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
@@ -40,9 +40,20 @@ public class WelcomePage extends JFrame implements ActionListener {
 		private static int DELAY = 40;
 		JProgressBar progressBar;
 
+		/**
+		 * Constructs loading bar in the welcome page
+		 * 
+		 * @param bar
+		 *            Type JProgressBar
+		 */
 		public welcomeThread(JProgressBar bar) {
 			progressBar = bar;
 		}
+
+		/**
+		 * 
+		 * Runs the components of the welcome page
+		 */
 
 		public void run() {
 			int max = progressBar.getMaximum();
@@ -85,6 +96,13 @@ public class WelcomePage extends JFrame implements ActionListener {
 		}
 	}// end of static class
 
+	/**
+	 * Frame for welcone page
+	 * 
+	 * @param title
+	 * @param frame
+	 */
+
 	public WelcomePage(String title, JFrame frame) {
 		welcomeName = title;
 		welcomeFrame = frame;
@@ -101,7 +119,6 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 		displayWelcomeMessage() {
 			ActionListener counter = new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					repaint();
 					index++;
@@ -110,18 +127,25 @@ public class WelcomePage extends JFrame implements ActionListener {
 			new Timer(delay, counter).start(); // runs animation
 		}
 
-		@Override
+		/**
+		 * Generates paintComponent
+		 */
 		public void paintComponent(Graphics graphics) {
 
 			if (index < text.length) {
 				graphics.drawString(text[index], startingPoint, 20);
 			}
-			if(index == text.length){
-				System.out.println("REPEATING ANIMINATION -------->>>>");
+			if (index == text.length) {
 				index = -1;
 			}
 		}
 	} // end of animation class
+
+	/**
+	 * Display the welcome page panel
+	 * 
+	 * @throws IOException
+	 */
 
 	public void displayWelcomePanel() throws IOException {
 		welcomeFrame = new JFrame(welcomeName);
@@ -129,15 +153,19 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 		displayWelcomeMessage welcome = new displayWelcomeMessage();
 		welcome.setBounds(260, 300, 400, 400);
-		welcome.setFont(new Font("SANS_SERIF", Font.BOLD | Font.ITALIC, 20));
+		welcome.setFont(new Font("SANS_SERIF", Font.BOLD, 20));
 		welcomeFrame.getContentPane().add(welcome);
 		welcome.setVisible(true);
-		System.out.println(welcomeFrame.getTitle());
 		welcomeFrame.setSize(700, 600);
 		welcomeFrame.getContentPane().setBackground(Color.WHITE);
 		welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * Incoprates the welcome page
+	 * 
+	 * @throws IOException
+	 */
 	public void welcomePageRunner() throws IOException {
 		this.bar = new JProgressBar(0, 50);
 		this.bar.setStringPainted(false);
@@ -173,6 +201,11 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.setVisible(true);
 	}
 
+	/**
+	 * Construct the page in the center
+	 * 
+	 */
+
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		welcomeFrame.setLocation(dim.width / 2 - welcomeFrame.getSize().width / 2,
@@ -180,19 +213,15 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.setVisible(true);
 	}
 
-	@Override
+	/**
+	 * What happens when button is pressed
+	 * 
+	 */
+
 	public void actionPerformed(ActionEvent e) {
 		this.welcomeButton.setEnabled(true);
 		Thread stepper = new welcomeThread(bar);
 		stepper.start();
-		if (stepper.isAlive()) {
-			if (stepper.isAlive()) {
-				System.out.println(stepper.getId());
-				System.out.println(stepper.getPriority());
-				System.out.println(stepper.getState());
-			} else {
-				//
-			}
-		}
+
 	}
 }
