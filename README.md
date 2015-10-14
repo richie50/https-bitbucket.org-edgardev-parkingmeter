@@ -9,7 +9,7 @@ and an insurance page for validating car
 insurance, model, make, and plates.
 
 
-Written by @edgardev, Richmond Frimpong and 
-Daniyal Javed 
+Written by @edgardev, @richee305 and 
+@daniyalj
 
 Free to use for educational purposes
