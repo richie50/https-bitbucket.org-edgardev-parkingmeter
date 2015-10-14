@@ -1,7 +1,7 @@
 
-/*
+/**
  * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
- * @cse : cse23004, cse23106, cse31034
+ * cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
  * EECS3461 - Scott McKenzie
  */
@@ -26,16 +26,12 @@ import javax.swing.border.SoftBevelBorder;
 
 public class InsurancePage extends JFrame implements ActionListener {
 
-	/**
-	 * I INC:UDED A INSURANCE TEST CLASS RUN THAT STUPID
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame mainFrame;
 	private JLabel headerLabel;
 	private JLabel statusLabel;
 	private JLabel monthLabel;
 	private JLabel yearLabel;
-	private String name;
 	private JLabel expLabel;
 	private JTextField model;
 	private JTextField make;
@@ -51,12 +47,21 @@ public class InsurancePage extends JFrame implements ActionListener {
 	private String firstRow[] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" };
 	private String secondRow[] = { "A", "S", "D", "F", "G", "H", "J", "K", "L" };
 	private String thirdRow[] = { "Z", "X", "C", "V", "B", "N", "M" };
-	private JPanel keyboardPanel;
+
+	/**
+	 * Frame for insurance page
+	 * 
+	 * @param frame
+	 * @param text
+	 */
 
 	public InsurancePage(JFrame frame, String text) {
 		this.mainFrame = frame;
-		this.name = text;
 	}
+
+	/**
+	 * Creates the window in the center
+	 */
 
 	public void middlePostion() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -64,6 +69,13 @@ public class InsurancePage extends JFrame implements ActionListener {
 				dim.height / 2 - mainFrame.getSize().height / 2);
 		mainFrame.setVisible(true);
 	}
+
+	/**
+	 * Initialize the insurance page
+	 * 
+	 * @throws IOException
+	 *             Input output exception
+	 */
 
 	public void initialize() throws IOException {
 		mainFrame = new JFrame("Insurance");
@@ -85,7 +97,6 @@ public class InsurancePage extends JFrame implements ActionListener {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		headerLabel = new JLabel("");
 		headerLabel.setText("Select your insurance company from the drop down below");
-		// int styleHeader = Font.BOLD | Font.ITALIC;
 		headerLabel.setFont(new Font("Garamond", Font.CENTER_BASELINE, 14));
 		headerLabel.setBounds(140, -10, 500, 60);
 		mainFrame.getContentPane().add(headerLabel);
@@ -101,32 +112,40 @@ public class InsurancePage extends JFrame implements ActionListener {
 		nextButton.setForeground(new Color(153, 190, 255));
 		nextButton.setOpaque(true);
 		nextButton.setBorderPainted(false);
-		;
-		// nextButton.setBounds(380, 500, 100, 35);
 		nextButton.setBounds(350, 425, 80, 30);
 		nextButton.setBorder(border);
 		nextButton.addActionListener(this);
-		make = new JTextField(); // FIELD EDGAR
+		make = new JTextField();
 		JLabel makeLabel = new JLabel("Make :");
 		make.setBounds(190, 140, 80, 30);
 		makeLabel.setBounds(145, 140, 50, 30);
 		this.make.addFocusListener(new FocusListener() {
 
+			/**
+			 * Focus created on the current field on make
+			 */
 			@Override
 			public void focusGained(FocusEvent e) {
 				currField = make;
 			}
 
+			/**
+			 * Focus lost on the current field
+			 */
+
 			@Override
 			public void focusLost(FocusEvent e) {
 			}
 		});
-		model = new JTextField(); // FIELD EDGAR
+		model = new JTextField();
 		model.setBounds(320, 140, 80, 30);
 		JLabel modelLabel = new JLabel("Model :");
 		modelLabel.setBounds(270, 140, 50, 30);
 		this.model.addFocusListener(new FocusListener() {
 
+			/**
+			 * Focus gained on the current field to model
+			 */
 			@Override
 			public void focusGained(FocusEvent e) {
 				currField = model;
@@ -136,12 +155,15 @@ public class InsurancePage extends JFrame implements ActionListener {
 			public void focusLost(FocusEvent e) {
 			}
 		});
-		plateNumber = new JTextField(); // FIELD EDGAR
+		plateNumber = new JTextField();
 		plateNumber.setBounds(440, 140, 80, 30);
 		JLabel plateLabel = new JLabel("Plate :");
 		plateLabel.setBounds(400, 140, 50, 30);
 		this.plateNumber.addFocusListener(new FocusListener() {
 
+			/**
+			 * Focus on currfield to plate
+			 */
 			@Override
 			public void focusGained(FocusEvent e) {
 				currField = plateNumber;
@@ -164,6 +186,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 		mainFrame.setVisible(true);
 	}
 
+	/**
+	 * Creates the keyboard for the insurance page
+	 */
 	public void initializeKeyboard() {
 		int x, y;
 		Border border = new BevelBorder(BevelBorder.RAISED);
@@ -235,46 +260,50 @@ public class InsurancePage extends JFrame implements ActionListener {
 			this.rowThree[i] = temp;
 			mainFrame.getContentPane().add(rowThree[i]);
 		}
-		// create the clear button
-				ImageIcon backSPace = new ImageIcon("backspace.png");
-				Image image = backSPace.getImage();
-				Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
-				backSPace = new ImageIcon(temporary);
-				this.clearButton = new JButton(backSPace);
-				this.clearButton.setBackground(Color.BLACK);
-				this.clearButton.setForeground(new Color(153, 190, 255));
-				this.clearButton.setOpaque(true);
-				this.clearButton.setBorderPainted(false);
-				this.clearButton.setBounds(530, 365, 70 , 40);
-				this.clearButton.setBorder(border);
-				this.mainFrame.getContentPane().add(clearButton);
-				clearButton.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO DEBUG
-						System.out.println("WHEN CLEAR BUTTON IS PRESSED . . . . . ");
-						//
-						if (e.getActionCommand().equals("")) {
-							if (currField.getText().length() >= 1) {
-								currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
-							} else {
-								System.out.println("NOTHING TO DELETE");
-							}
-						}
+		ImageIcon backSPace = new ImageIcon("backspace.png");
+		Image image = backSPace.getImage();
+		Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
+		backSPace = new ImageIcon(temporary);
+		this.clearButton = new JButton(backSPace);
+		this.clearButton.setBackground(Color.BLACK);
+		this.clearButton.setForeground(new Color(153, 190, 255));
+		this.clearButton.setOpaque(true);
+		this.clearButton.setBorderPainted(false);
+		this.clearButton.setBounds(530, 365, 70, 40);
+		this.clearButton.setBorder(border);
+		this.mainFrame.getContentPane().add(clearButton);
+		clearButton.addActionListener(new ActionListener() {
+
+			/**
+			 * See Java API
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (e.getActionCommand().equals("")) {
+					if (currField.getText().length() >= 1) {
+						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
 					}
-				});
+				}
+			}
+		});
 		mainFrame.setVisible(true);
 	}
 
 	final DefaultComboBoxModel<Integer> insExpM = new DefaultComboBoxModel<Integer>();
-
 	final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
-	final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
 
+	final DefaultComboBoxModel<Integer> insExpY = new DefaultComboBoxModel<Integer>();
 	final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 
-	public void showComboboxDemo() throws IOException {
+	/**
+	 * Creates the combo box
+	 * 
+	 * @throws IOException
+	 *             Input output exception
+	 */
+	public void showCombobox() throws IOException {
 		final DefaultComboBoxModel<String> insName = new DefaultComboBoxModel<String>();
 		File file = new File("companies.txt");
 		FileReader fileReader = new FileReader(file);
@@ -290,34 +319,28 @@ public class InsurancePage extends JFrame implements ActionListener {
 		inSelect.setBackground(Color.BLACK);
 		inSelect.setForeground(new Color(153, 190, 255));
 		inSelect.setBounds(170, 35, 350, 30);
-		JScrollPane inList = new JScrollPane(inSelect);
+		new JScrollPane(inSelect);
 		mainFrame.getContentPane().add(inSelect);
 		// adding expiry month
-		// final DefaultComboBoxModel<Integer> insExpM = new
-		// DefaultComboBoxModel<Integer>();
 
 		for (int i = 1; i < 13; i++) {
 			insExpM.addElement(i);
 		}
-		// final JComboBox<Integer> inEx = new JComboBox<Integer>(insExpM);
 		inSelect.setSelectedIndex(0);
 		inEx.setBackground(Color.BLACK);
 		inEx.setForeground(new Color(153, 190, 255));
 		inEx.setBounds(250, 95, 60, 30);
-		JScrollPane inExx = new JScrollPane(inEx);
+		new JScrollPane(inEx);
 		mainFrame.getContentPane().add(inEx);
 		// add expiry year
-		// final DefaultComboBoxModel<Integer> insExpY = new
-		// DefaultComboBoxModel<Integer>();
 		for (int i = 2015; i < 2021; i++) {
 			insExpY.addElement(i);
 		}
-		// final JComboBox<Integer> inY = new JComboBox<Integer>(insExpY);
 		inSelect.setSelectedIndex(0);
 		inY.setBackground(Color.BLACK);
 		inY.setForeground(new Color(153, 190, 255));
 		inY.setBounds(350, 95, 90, 30);
-		JScrollPane inExxY = new JScrollPane(inY);
+		new JScrollPane(inY);
 		mainFrame.getContentPane().add(inY);
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		JButton showButton = new JButton("Next Field");
@@ -329,6 +352,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 		showButton.setBorderPainted(false);
 		;
 		showButton.addActionListener(new ActionListener() {
+			/**
+			 * See Java API
+			 */
 			public void actionPerformed(ActionEvent e) {
 				if (currField == make) {
 					currField = model;
@@ -345,14 +371,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 		mainFrame.setVisible(true);
 	}
 
-	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 * ATT: EDGAR FEEL FREE TO CHANGE THIS LISTENER , I ALREADY SET LISTENERS ON
-	 * THE BUTTONS JUST DO UR MAGIC. BRUH LOL
+	/**
+	 * See Java API
 	 */
 	public void actionPerformed(ActionEvent event) {
 
@@ -372,17 +392,22 @@ public class InsurancePage extends JFrame implements ActionListener {
 
 		if (!event.getActionCommand().equals("Print Ticket")) {
 			String val = ((JButton) event.getSource()).getText().toLowerCase();
-			System.out.print("KEY => ");
-			System.out.println(val + " WAS PRESSED IN INSURANCEPAGE");
 			currField.setText(currField.getText().toLowerCase() + val);
 		}
 
 		if (event.getActionCommand().equals("Print Ticket")) {
 			String carMake = make.getText();
 			String carPlate = plateNumber.getText();
+			String carModel = model.getText();
 
 			if (carMake.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please enter the make of your vehicle.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+
+			}
+
+			else if (carModel.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please enter the model of your vehicle.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 
 			}
@@ -396,7 +421,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 				this.mainFrame = new JFrame("RECIEPT");
 				this.mainFrame.setLayout(new GridLayout());
 
-				this.mainFrame.setSize(500, 400);
+				this.mainFrame.setSize(1000, 400);
 				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 				mainFrame.setLocation(dim.width / 2 - mainFrame.getSize().width / 2,
 						dim.height / 2 - mainFrame.getSize().height / 2);
@@ -413,10 +438,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 				try {
 					fileReader = new FileReader(file);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
-				@SuppressWarnings("resource")
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				String line;
 				try {
@@ -442,9 +466,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 					label.setFont(new Font("Serif", Font.BOLD, 25));
 					label.setText("<html> Hello " + name + "<br>Account charged $3.50 per day<br> Student Number : "
 							+ sn + "<br>" + "Date issued : " + cal.getTime() + "<br>" + " Make:    "
-							+ carMake.toUpperCase() + "<br>" + "     Plates: " + carPlate.toUpperCase() + "<br>"
-							+ "Permit valid till " + inEx.getItemAt(inEx.getSelectedIndex()) + "/"
-							+ inY.getItemAt(inY.getSelectedIndex()) + "<br>" + "</html>");
+							+ carMake.toUpperCase() + "<br>" + "Model: " + carModel.toUpperCase() + "<br>"
+							+ "     Plates: " + carPlate.toUpperCase() + "<br>" + "Permit valid till "
+							+ inEx.getItemAt(inEx.getSelectedIndex()) + "/" + inY.getItemAt(inY.getSelectedIndex())
+							+ "<br>" + "</html>");
 					this.mainFrame.add(acc);
 					this.mainFrame.add(label);
 
@@ -458,7 +483,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 					label.setVerticalAlignment(SwingConstants.CENTER);
 					label.setFont(new Font("Serif", Font.BOLD, 25));
 					label.setForeground(Color.red);
-					label.setText("<html>PERMISSION DENIED DUE TO:<br>" + "OUTSTANDING BALANCE</html>");
+					label.setText("<html>PERMISSION DENIED DUE TO:<br>"
+							+ "OUTSTANDING BALANCE <br><font color='black'> For further "
+							+ "information please contact: YorkU Parking Services <br> 416-736-5335</font></html>");
 					this.mainFrame.add(dec);
 					this.mainFrame.add(label);
 				}
