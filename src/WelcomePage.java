@@ -189,12 +189,12 @@ public class WelcomePage extends JFrame implements ActionListener {
 
 		// Copyright York University, added logo to match our themed York
 		// University Parking System
-		String image_path = "YorkLogo.gif";
+		String image_path = "YorkLogo.png";
 		File path = new File(image_path);
 		BufferedImage image = ImageIO.read(path);
 		JLabel label = new JLabel(new ImageIcon(image));
 
-		label.setBounds(100, -150, 500, 500);
+		label.setBounds(120, 50, 500, 250);
 		JLabel time = new JLabel("Current Date/Time: " + DateFormat.getDateTimeInstance().format(new Date()));
 		time.setVerticalAlignment(JLabel.BOTTOM);
 		time.setFont(new Font("MONOSPACED", Font.BOLD | Font.ITALIC, 17));
