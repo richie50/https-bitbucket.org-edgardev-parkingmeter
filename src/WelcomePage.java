@@ -118,7 +118,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			}
 			if(index == text.length){
 				System.out.println("REPEATING ANIMINATION -------->>>>");
-				index = 0;
+				index = -1;
 			}
 		}
 	} // end of animation class
