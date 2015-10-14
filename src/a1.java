@@ -15,7 +15,7 @@ public class a1 {
 
 	public static void main(String[] args) throws IOException {
 		JFrame frame = null;
-		WelcomePage welcome = new WelcomePage("Initiate the program", frame);
+		WelcomePage welcome = new WelcomePage("Welcome to YorkU", frame);
 		Runnable runner = new Runnable() {
 			@Override
 			public void run() {
