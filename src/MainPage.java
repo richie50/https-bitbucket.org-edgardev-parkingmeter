@@ -1,5 +1,5 @@
 
-/*
+/**
  * @author Richmond Frimpong, Edgar Zaganjori, Daniyal Javed
  * @cse : cse23004, cse23106, cse31034
  * YorkU Parking Meter GUI
@@ -44,14 +44,34 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	private JButton submitButton;
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Creates frame for the main page
+	 * 
+	 * @param text
+	 * @param frame
+	 */
+
 	public MainPage(String text, JFrame frame) {
 		this.mainFrame = frame;
 		this.main_page_name = text;
 	}
 
+	/**
+	 * Sets the text
+	 * 
+	 * @param txt
+	 */
+
 	public void setText(String txt) {
 		this.main_page_name = txt;
 	}
+
+	/**
+	 * Displays the main page
+	 * 
+	 * @throws IOException
+	 *             Input output exception
+	 */
 
 	public void displayMainPage() throws IOException {
 		this.mainFrame = new JFrame(this.main_page_name);
@@ -71,6 +91,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.mainFrame.setVisible(true);
 	}
 
+	/**
+	 * Displays the text fields of student and pin
+	 */
+
 	public void addTextFields() {
 
 		JLabel StudentNumber, PIN;
@@ -87,12 +111,18 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.mainFrame.getContentPane().add(sn_field);
 		this.sn_field.addFocusListener(new FocusListener() {
 
-			@Override
+			/**
+			 * Creates focus on current field
+			 */
+
 			public void focusGained(FocusEvent e) {
 				currField = sn_field;
 			}
 
-			@Override
+			/**
+			 * Added tooltip for focus
+			 */
+
 			public void focusLost(FocusEvent e) {
 				// ADDED TOOLTIP
 				JTextField field = (JTextField) e.getSource();
@@ -115,12 +145,17 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.pin_password_field.addMouseListener(this);
 		this.pin_password_field.addFocusListener(new FocusListener() {
 
-			@Override
+			/**
+			 * Focus on pin field
+			 */
 			public void focusGained(FocusEvent e) {
 				currField = pin_password_field;
 			}
 
-			@Override
+			/**
+			 * Added tooltip on pin field
+			 */
+
 			public void focusLost(FocusEvent e) {
 				// ADDED TOOLTIP
 				JPasswordField field = (JPasswordField) e.getSource();
@@ -131,6 +166,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 			}
 		});
 	}
+
+	/**
+	 * Adding numeric keyboard
+	 */
 
 	public void addNumberButtons() {
 		Border border = new BevelBorder(BevelBorder.RAISED);
@@ -192,6 +231,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		this.mainFrame.getContentPane().add(zero);
 	}
 
+	/**
+	 * Add the backspace image and button
+	 */
+
 	public void addClearButton() {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
 		ImageIcon backSpace = new ImageIcon("backspace.png");
@@ -214,13 +257,18 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 				if (e.getActionCommand().equals("")) {
 					if (currField.getText().length() >= 1) {
 						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
-					} else {
-						// System.out.println("NOTHING TO DELETE");
 					}
 				}
 			}
 		});
 	}
+
+	/**
+	 * Adding the submit button to verify input from students database
+	 * 
+	 * @param text
+	 *            Submit button
+	 */
 
 	public void addSubmitButtons(String text) {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
@@ -234,6 +282,10 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		submitButton.addActionListener(this);
 		this.mainFrame.getContentPane().add(submitButton);
 	}
+
+	/**
+	 * Added the exit button
+	 */
 
 	public void exitButton() {
 		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
@@ -259,6 +311,11 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		;
 		this.mainFrame.repaint();
 	}
+
+	/**
+	 * 
+	 * Refer to JAVA API
+	 */
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -300,6 +357,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 						// + matchingPerson.getLastName().toUpperCase());
 						// System.out.println("\tSTUDENT STATUS > > > > >" +
 						// matchingPerson.getStatus());
+
 						// add valid info to the file
 						final String newLine = System.getProperty("line.separator");
 						File file = new File("Ticket_database.txt");
@@ -345,7 +403,6 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 				}
 			else {
 				studentErrorWindow();
-				// System.out.println("No matching record found".toUpperCase());
 			}
 
 		} else if (e.getActionCommand().equals("1")) {
@@ -381,31 +438,60 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Mouse clicked
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
+
+	/**
+	 * Mouse entered
+	 */
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 
 	}
 
+	/**
+	 * Mouse exited
+	 */
+
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
 
+	/**
+	 * Mouse pressed
+	 */
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
+
+	/**
+	 * Mouse released
+	 */
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
 	}
 
+	/**
+	 * Returns the current field
+	 * 
+	 * @return currField Current field
+	 */
+
 	public JTextField getCurrentField() {
 		return this.currField;
 	}
+
+	/**
+	 * Creates an error window every time false information is input
+	 */
 
 	public void studentErrorWindow() {
 		JOptionPane.showMessageDialog(null, "No matching record found.", "Error", JOptionPane.ERROR_MESSAGE);
