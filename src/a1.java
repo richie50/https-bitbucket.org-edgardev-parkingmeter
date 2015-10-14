@@ -11,6 +11,10 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+/**
+ * 
+ * Default Runner for the project incorperating all files.
+ */
 public class a1 {
 
 	public static void main(String[] args) throws IOException {
@@ -22,12 +26,12 @@ public class a1 {
 				try {
 					welcome.displayWelcomePanel();
 				} catch (IOException e) {
-
+					// Do nothing as it will generate welcome page panel
 				}
 				try {
 					welcome.welcomePageRunner();
 				} catch (IOException e) {
-
+					// Do nothing as it will generate welcome page runner
 				}
 				welcome.middlePostion();
 			}
@@ -35,5 +39,4 @@ public class a1 {
 		EventQueue.invokeLater(runner);
 		welcome.setVisible(false);
 	}
-
 }

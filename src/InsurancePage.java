@@ -26,6 +26,10 @@ import javax.swing.border.SoftBevelBorder;
 
 public class InsurancePage extends JFrame implements ActionListener {
 
+	/**
+	 * Default init of variables needed for this page.
+	 */
+
 	private static final long serialVersionUID = 1L;
 	private JFrame mainFrame;
 	private JLabel headerLabel;
@@ -117,6 +121,10 @@ public class InsurancePage extends JFrame implements ActionListener {
 		nextButton.addActionListener(this);
 		make = new JTextField();
 		JLabel makeLabel = new JLabel("Make :");
+		Border field_border = new SoftBevelBorder(SoftBevelBorder.RAISED);
+		this.make.setBorder(field_border);
+		this.make.setBackground(Color.LIGHT_GRAY);
+		this.make.setEditable(false);
 		make.setBounds(190, 140, 80, 30);
 		makeLabel.setBounds(145, 140, 50, 30);
 		this.make.addFocusListener(new FocusListener() {
@@ -140,6 +148,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 		model = new JTextField();
 		model.setBounds(320, 140, 80, 30);
 		JLabel modelLabel = new JLabel("Model :");
+		this.model.setBorder(field_border);
+		this.model.setBackground(Color.LIGHT_GRAY);
+		this.model.setEditable(false);
 		modelLabel.setBounds(270, 140, 50, 30);
 		this.model.addFocusListener(new FocusListener() {
 
@@ -158,6 +169,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 		plateNumber = new JTextField();
 		plateNumber.setBounds(440, 140, 80, 30);
 		JLabel plateLabel = new JLabel("Plate :");
+		this.plateNumber.setBorder(field_border);
+		this.plateNumber.setBackground(Color.LIGHT_GRAY);
+		this.plateNumber.setEditable(false);
 		plateLabel.setBounds(400, 140, 50, 30);
 		this.plateNumber.addFocusListener(new FocusListener() {
 
@@ -187,13 +201,14 @@ public class InsurancePage extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Creates the keyboard for the insurance page
+	 * Creates the keyboard for the insurance page and set the layout for the
+	 * keyboard not limited to location, but also design.
 	 */
 	public void initializeKeyboard() {
 		int x, y;
 		Border border = new BevelBorder(BevelBorder.RAISED);
 		this.numberRow = new JButton[digit.length];
-		x = 55;
+		x = 65;
 		y = 200;
 		for (int i = 0; i < digit.length; i++) {
 			JButton temp = new JButton(digit[i]);
@@ -227,7 +242,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(rowOne[i]);
 		}
 		this.rowTwo = new JButton[secondRow.length];
-		x = 75;
+		x = 90;
 		y = 310;
 		for (int i = 0; i < secondRow.length; i++) {
 			JButton temp = new JButton(secondRow[i]);
@@ -244,7 +259,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(rowTwo[i]);
 		}
 		this.rowThree = new JButton[thirdRow.length];
-		x = 150;
+		x = 115;
 		y = 365;
 		for (int i = 0; i < thirdRow.length; i++) {
 			JButton temp = new JButton(thirdRow[i]);
@@ -261,6 +276,11 @@ public class InsurancePage extends JFrame implements ActionListener {
 			mainFrame.getContentPane().add(rowThree[i]);
 		}
 
+		/*
+		 * use a png image of a backspace button that everyone knows of for
+		 * easier use in UI.
+		 */
+
 		ImageIcon backSPace = new ImageIcon("backspace.png");
 		Image image = backSPace.getImage();
 		Image temporary = image.getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
@@ -270,7 +290,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 		this.clearButton.setForeground(new Color(153, 190, 255));
 		this.clearButton.setOpaque(true);
 		this.clearButton.setBorderPainted(false);
-		this.clearButton.setBounds(530, 365, 70, 40);
+		// this.clearButton.setBounds(530, 365, 60, 40);
+		this.clearButton.setBounds(535, 365, 50, 40);
 		this.clearButton.setBorder(border);
 		this.mainFrame.getContentPane().add(clearButton);
 		clearButton.addActionListener(new ActionListener() {
@@ -284,6 +305,8 @@ public class InsurancePage extends JFrame implements ActionListener {
 				if (e.getActionCommand().equals("")) {
 					if (currField.getText().length() >= 1) {
 						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+					} else if (currField.getText().length() == 0) {
+						currField.setText("");
 					}
 				}
 			}
@@ -361,8 +384,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 				} else if (currField == model) {
 					currField = plateNumber;
 				} else if (currField == plateNumber) {
-					currField = plateNumber;
-					// display Popup next Field is empty or set back to make
+					currField = make;
 				}
 			}
 		});
@@ -375,26 +397,35 @@ public class InsurancePage extends JFrame implements ActionListener {
 	 * See Java API
 	 */
 	public void actionPerformed(ActionEvent event) {
-
+		// set default field to make so when the user starts typing its directed
+		// to make
 		if (currField == null) {
 			currField = make;
 		}
+		// check if Make is greater then 8, put into model because no car
+		// manufacturer has a length greater the 8
 		if (this.make.getText().toString().length() >= 8) {
 			currField = model;
 		}
+		// if model is greater then 8 in length, put forward to plates
 		if (this.model.getText().toString().length() >= 8) {
 			currField = plateNumber;
 		}
+		// if plate is greater then 8, take the substring from index 0 to 8,
+		// then set the field to make again in case user wants to edit make
+		// again.
 		if (this.plateNumber.getText().toString().length() >= 8) {
-			this.plateNumber.setText(this.plateNumber.getText().substring(0, 9));
-			currField = plateNumber;
+			this.plateNumber.setText(this.plateNumber.getText().substring(0, 8));
+			currField = make;
 		}
-
+		// if print ticket is not pressed, user is still enter info, so the
+		// fields are written to.
 		if (!event.getActionCommand().equals("Print Ticket")) {
 			String val = ((JButton) event.getSource()).getText().toLowerCase();
 			currField.setText(currField.getText().toLowerCase() + val);
 		}
-
+		// this is where our receipt is made, a bunch of error checking
+		// included!
 		if (event.getActionCommand().equals("Print Ticket")) {
 			String carMake = make.getText();
 			String carPlate = plateNumber.getText();
@@ -403,20 +434,19 @@ public class InsurancePage extends JFrame implements ActionListener {
 			if (carMake.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please enter the make of your vehicle.", "Error",
 						JOptionPane.ERROR_MESSAGE);
-
 			}
 
 			else if (carModel.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please enter the model of your vehicle.", "Error",
 						JOptionPane.ERROR_MESSAGE);
-
 			}
 
 			else if (carPlate.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please enter the plate of your vehicle.", "Error",
 						JOptionPane.ERROR_MESSAGE);
-
-			} else {
+			}
+			// after error checking is done, launch a new frame with the receipt
+			else {
 				this.mainFrame.setVisible(true);
 				this.mainFrame = new JFrame("RECIEPT");
 				this.mainFrame.setLayout(new GridLayout());
@@ -432,38 +462,36 @@ public class InsurancePage extends JFrame implements ActionListener {
 				Calendar cal = GregorianCalendar.getInstance();
 
 				ArrayList<String> lst = new ArrayList<String>();
-
 				File file = new File("Ticket_database.txt");
 				FileReader fileReader = null;
 				try {
 					fileReader = new FileReader(file);
 				} catch (FileNotFoundException e) {
-
-					e.printStackTrace();
+					System.out.println("file does not exist, make sure path is correct");
 				}
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				String line;
 				try {
 					while ((line = bufferedReader.readLine()) != null) {
-
 						lst.add(line);
 					}
 				} catch (IOException e) {
-
-					e.printStackTrace();
 				}
 
 				String sn = (String) lst.get(0);
 				String name = (String) lst.get(1);
 				String status = (String) lst.get(2);
 
+				// check if student is ok to park
 				if (status.equals("ok")) {
+					// added accepted image
 					JLabel acc = new JLabel(new ImageIcon("accept.png"));
 					acc.setBounds(100, 50, 80, 80);
 					JLabel label = new JLabel();
 					label.setHorizontalAlignment(SwingConstants.CENTER);
 					label.setVerticalAlignment(SwingConstants.CENTER);
 					label.setFont(new Font("Serif", Font.BOLD, 25));
+					// formating output for the receipt
 					label.setText("<html> Hello " + name + "<br>Account charged $3.50 per day<br> Student Number : "
 							+ sn + "<br>" + "Date issued : " + cal.getTime() + "<br>" + " Make:    "
 							+ carMake.toUpperCase() + "<br>" + "Model: " + carModel.toUpperCase() + "<br>"
@@ -474,8 +502,9 @@ public class InsurancePage extends JFrame implements ActionListener {
 					this.mainFrame.add(label);
 
 				}
-
+				// student has outstanding fees, declined.
 				else if (status.equals("arrears")) {
+					// image on receipt
 					JLabel dec = new JLabel(new ImageIcon("declined.png"));
 					dec.setBounds(100, 50, 80, 80);
 					JLabel label = new JLabel();
@@ -483,6 +512,7 @@ public class InsurancePage extends JFrame implements ActionListener {
 					label.setVerticalAlignment(SwingConstants.CENTER);
 					label.setFont(new Font("Serif", Font.BOLD, 25));
 					label.setForeground(Color.red);
+					// formating text
 					label.setText("<html>PERMISSION DENIED DUE TO:<br>"
 							+ "OUTSTANDING BALANCE <br><font color='black'> For further "
 							+ "information please contact: YorkU Parking Services <br> 416-736-5335</font></html>");

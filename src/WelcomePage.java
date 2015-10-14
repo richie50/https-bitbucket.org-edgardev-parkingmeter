@@ -167,6 +167,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 	 * @throws IOException
 	 */
 	public void welcomePageRunner() throws IOException {
+		// create a coloured progress bar
 		this.bar = new JProgressBar(0, 50);
 		this.bar.setStringPainted(false);
 		Random rnd = new Random();
@@ -175,6 +176,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 		float green = rnd.nextFloat();
 		this.bar.setForeground(new Color(red, blue, green));
 		Border border = new EtchedBorder(EtchedBorder.LOWERED);
+		// create button for example like tap to continue
 		this.welcomeButton = new JButton("PRESS HERE TO CONITNUE");
 		this.welcomeButton.setForeground(new Color(153, 190, 255));
 		this.welcomeButton.setOpaque(true);
@@ -185,6 +187,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 		welcomeFrame.add(bar, BorderLayout.NORTH);
 		welcomeFrame.add(welcomeButton, BorderLayout.SOUTH);
 
+		// Copyright York University, added logo to match our themed York
+		// University Parking System
 		String image_path = "YorkLogo.gif";
 		File path = new File(image_path);
 		BufferedImage image = ImageIO.read(path);

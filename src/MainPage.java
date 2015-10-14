@@ -104,11 +104,12 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		StudentNumber.setBounds(250, 25, 200, 20);
 		this.mainFrame.getContentPane().add(StudentNumber);
 		this.sn_field = new JTextField(30);
-		this.sn_field.setEditable(true);
+		this.sn_field.setEditable(false);
 		this.sn_field.setBackground(Color.LIGHT_GRAY);
 		this.sn_field.setBorder(border);
 		this.sn_field.setBounds(235, 50, 250, 30);
 		this.mainFrame.getContentPane().add(sn_field);
+		// added focus listener to tell which field is currently active
 		this.sn_field.addFocusListener(new FocusListener() {
 
 			/**
@@ -137,12 +138,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 		PIN.setBounds(320, 110, 200, 20);
 		this.mainFrame.getContentPane().add(PIN);
 		this.pin_password_field = new JPasswordField(30);
-		this.pin_password_field.setEditable(true);
+		this.pin_password_field.setEditable(false);
 		this.pin_password_field.setBackground(Color.LIGHT_GRAY);
 		this.pin_password_field.setBorder(border);
 		this.pin_password_field.setBounds(230, 150, 250, 30);
 		this.mainFrame.getContentPane().add(pin_password_field);
 		this.pin_password_field.addMouseListener(this);
+		// added focus listener to tell which field is currently active
 		this.pin_password_field.addFocusListener(new FocusListener() {
 
 			/**
@@ -168,7 +170,8 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 	}
 
 	/**
-	 * Adding numeric keyboard
+	 * Adding numeric keyboard Styled to match rest of UI, black background with
+	 * light blue font easier to use.
 	 */
 
 	public void addNumberButtons() {
@@ -257,6 +260,8 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 				if (e.getActionCommand().equals("")) {
 					if (currField.getText().length() >= 1) {
 						currField.setText(currField.getText().substring(0, currField.getText().length() - 1));
+					} else if (currField.getText().length() == 0) {
+						currField.setText("");
 					}
 				}
 			}
@@ -349,9 +354,7 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 				try {
 					{
 						Person matchingPerson = matchingStudent.get();
-
-						/* Debug */
-
+						/* Code used to Debug */
 						// System.out.println("Hello " +
 						// matchingPerson.getFirstName().toUpperCase() + " "
 						// + matchingPerson.getLastName().toUpperCase());
@@ -374,8 +377,6 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 							writer.write(matchingPerson.getStudentNumber() + newLine + matchingPerson.getFirstName()
 									+ " " + matchingPerson.getLastName() + " \n" + matchingPerson.getStatus());
 						} catch (IOException e1) {
-
-							e1.printStackTrace();
 						} finally {
 							if (writer != null) {
 								writer.flush();
@@ -388,8 +389,6 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 						try {
 							email.diplayEmailPage();
 						} catch (IOException e1) {
-
-							e1.printStackTrace();
 						}
 						email.middlePostion();
 						email.addEmailLabelAndTextFeild();
@@ -398,13 +397,13 @@ public class MainPage extends JFrame implements ActionListener, MouseListener {
 						email.exitButton();
 					}
 				} catch (Exception e1) {
-
-					e1.printStackTrace();
 				}
 			else {
 				studentErrorWindow();
 			}
-
+			// writing the numbers on the fields to student field and pin field,
+			// using focus listeners we know
+			// which one is the current field.
 		} else if (e.getActionCommand().equals("1")) {
 			value = ((JButton) e.getSource()).getText();
 			currField.setText(currField.getText() + value);

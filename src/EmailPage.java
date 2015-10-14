@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class EmailPage extends JFrame implements ActionListener {
 
@@ -86,6 +88,10 @@ public class EmailPage extends JFrame implements ActionListener {
 		this.email.setBounds(120, 100, 300, 30);
 		this.email_field = new JTextField(30);
 		this.email_field.setBounds(250, 100, 300, 30);
+		Border border = new SoftBevelBorder(SoftBevelBorder.RAISED);
+		this.email_field.setBorder(border);
+		this.email_field.setBackground(Color.LIGHT_GRAY);
+		this.email_field.setEditable(false);
 		this.emailFrame.getContentPane().add(prompt);
 		this.emailFrame.getContentPane().add(email);
 		this.emailFrame.getContentPane().add(email_field);
@@ -193,6 +199,8 @@ public class EmailPage extends JFrame implements ActionListener {
 				if (e.getActionCommand().equals("")) {
 					if (email_field.getText().length() >= 1) {
 						email_field.setText(email_field.getText().substring(0, email_field.getText().length() - 1));
+					} else if (email_field.getText().length() == 0) {
+						email_field.setText("");
 					}
 				}
 			}
