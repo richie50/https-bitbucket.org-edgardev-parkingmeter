@@ -25,23 +25,12 @@ cse23106, 211509551, Zaganjori, Edgar
     red and white, but we added black and blue keyboard because it looks very
     nice on the white background. 
 
-    RICHMOND ADD STUFF
-
-    (Describe the motivation behind your software design. Why did you use
-     the JFC/Swing components that you did, and why did you organise them
-     that way? Briefly justify your design.)
-
-
     --------------------
     Additional Features: (optional)
     --------------------
 
     We provided an Email page that was not a requirement. This is to sign
     a student up to news letters and offers provided by the university. 
-
-    RICHMOND ADD STUFF
-(Describe any additional features implemented.)
-
 
     ---------------
     Communications:
@@ -71,8 +60,12 @@ cse23106, 211509551, Zaganjori, Edgar
 
     The entire project was now done. Started to work on testing, documentation and design.
     Edgar debugged along with richmond, changed the layout from 
-    barebones to something that represents the final design decisions. 
-
+    barebones to something that represents the final design decisions.
+    
+    October 15 2015; 530 pm to 10 pm
+    
+    Finalized the assignment. Added a 'Pay Balace' button if the student has arrears.
+    
     -----------------
     Responsibilities:
     -----------------
