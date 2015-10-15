@@ -31,6 +31,8 @@ cse23106, 211509551, Zaganjori, Edgar
 
     We provided an Email page that was not a requirement. This is to sign
     a student up to news letters and offers provided by the university. 
+    
+    We designed a Pay Balance button if student has arrears.
 
     ---------------
     Communications:
